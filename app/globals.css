@@ -2,26 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+    @font-face {
+        font-family: "Genshin";
+        src: url("../assets/font/Genshin_Impact.font-woff") format("woff2");
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@layer components {
+    .icon_button {
+        @apply h-10 w-10 flex justify-center 
+        items-center bg-slate-600 opacity-25
+    }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .nav_grad {
+        @apply bg-black bg-opacity-45
+    }
 }
