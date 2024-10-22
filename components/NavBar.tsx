@@ -1,16 +1,16 @@
 import Image from "next/image"
 import vision from "@/assets/vision/Vision_Sumeru_Cryo.webp"
-import { Elements, Nationality } from "@/models/ConstEnum"
+import { Elements, Nation } from "@/models/ConstEnum"
 
 const NavProps = {
   charName: String,
   element: Elements,
-  nationality: Nationality
+  nationality: Nation
 }
 
 const NavBar = () => {
   return (
-    <header className="nav_grad bg-gradient-to-b from-gray-600 px-5 py-2 text-start">
+    <header className="nav_grad bg-gradient-to-b from-gray-600 px-5 pt-2 pb-1 text-start">
     <nav>
       <div className="flex flex-row items-center">
         <Image 

@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        'cryo_mist':"#169fc5",
+        'cryo_back':"#195d7a"
       },
     },
   },

@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply bg-gradient-to-b from-blue-700 via-blue-300 to-blue-950
+        @apply bg_default
     }
 
     @font-face {
@@ -21,5 +21,9 @@
 
     .nav_grad {
         @apply bg-black bg-opacity-45
+    }
+
+    .bg_default {
+        @apply bg-gradient-to-b from-cryo_back via-cryo_mist to-blue-950
     }
 }
