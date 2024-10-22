@@ -2,7 +2,7 @@ import InfoBackground from "./component/InfoBackground"
 
 const Home = () => {
   return (
-    <section className="h-full w-full flex flex-row justify-center items-center" >
+    <section className="h-screen w-full flex flex-row justify-center items-center" >
         <InfoBackground/>
     </section>
   )

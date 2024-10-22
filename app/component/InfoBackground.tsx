@@ -13,7 +13,7 @@ const InfoBackground = () => {
     })
     
     return (
-        <Canvas>
+        <Canvas className="z-[-1]">
             <mesh
                 geometry={geometry}
                 material={material}
