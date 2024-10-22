@@ -1,4 +1,4 @@
-enum Elements {
+export enum Elements {
     Pyro,
     Anemo,
     Cryo,
@@ -7,7 +7,7 @@ enum Elements {
     Dendro,
 }
 
-enum Nationality {
+export enum Nation {
     Mondstadt,
     Liyue,
     Inazuma,
