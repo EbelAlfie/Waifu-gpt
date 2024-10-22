@@ -5,7 +5,7 @@ export const metaData = {
     title: "Genshin"
 }
 
-const layout = ({ children }: { children: React.ReactNode}) => {
+const MainLayout = ({ children }: { children: React.ReactNode}) => {
   return (
     <html lang="en">
         <body className="w-full h-screen">
@@ -16,4 +16,4 @@ const layout = ({ children }: { children: React.ReactNode}) => {
   )
 }
 
-export default layout
+export default MainLayout
