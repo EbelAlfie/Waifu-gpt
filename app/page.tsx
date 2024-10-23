@@ -1,10 +1,16 @@
+import IconButton from "@/components/IconButton"
 import InfoBackground from "./component/InfoBackground"
 
 const Home = () => {
   return (
-    <section className="h-screen w-full flex flex-row justify-center items-center" >
+    <main className="flex flex-row">
+      <section className="h-screen w-full flex flex-row flex-nowrap justify-center items-center" >
         <InfoBackground/>
-    </section>
+        <div className="h-full flex flex-col me-8 items-start">
+          <IconButton />
+        </div>
+      </section>
+    </main>
   )
 }
 

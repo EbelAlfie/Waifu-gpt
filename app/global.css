@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-    body {
+    /* body {
         @apply bg_default
-    }
+    } */
 
     @font-face {
         font-family: "Genshin";
@@ -15,8 +15,8 @@
 
 @layer components {
     .icon_button {
-        @apply h-10 w-10 flex justify-center 
-        items-center bg-slate-600 opacity-25
+        @apply h-16 w-16 flex justify-center 
+        items-center bg-slate-600 bg-opacity-25 rounded-full
     }
 
     .nav_grad {

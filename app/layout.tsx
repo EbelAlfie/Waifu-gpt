@@ -10,7 +10,7 @@ const MainLayout = ({ children }: { children: React.ReactNode}) => {
     <html lang="en">
         <body className="w-full h-screen">
             <NavBar />
-            <main>{children}</main>
+            {children}
         </body>
     </html>
   )
