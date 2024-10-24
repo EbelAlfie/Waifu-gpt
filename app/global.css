@@ -26,4 +26,8 @@
     .bg_default {
         @apply bg-gradient-to-b from-cryo_back via-cryo_mist to-blue-950
     }
+
+    .text_genshin {
+        @apply font-[Genshin] text-white
+    }
 }

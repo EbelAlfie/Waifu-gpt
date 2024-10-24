@@ -19,7 +19,7 @@ const NavBar = () => {
           width={100}
           height={100}
         />
-        <p className="font-[Genshin] text-white">Cryo/ Layla</p>
+        <p className="text_genshin">Cryo/ Layla</p>
       </div>
     </nav>
   </header>
