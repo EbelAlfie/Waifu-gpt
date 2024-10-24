@@ -14,11 +14,12 @@ const InfoBackground = () => {
             shadows
             scene={scene}
         > 
-            <mesh>
-                <ambientLight color={0xffffff} intensity={0.1} />
-                <planeGeometry/>
+            <ambientLight color={0xffffff} intensity={0.1} />
+            <mesh rotation={[0.5, 0, 0.5]}>
                 <sphereGeometry/>
+                <planeGeometry/>
             </mesh> 
+            
         </Canvas>
     )
 }
