@@ -10,7 +10,7 @@ const NavProps = {
 
 const NavBar = () => {
   return (
-    <header className="fixed w-screen nav_grad bg-gradient-to-b from-gray-600 px-5 pt-2 pb-1 text-start">
+    <header className="w-screen nav_grad bg-gradient-to-b from-gray-600 px-5 pt-2 pb-1 text-start">
     <nav>
       <div className="flex flex-row items-center">
         <Image 

@@ -3,10 +3,13 @@ import InfoBackground from "./component/InfoBackground"
 
 const Home = () => {
   return (
-    <main className="flex flex-row">
-      <section className="h-screen w-full flex flex-row flex-nowrap justify-center items-center" >
+    <main>
+      <section className="absolute top-0 h-screen w-full z-[-1]">
         <InfoBackground/>
-        <div className="h-full flex flex-col me-8 items-start">
+      </section>
+
+      <section className="w-full py-8 flex flex-row flex-nowrap justify-end" >
+        <div className="flex flex-col me-8 items-start justify-self-end">
           <IconButton />
         </div>
       </section>

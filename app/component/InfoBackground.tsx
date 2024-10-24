@@ -14,11 +14,8 @@ const InfoBackground = () => {
     
     return (
         <Canvas>
-            <mesh
-                geometry={geometry}
-                material={material}
-                rotation={new Euler(0.5, 0.5, 0.5)}
-            >
+            <mesh rotation={[0.5, 0.5, 0.5]}>
+                <sphereGeometry args={[1, 16, 16]} />
             </mesh>
         </Canvas>
     )
