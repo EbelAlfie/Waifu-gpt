@@ -1,10 +1,7 @@
-import { Canvas } from "@react-three/fiber"
-
 const Character = () => {
     return (
-        <Canvas>
-            <div></div>
-        </Canvas>
+        <mesh>
+        </mesh>
     )
 }
 

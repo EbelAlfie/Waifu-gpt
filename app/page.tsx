@@ -1,14 +1,14 @@
 import IconButton from "@/components/IconButton"
-import InfoBackground from "./component/InfoBackground"
+import MainCanvas from "./component/MainCanvas"
 
 const Home = () => {
   return (
     <main>
-      <section className="absolute top-0 h-screen w-full z-[-1]">
-        <InfoBackground/>
+      <section className="absolute top-0 h-screen w-full">
+        <MainCanvas/>
       </section>
 
-      <section className="w-full py-8 flex flex-row flex-nowrap justify-end" >
+      <section className="py-8 flex flex-row flex-nowrap justify-end" >
         <div className="flex flex-col me-8 items-start justify-self-end">
           <IconButton />
         </div>

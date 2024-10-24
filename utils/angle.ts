@@ -1,0 +1,1 @@
+export const DEG_90 = Math.PI / 180 * 90 
