@@ -1,1 +1,1 @@
-export const DEG_90 = Math.PI / 180 * 90 
+export const deg = (degree: number) => Math.PI / 180 * degree 

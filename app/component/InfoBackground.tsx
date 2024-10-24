@@ -1,5 +1,5 @@
 import { DEG_90 } from "@/utils/angle"
-import { color, DoubleSide } from "three/webgpu"
+import { DoubleSide } from "three/webgpu"
 
 const InfoBackground = () => { 
     return (
@@ -12,9 +12,11 @@ const InfoBackground = () => {
             <mesh 
                 rotation={[-DEG_90, 0, 0]}
                 receiveShadow={true}
-                attach="geometry"
             >
-                <planeGeometry args={[100, 100]}/>
+                <planeGeometry 
+                    args={[100, 100]}
+                    attach="geometry"
+                />
                 <meshBasicMaterial 
                     side={DoubleSide}
                     color="black"
