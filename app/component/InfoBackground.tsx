@@ -7,8 +7,11 @@ const InfoBackground = () => {
     return (
         <mesh>
             <ambientLight color={0xffffff} intensity={0.1} />
-            <directionalLight color="red" position={[0, 0, 5]} />
-            <Stars fade={true} />
+            <Stars 
+                fade={true} 
+                radius={3}
+                count={1000}
+            />
             <mesh >
                 <sphereGeometry/>
             </mesh>
@@ -20,14 +23,15 @@ const InfoBackground = () => {
                     args={[100, 100]}
                     attach="geometry"
                 />
-                {/* <meshBasicMaterial 
-                    side={DoubleSide}
-                    color={0x000000}
-                    attach="material"
-                /> */}
                 <MeshReflectorMaterial 
                     side={DoubleSide}
-                    mirror={10}
+                    mirror={1}
+                    mixBlur={0}
+                    mixContrast={1}
+                    mixStrength={1}
+                    blur={[0, 0]}
+                    distortion={0}
+                    resolution={1080}
                     attach="material"
                 />
             </mesh>
