@@ -30,4 +30,8 @@
     .text_genshin {
         @apply font-[Genshin] text-white
     }
+
+    .box_overlay {
+        @apply bg-black bg-opacity-25
+    }
 }

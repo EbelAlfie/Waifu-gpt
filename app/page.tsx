@@ -4,7 +4,7 @@ import MainCanvas from "./component/MainCanvas"
 const Home = () => {
   return (
     <main>
-      <section className="absolute top-0 h-screen w-full">
+      <section className="absolute top-0 h-screen w-full flex-row flex">
         <MainCanvas/>
       </section>
 
