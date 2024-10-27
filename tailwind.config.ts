@@ -10,7 +10,8 @@ const config: Config = {
     extend: {
       colors: {
         'cryo_mist':"#169fc5",
-        'cryo_back':"#195d7a"
+        'cryo_sky':"#1b5b85",
+        'cryo_cloud': "#2594b5",
       },
     },
   },
