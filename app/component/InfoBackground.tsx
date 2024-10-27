@@ -1,7 +1,7 @@
 import { deg } from "@/utils/angle"
 import { Cloud, Clouds, Effects, MeshPortalMaterial, MeshReflectorMaterial, Sky, Stars } from "@react-three/drei"
 import { MirrorShader } from "three/examples/jsm/Addons.js"
-import { DoubleSide, MeshPhongMaterial, MeshToonMaterial, ShaderMaterial } from "three/webgpu"
+import { DoubleSide } from "three/webgpu"
 
 const InfoBackground = () => { 
     return (
@@ -19,7 +19,7 @@ const InfoBackground = () => {
             >
                 <sphereGeometry />
             </mesh>
-            
+
             <mesh 
                 rotation={[-deg(90), 0, 0]}
                 receiveShadow={true}
@@ -30,13 +30,14 @@ const InfoBackground = () => {
                 />
                 <MeshReflectorMaterial 
                     side = {DoubleSide}
-                    mirror = {1}
-                    mixBlur = {0}
-                    mixContrast = {1}
-                    mixStrength = {1}
-                    blur = {[0, 0]}
-                    distortion = {0}
-                    resolution = {900}
+                    mirror = {0.75}
+                    mixBlur = {10}
+                    mixStrength = {100}
+                    metalness={0.5}
+                    roughness={1}
+                    resolution = {1080}
+                    blur={[0, 0]}
+                    color="#1a7194"
                     attach = "material"
                 />
             </mesh>
