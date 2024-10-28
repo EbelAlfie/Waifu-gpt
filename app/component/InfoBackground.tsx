@@ -1,15 +1,16 @@
 import { deg } from "@/utils/angle"
-import { Cloud, Clouds, Effects, MeshPortalMaterial, MeshReflectorMaterial, Sky, Stars } from "@react-three/drei"
-import { MirrorShader } from "three/examples/jsm/Addons.js"
-import { DoubleSide } from "three/webgpu"
+import { MeshReflectorMaterial, Stars, useTexture } from "@react-three/drei"
+import { Vector2 } from "three/webgpu"
 
-const InfoBackground = () => { 
+const InfoBackground = () => {
     return (
         <>
-            <ambientLight color={0xffffff} intensity={0.1} />
+            <ambientLight color={0xffffff} intensity={0.8} />
+            <pointLight intensity={1} position={[0, 6, 0]} />
+            <hemisphereLight intensity={1} position={[0, 0, 0]} />
             <Stars 
-                fade={true}
-                factor={3} 
+                fade
+                factor={4} 
                 radius={3}
                 count={200}
             />
@@ -19,7 +20,7 @@ const InfoBackground = () => {
             >
                 <sphereGeometry />
             </mesh>
-
+            
             <mesh 
                 rotation={[-deg(90), 0, 0]}
                 receiveShadow={true}
@@ -29,16 +30,13 @@ const InfoBackground = () => {
                     attach="geometry"
                 />
                 <MeshReflectorMaterial 
-                    side = {DoubleSide}
                     mirror = {0.75}
                     mixBlur = {10}
-                    mixStrength = {100}
-                    metalness={0.5}
-                    roughness={1}
-                    resolution = {1080}
+                    mixStrength = {2}
+                    resolution = {1024}
                     blur={[0, 0]}
-                    color="#1a7194"
-                    attach = "material"
+                    normalScale = {new Vector2(0)}
+                    color="#a0a0a0"
                 />
             </mesh>
            
