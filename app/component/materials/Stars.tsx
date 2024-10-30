@@ -28,16 +28,9 @@ class StarfieldMaterial extends ShaderMaterial {
       varying vec3 vColor;
       void main() {
         vColor = color;
-        vec4 mvPosition ;
-        switch(starType) {
-          case 0: 
-            mvPosition = modelViewMatrix * vec4(position, 0.5);
-            break ;
-          default: 
-            mvPosition = modelViewMatrix * vec4(position, 0.5);
-        }
+        vec4 mvPosition = modelViewMatrix * vec4(position, 0.5);
         
-        gl_PointSize = size * (30.0 / -mvPosition.z) * (3.0 + sin(time + 100.0));
+        gl_PointSize = size * (30.0 / -mvPosition.z) * (2.0 + sin(time + 100.0));
         gl_Position = projectionMatrix * mvPosition;
       }`,
       fragmentShader: /* glsl */ `
@@ -51,7 +44,7 @@ class StarfieldMaterial extends ShaderMaterial {
           float d = distance(gl_PointCoord, vec2(0.5, 0.5));
           opacity = 1.0 / (1.0 + exp(16.0 * (d - 0.25)));
         }
-        gl_FragColor = vec4(1.0, 0.0, 0.0, opacity);
+        gl_FragColor = vec4(vColor, opacity);
 
         #include <tonemapping_fragment>
 	      #include <${version >= 154 ? 'colorspace_fragment' : 'encodings_fragment'}>

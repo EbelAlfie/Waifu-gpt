@@ -16,10 +16,10 @@ const MainCanvas = () => {
 
     const updateCurrentCoord = (coord?: CameraControls) => {
         console.log(coord)
-        // setCoord(coord)
     }
    
-    const ControlHelper = () => {    
+    const ControlHelper = () => {   
+        new PerspectiveCamera().matrixWorld 
         return (
             <CameraControls 
                 makeDefault 
