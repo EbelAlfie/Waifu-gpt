@@ -1,25 +1,26 @@
 import { deg } from "@/utils/angle"
-import { MeshReflectorMaterial, Stars, useTexture } from "@react-three/drei"
+import { MeshReflectorMaterial, useTexture } from "@react-three/drei"
 import { Vector2 } from "three/webgpu"
+import { DebugMesh } from "./materials/DebugGeometry"
+import { StarsF } from "./materials/Stars"
+import fragmentShader from "@/app/component/shader/fragment_shader"
+import vertexShader from "@/app/component/shader/vertex_shader"
 
 const InfoBackground = () => {
     return (
         <>
-            <ambientLight color={0xffffff} intensity={0.8} />
+            <ambientLight color={0x19566d} intensity={0.8} />
             <pointLight intensity={1} position={[0, 6, 0]} />
             <hemisphereLight intensity={1} position={[0, 0, 0]} />
-            <Stars 
+            <StarsF
                 fade
                 factor={4} 
                 radius={3}
-                count={200}
+                count={1000}
+                speed={2}
             />
             
-            <mesh 
-                position={[0, 1, 0]}
-            >
-                <sphereGeometry />
-            </mesh>
+            <DebugMesh />
             
             <mesh 
                 rotation={[-deg(90), 0, 0]}
@@ -33,7 +34,7 @@ const InfoBackground = () => {
                     mirror = {0.75}
                     mixBlur = {10}
                     mixStrength = {2}
-                    resolution = {1024}
+                    resolution = {1080}
                     blur={[0, 0]}
                     normalScale = {new Vector2(0)}
                     color="#a0a0a0"
