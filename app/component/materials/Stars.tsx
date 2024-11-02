@@ -29,14 +29,14 @@ class StarfieldMaterial extends ShaderMaterial {
       void main() {
         vColor = color;
         float rad = length(position.xz);
-        float angle = atan(position.z, position.x);
-        float orbitX = rad * cos(angle + time/30.0) ;
-        float orbitZ = rad * sin(angle + time/30.0) ;
+        float angle = atan(position.x, position.z);
+        float orbitX = rad * cos(angle + time/100.0) ;
+        float orbitZ = rad * sin(angle + time/100.0) ;
         vec3 orbitPos = vec3(orbitX, position.y, orbitZ) ;
 
         vec4 mvPosition = modelViewMatrix * vec4(orbitPos, 0.5);
         
-        gl_PointSize = size * (30.0 / -mvPosition.z) * (2.0 + sin(time + 100.0));
+        gl_PointSize = size * (30.0 / -mvPosition.z) * (3.0 + sin(time + 100.0));
         gl_Position = projectionMatrix * mvPosition;
       }`,
       fragmentShader: /* glsl */ `
@@ -54,9 +54,9 @@ class StarfieldMaterial extends ShaderMaterial {
         float r = 0.5 * sin(time + 10.0) ;
         float g = 0.5 * sin(time + 20.0) ;
         float b = 0.5 * sin(time + 30.0) ;
-        r = mix(0.278, 0.769, r);
-        g = mix(0.455, 0.71, g);  
-        b = mix(0.4, 0.733, b);   
+        // r = mix(0.278, 0.769, r);
+        // g = mix(0.455, 0.71, g);  
+        // b = mix(0.4, 0.733, b);   
         vec3 col = vec3(r, g, b) ;
         gl_FragColor = vec4(col, opacity);
 

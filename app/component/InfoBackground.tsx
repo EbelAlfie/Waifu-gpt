@@ -3,6 +3,7 @@ import { MeshReflectorMaterial } from "@react-three/drei"
 import { Vector2 } from "three/webgpu"
 import { DebugMesh } from "./materials/DebugGeometry"
 import { StarsF } from "./materials/Stars"
+import CharacterFog from "./materials/Fog"
 
 const InfoBackground = () => {
     return (
@@ -17,6 +18,8 @@ const InfoBackground = () => {
                 count={1000}
                 speed={2}
             />
+
+            <CharacterFog />
             
             <DebugMesh />
             
