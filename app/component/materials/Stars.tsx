@@ -29,8 +29,9 @@ class StarfieldMaterial extends ShaderMaterial {
       void main() {
         vColor = color;
         float rad = length(position.xz);
-        float orbitX = rad * cos(time/10.0 + position.x) ;
-        float orbitZ = rad * sin(time/10.0 + position.z) ;
+        float angle = atan(position.z, position.x);
+        float orbitX = rad * cos(angle + time/30.0) ;
+        float orbitZ = rad * sin(angle + time/30.0) ;
         vec3 orbitPos = vec3(orbitX, position.y, orbitZ) ;
 
         vec4 mvPosition = modelViewMatrix * vec4(orbitPos, 0.5);
