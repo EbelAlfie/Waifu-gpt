@@ -7,7 +7,7 @@ import { RootState, ThreeEvent, useFrame } from "@react-three/fiber";
 
 export const DebugMesh = () => {
   const materialRef = useRef<ShaderMaterial>()
-  const speed = 13
+  const speed = 2
 
   useFrame(
     (state: RootState) => {
@@ -26,9 +26,9 @@ export const DebugMesh = () => {
         position={[0, 1, 0]}
         onPointerOver={onPointerEnter}
     >
-        <sphereGeometry>
+        <boxGeometry>
           <bufferAttribute attach="attributes-size" args={[new Float32Array(100), 1]}/>
-        </sphereGeometry>
+        </boxGeometry>
         <shaderMaterial 
             ref={materialRef as Ref<ShaderMaterial>}
             uniforms={

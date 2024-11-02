@@ -28,7 +28,12 @@ class StarfieldMaterial extends ShaderMaterial {
       varying vec3 vColor;
       void main() {
         vColor = color;
-        vec4 mvPosition = modelViewMatrix * vec4(position, 0.5);
+        float rad = length(position.xz);
+        float orbitX = rad * cos(time/10.0 + position.x) ;
+        float orbitZ = rad * sin(time/10.0 + position.z) ;
+        vec3 orbitPos = vec3(orbitX, position.y, orbitZ) ;
+
+        vec4 mvPosition = modelViewMatrix * vec4(orbitPos, 0.5);
         
         gl_PointSize = size * (30.0 / -mvPosition.z) * (2.0 + sin(time + 100.0));
         gl_Position = projectionMatrix * mvPosition;
@@ -44,7 +49,15 @@ class StarfieldMaterial extends ShaderMaterial {
           float d = distance(gl_PointCoord, vec2(0.5, 0.5));
           opacity = 1.0 / (1.0 + exp(16.0 * (d - 0.25)));
         }
-        gl_FragColor = vec4(vColor, opacity);
+
+        float r = 0.5 * sin(time + 10.0) ;
+        float g = 0.5 * sin(time + 20.0) ;
+        float b = 0.5 * sin(time + 30.0) ;
+        r = mix(0.278, 0.769, r);
+        g = mix(0.455, 0.71, g);  
+        b = mix(0.4, 0.733, b);   
+        vec3 col = vec3(r, g, b) ;
+        gl_FragColor = vec4(col, opacity);
 
         #include <tonemapping_fragment>
 	      #include <${version >= 154 ? 'colorspace_fragment' : 'encodings_fragment'}>
