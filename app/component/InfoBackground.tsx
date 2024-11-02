@@ -19,7 +19,9 @@ const InfoBackground = () => {
                 speed={2}
             />
 
-            <CharacterFog />
+            <CharacterFog 
+                color="#169fc5"
+            />
             
             <DebugMesh />
             

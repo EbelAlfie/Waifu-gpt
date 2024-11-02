@@ -1,10 +1,17 @@
 import { Cloud, Clouds } from "@react-three/drei"
+import { Color } from "@react-three/fiber"
 
-const CharacterFog = () => {
+type CloudProp = {
+    color: Color | string | number
+}
+
+const CharacterFog = (props: CloudProp) => {
     return (
         <>
             <mesh >
-                <Cloud />
+                <Cloud 
+                    color={props.color}
+                />
             </mesh>
         </>
     )
