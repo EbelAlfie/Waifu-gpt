@@ -12,7 +12,7 @@ const MainCanvas = () => {
 
     let scene = new Scene();
 	scene.background = new Color(0x169fc5)
-    scene.fog = new Fog(0x77d4f0, 2, 15)
+    // scene.fog = new Fog(0x77d4f0, 2, 15)
 
     const updateCurrentCoord = (coord?: CameraControls) => {
         console.log(coord)
