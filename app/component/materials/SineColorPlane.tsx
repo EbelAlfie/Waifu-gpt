@@ -1,5 +1,4 @@
 import { deg } from "@/utils/angle"
-import {version} from "@react-three/drei/helpers/constants"
 import { DoubleSide } from "three"
 
 const vertShader = `
@@ -7,19 +6,19 @@ varying vec4 glPos ;
 void main() {
   vec4 mvPosition = modelMatrix * vec4(position, 0.5);
 
-  mvPosition.y = sin(mvPosition.x * 2.0) * 0.5 + 3.0;
-//   mvPosition.z = sin(mvPosition.x * 2.0) * 0.5 + 3.0;
+  mvPosition.y = sin(mvPosition.x * 2.0) + 3.0;
+//   mvPosition.x = cos(mvPosition.y);
+//   mvPosition.z = sin(mvPosition.x * 2.0) + 3.0;
 
   vec4 viewPosition = viewMatrix * mvPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
 
   gl_Position = projectedPosition;
-  glPos = projectedPosition; 
+  glPos = mvPosition; 
 }
 `
 
 const fragShader =  `
-varying vec3 vColor;
 varying vec4 glPos ;
 void main() {
     gl_FragColor = vec4(glPos.rgb, 1.0);
