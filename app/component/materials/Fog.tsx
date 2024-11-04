@@ -1,7 +1,7 @@
-import { Cloud, Clouds } from "@react-three/drei"
+import { Cloud } from "@react-three/drei"
 import { Color } from "@react-three/fiber"
 import { useRef } from "react"
-import { MeshLambertMaterial, Object3DEventMap, REVISION } from "three"
+import { Group, MeshLambertMaterial, Object3DEventMap, REVISION, Spherical, Vector3 } from "three"
 
 class MistMaterial extends MeshLambertMaterial {
     constructor() {
@@ -36,15 +36,25 @@ type CloudProp = {
 }
 
 const CharacterFog = (props: CloudProp) => {
-    return (
-        <>
-            <mesh >
-                <Cloud 
-                    color={props.color}
-                />
-                <cloudMaterial />
-            </mesh>
-        </>
+  
+  const distribute = () => {
+    return {
+      point: new Vector3().setFromSpherical(new Spherical(10, Math.acos(1 - Math.random() * 2), Math.random() * 2 * Math.PI))
+    }
+  }
+
+  return (
+      <mesh >
+          <Cloud 
+              bounds={[1, 1, 1]}
+              color={props.color}
+              distribute={distribute}
+              concentrate = "inside"
+              volume={20}
+              scale={10.0}
+              growth={10}
+          />
+      </mesh>
     )
 }
 

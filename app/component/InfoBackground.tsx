@@ -5,6 +5,7 @@ import { DebugMesh } from "./materials/DebugGeometry"
 import { StarsF } from "./materials/Stars"
 import CharacterFog from "./materials/Fog"
 import { SineColorPlane } from "./materials/SineColorPlane"
+import { Mist } from "./materials/Mist"
 
 const InfoBackground = () => {
     return (
@@ -20,6 +21,8 @@ const InfoBackground = () => {
                 speed={2}
             />
 
+            <Mist />
+            
             <CharacterFog 
                 color="#169fc5"
             />

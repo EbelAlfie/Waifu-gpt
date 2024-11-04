@@ -6,7 +6,7 @@ varying vec4 glPos ;
 void main() {
   vec4 mvPosition = modelMatrix * vec4(position, 0.5);
 
-  mvPosition.y = sin(mvPosition.x * 2.0) + 3.0;
+  mvPosition.y = 0.5 * sin(mvPosition.x * -3.62 + 4.7) + 1.5;
 //   mvPosition.x = cos(mvPosition.y);
 //   mvPosition.z = sin(mvPosition.x * 2.0) + 3.0;
 

@@ -6,6 +6,7 @@ import InfoBackground from "./InfoBackground";
 import { CameraControls, OrbitControls, OrbitControlsChangeEvent } from "@react-three/drei";
 import { DragEventHandler, useEffect, useRef, useState } from "react";
 import CoordHelper from "./CoordHelper";
+import { fog } from "three/webgpu";
 
 const MainCanvas = () => {
     const [coord, setCoord] = useState<OrbitControlsChangeEvent>()
@@ -13,6 +14,7 @@ const MainCanvas = () => {
     let scene = new Scene();
 	scene.background = new Color(0x169fc5)
     // scene.fog = new Fog(0x77d4f0, 2, 15)
+    scene.fogNode = fog(0x169fc5, 10)
 
     const updateCurrentCoord = (coord?: CameraControls) => {
         console.log(coord)
