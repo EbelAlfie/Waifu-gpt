@@ -49,9 +49,9 @@ class StarfieldMaterial extends ShaderMaterial {
           opacity = 1.0 / (1.0 + exp(16.0 * (d - 0.25)));
         }
 
-        float r = 0.5 * sin(time + 10.0) ;
-        float g = 0.5 * sin(time + 20.0) ;
-        float b = 0.5 * sin(time + 30.0) ;
+        float r = 0.5 * sin(time / 3.0) ;
+        float g = 0.5 * sin(time / 6.0) ;
+        float b = 0.5 * sin(time / 9.0) ;
         // r = mix(0.278, 0.769, r);
         // g = mix(0.455, 0.71, g);  
         // b = mix(0.4, 0.733, b);   

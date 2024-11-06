@@ -27,9 +27,9 @@ const InfoBackground = () => {
             <GenshinCloud 
                 color = "#169fc5"
             />
-            {/* <CharacterFog 
+            <CharacterFog 
                 color="#169fc5"
-            /> */}
+            />
 
             <SineColorPlane />
             

@@ -27,8 +27,8 @@ const CharacterFog = (props: CloudProp)=> {
     const material: Material = 
       (mesh instanceof InstancedMesh) && mesh.material
     
-    return (material instanceof MistMaterial) && (material.userData) &&
-      (material.userData.uniforms.time.value = state.clock.getElapsedTime())
+    return (material instanceof MistMaterial) && (material.shaders) &&
+      (material.shaders.uniforms.time.value = state.clock.getElapsedTime())
   })
 
   return (
