@@ -6,6 +6,7 @@ import { StarsF } from "./materials/Stars"
 import CharacterFog from "./materials/Fog"
 import { SineColorPlane } from "./materials/SineColorPlane"
 import { Mist } from "./materials/Mist"
+import { GenshinCloud } from "./materials/cloud/CustomCloud"
 
 const InfoBackground = () => {
     return (
@@ -23,9 +24,12 @@ const InfoBackground = () => {
 
             <Mist />
             
-            <CharacterFog 
-                color="#169fc5"
+            <GenshinCloud 
+                color = "#169fc5"
             />
+            {/* <CharacterFog 
+                color="#169fc5"
+            /> */}
 
             <SineColorPlane />
             
