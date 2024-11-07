@@ -6,6 +6,7 @@ import { Group, InstancedMesh, Material, MeshLambertMaterial, MeshPhongMaterial,
 import texture from "@/assets/tex/cloud.png"
 import { useRef } from "react"
 import { MistMaterial } from "./cloud/CustomCloud";
+import { GenshinClouds } from "./cloud/GenshinCloud";
 
 type CloudProp = {
     color: Color | string | number
@@ -35,7 +36,6 @@ const CharacterFog = (props: CloudProp)=> {
         <Clouds 
           ref={cloudRef}
           texture={texture.src}
-          material={MistMaterial}
         >
           <CloudInstance
               bounds={[1, 1, 1]}

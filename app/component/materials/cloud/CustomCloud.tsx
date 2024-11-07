@@ -1,5 +1,5 @@
 import { useTexture } from "@react-three/drei"
-import { Color, DoubleSide, DynamicDrawUsage, MeshLambertMaterial, REVISION, WebGLProgramParametersWithUniforms } from "three"
+import { Color, DoubleSide, DynamicDrawUsage, Group, MeshLambertMaterial, Object3DEventMap, Quaternion, REVISION, Vector3, WebGLProgramParametersWithUniforms } from "three"
 import defaultTexture from "@/assets/tex/cloud.png"
 import { extend, MaterialNode, useFrame } from "@react-three/fiber"
 import { useMemo, useRef } from "react"
@@ -19,8 +19,14 @@ export class MistMaterial extends MeshLambertMaterial {
               '#include <fog_vertex>',
               `#include <fog_vertex>
               vOpacity = cloudOpacity;
-              vec4 pos = projectionMatrix * modelViewMatrix * vec4(position, 1.0) ;
-              gl_Position = pos;
+              
+              float cameraAngle = atan(cameraPosition.x, cameraPosition.z) ;
+              vec3 pos = vec3(position) ;
+              pos.x += cos(cameraAngle) ;
+              pos.z += sin(cameraAngle) ;
+
+              vec4 cloudPos = projectionMatrix * modelViewMatrix * vec4(pos, 1.0) ;
+              gl_Position = cloudPos;
               `
             )
           shader.fragmentShader =
@@ -54,6 +60,7 @@ type CloudProp = {
 export const GenshinCloud = ({color = 0xffffff, texture = defaultTexture.src, limit = 100}: CloudProp) => {
 
     const matRef = useRef<MistMaterial>(null)
+    const meshRef = useRef<Group<Object3DEventMap>>(null)
 
     extend({ MistMaterial })
     
@@ -67,11 +74,10 @@ export const GenshinCloud = ({color = 0xffffff, texture = defaultTexture.src, li
 
     useFrame((state) => {
         const time = state.clock.elapsedTime
-        console.log(matRef)
     })
 
     return (
-        <group>
+        <group ref={meshRef}>
             <mesh position={[0,5,0]}>
                 <planeGeometry args={[...rectBound] as any} >
                     <bufferAttribute 
