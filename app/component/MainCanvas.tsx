@@ -1,29 +1,43 @@
 "use client";
 
-import { Canvas, RootState, useFrame } from "@react-three/fiber";
-import { Color, Fog, FogExp2, PerspectiveCamera, Scene } from "three";
+import { Canvas, } from "@react-three/fiber";
+import { Color, Scene } from "three";
 import InfoBackground from "./InfoBackground";
-import { CameraControls, OrbitControls, OrbitControlsChangeEvent } from "@react-three/drei";
-import { DragEventHandler, useEffect, useRef, useState } from "react";
-import CoordHelper from "./CoordHelper";
-import { fog } from "three/webgpu";
+import { CameraControls } from "@react-three/drei";
+import { useEffect, useRef, useState } from "react";
+import CoordHelper, { CoordProps } from "./CoordHelper";
+import { initializeFog } from "@/utils/three";
 
 const MainCanvas = () => {
-    const [coord, setCoord] = useState<OrbitControlsChangeEvent>()
+    const [coord, setCoord] = useState<CoordProps>()
+    const camRef = useRef<CameraControls>(null)
+
+    useEffect(() => {
+        camRef.current?.addEventListener('control', () => {
+            const position = camRef.current && camRef.current.camera.position
+            updateCurrentCoord(
+                {
+                    x: position?.x,
+                    y: position?.y,
+                    z: position?.z
+                }
+            )  
+        })
+    }, [camRef.current?.camera.position])
 
     let scene = new Scene();
 	scene.background = new Color(0x169fc5)
-    // scene.fog = new Fog(0x77d4f0, 2, 15)
-    scene.fogNode = fog(0x169fc5, 10)
+    // initializeFog(scene)
 
-    const updateCurrentCoord = (coord?: CameraControls) => {
+    const updateCurrentCoord = (coord?: CoordProps) => {
         console.log(coord)
+        setCoord(coord)
     }
    
     const ControlHelper = () => {   
-        new PerspectiveCamera().matrixWorld 
         return (
             <CameraControls 
+                ref={camRef}
                 makeDefault 
             />
         )
@@ -39,7 +53,7 @@ const MainCanvas = () => {
                 <axesHelper scale={10}/>
                 <InfoBackground />           
             </Canvas>
-            <CoordHelper props={coord} />
+            <CoordHelper props={coord}/>
         </>
     )
 }

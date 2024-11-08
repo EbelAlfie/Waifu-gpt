@@ -12,12 +12,62 @@ import {
   Matrix4,
   Quaternion,
   BufferAttribute,
+  DoubleSide,
+  WebGLProgramParametersWithUniforms,
 } from 'three'
 import { MaterialNode, extend, applyProps, useFrame, ReactThreeFiber } from '@react-three/fiber'
 import { useTexture } from '@react-three/drei'
 import { setUpdateRange } from '@react-three/drei/helpers/deprecated'
 
 const CLOUD_URL = 'https://rawcdn.githack.com/pmndrs/drei-assets/9225a9f1fbd449d9411125c2f419b843d0308c9f/cloud.png'
+
+
+export class MistMaterial extends MeshLambertMaterial {
+  shaders?: WebGLProgramParametersWithUniforms
+
+  constructor() {
+      super()
+      const opaque_fragment = parseInt(REVISION.replace(/\D+/g, '')) >= 154 ? 'opaque_fragment' : 'output_fragment'
+      this.onBeforeCompile = (shader) => {
+        shader.vertexShader =
+          `attribute float cloudOpacity;
+           varying float vOpacity;
+          ` +
+          shader.vertexShader.replace(
+            '#include <fog_vertex>',
+            `#include <fog_vertex>
+            vOpacity = cloudOpacity;
+            
+            float cameraAngle = atan(cameraPosition.x, cameraPosition.z) ;
+            vec3 pos = vec3(position) ;
+            pos.x += cos(cameraAngle) ;
+            pos.z += sin(cameraAngle) ;
+
+            vec4 cloudPos = projectionMatrix * modelViewMatrix * vec4(pos, 1.0) ;
+            gl_Position = cloudPos;
+            `
+          )
+        shader.fragmentShader =
+          `varying float vOpacity;
+          ` +
+          shader.fragmentShader.replace(
+            `#include <${opaque_fragment}>`,
+            `#include <${opaque_fragment}>
+             gl_FragColor = vec4(outgoingLight, diffuseColor.a * vOpacity);
+            `
+          )
+        this.shaders = shader
+      }
+    }
+}
+
+declare global {
+  namespace JSX {
+      interface IntrinsicElements {
+          mistMaterial: MaterialNode<MistMaterial, typeof MistMaterial>;
+      }
+  }
+}
 
 type CloudState = {
   uuid: string
@@ -181,6 +231,12 @@ export const GenshinClouds = /* @__PURE__ */ React.forwardRef<Group, CloudsProps
                 args={[opacities, 1]}
               />
             </planeGeometry>
+            {/* <mistMaterial 
+                    side={DoubleSide}
+                    map={cloudTexture} 
+                    depthWrite={false}
+                    transparent
+                /> */}
             <cloudMaterial key={material.name} map={cloudTexture} transparent depthWrite={false} />
           </instancedMesh>
         </context.Provider>

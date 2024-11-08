@@ -37,6 +37,7 @@ const InfoBackground = () => {
             
             <mesh 
                 rotation={[-deg(90), 0, 0]}
+                scale={50}
                 receiveShadow={true}
             >
                 <circleGeometry 
