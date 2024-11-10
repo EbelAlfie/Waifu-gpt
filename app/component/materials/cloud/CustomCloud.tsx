@@ -1,5 +1,5 @@
 import { useTexture } from "@react-three/drei"
-import { Color, ColorRepresentation, Data3DTexture, DoubleSide, DynamicDrawUsage, GLSL3, Group, LinearFilter, Mesh, MeshLambertMaterial, Object3DEventMap, Quaternion, RawShaderMaterial, RedFormat, REVISION, Vector3, WebGLProgramParametersWithUniforms } from "three"
+import { Color, ColorRepresentation, Data3DTexture, DoubleSide, DynamicDrawUsage, GLSL3, LinearFilter, Mesh, RawShaderMaterial, RedFormat, REVISION, Vector3, WebGLProgramParametersWithUniforms } from "three"
 import defaultTexture from "@/assets/tex/cloud.png"
 import { extend, MaterialNode, useFrame } from "@react-three/fiber"
 import { useMemo, useRef } from "react"
@@ -180,7 +180,7 @@ export const GenshinCloud = ({color = 0xffffff}: CloudProp) => {
         cloudText.needsUpdate = true;
         
         return {
-            base: { value: new Color( color ) },
+            base: { value: new Color(color) },
             map: { value: cloudText },
             cameraPos: { value: new Vector3() },
             threshold: { value: 0.25 },
@@ -198,7 +198,7 @@ export const GenshinCloud = ({color = 0xffffff}: CloudProp) => {
         (ref.material as RawShaderMaterial).uniforms.cameraPos.value.copy( 
             state.camera.position 
         );
-        ref.rotation.y = - performance.now() / 7500;
+        // ref.rotation.y = - performance.now() / 7500;
 
         (ref.material as RawShaderMaterial).uniforms.frame.value ++
     })

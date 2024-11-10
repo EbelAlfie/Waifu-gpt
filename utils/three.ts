@@ -1,6 +1,9 @@
 import * as THREE from "three"
 
-export const initializeFog = (scene: THREE.Scene) => {
+export const initializeFog = (
+    scene: THREE.Scene, 
+    fogColor: THREE.ColorRepresentation
+) => {
     THREE.ShaderChunk.fog_pars_fragment = `
     #ifdef USE_FOG
 
@@ -58,5 +61,6 @@ export const initializeFog = (scene: THREE.Scene) => {
         vWorldPos = worldPosition.xyz ;
     #endif
     `
-    scene.fog = new THREE.Fog(0x77d4f0, 1, 25)
+    scene.fog = new THREE.FogExp2(0x77d4f0, 0.4)
+    // scene.fog = new THREE.Fog(fogColor, 1, 25)
 }

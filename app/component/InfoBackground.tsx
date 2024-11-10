@@ -7,6 +7,7 @@ import CharacterFog from "./materials/Fog"
 import { SineColorPlane } from "./materials/SineColorPlane"
 import { Mist } from "./materials/Mist"
 import { GenshinCloud } from "./materials/cloud/CustomCloud"
+import CharaSky from "./CharaSky"
 
 const InfoBackground = () => {
     return (
@@ -41,7 +42,7 @@ const InfoBackground = () => {
                 receiveShadow={true}
             >
                 <circleGeometry 
-                    args={[10]}
+                    args={[3]}
                     attach="geometry"
                 />
                 <MeshReflectorMaterial 

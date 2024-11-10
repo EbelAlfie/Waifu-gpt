@@ -14,12 +14,6 @@ type CloudProp = {
 const CharacterFog = (props: CloudProp)=> {
 
   const cloudRef = useRef<Group<Object3DEventMap>>(null)
-  
-  const distribute = () => {
-    return {
-      point: new Vector3().setFromSpherical(new Spherical(10, Math.acos(1 - Math.random() * 2), Math.random() * 2 * Math.PI)),
-    }
-  }
 
   useFrame((state) => {
     const mesh = cloudRef.current?.children[1];
@@ -30,6 +24,12 @@ const CharacterFog = (props: CloudProp)=> {
     return (material instanceof MistMaterial) && (material.shaders) &&
       (material.shaders.uniforms.time.value = state.clock.getElapsedTime())
   })
+
+  const distribute = () => {
+    return {
+      point: new Vector3().setFromSpherical(new Spherical(20, Math.acos(1 - Math.random() * 2), Math.random() * 2 * Math.PI)),
+    }
+  }
 
   return (
         <Clouds 
@@ -44,6 +44,7 @@ const CharacterFog = (props: CloudProp)=> {
               volume={30}
               scale={5.0}
               growth={10}
+              segments={100}
           />
         </Clouds>
     )
