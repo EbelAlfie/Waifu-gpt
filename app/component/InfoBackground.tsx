@@ -3,11 +3,10 @@ import { MeshReflectorMaterial } from "@react-three/drei"
 import { Vector2 } from "three/webgpu"
 import { DebugMesh } from "./materials/DebugGeometry"
 import { StarsF } from "./materials/Stars"
-import CharacterFog from "./materials/Fog"
 import { SineColorPlane } from "./materials/SineColorPlane"
-import { Mist } from "./materials/Mist"
 import { GenshinCloud } from "./materials/cloud/CustomCloud"
 import CharaSky from "./CharaSky"
+import CharacterMist from "./materials/Mist"
 
 const InfoBackground = () => {
     return (
@@ -23,12 +22,10 @@ const InfoBackground = () => {
                 speed={2}
             />
 
-            <Mist />
-            
             <GenshinCloud 
                 color = "#169fc5"
             />
-            <CharacterFog 
+            <CharacterMist
                 color="#169fc5"
             />
 

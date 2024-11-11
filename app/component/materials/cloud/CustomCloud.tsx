@@ -172,12 +172,12 @@ export const GenshinCloud = ({color = 0xffffff}: CloudProp) => {
 
         }
         
-        const cloudText = new Data3DTexture( data, size, size, size );
-        cloudText.format = RedFormat;
-        cloudText.minFilter = LinearFilter;
-        cloudText.magFilter = LinearFilter;
-        cloudText.unpackAlignment = 1;
-        cloudText.needsUpdate = true;
+        const cloudText = new Data3DTexture( data, size, size, size )
+        cloudText.format = RedFormat
+        cloudText.minFilter = LinearFilter
+        cloudText.magFilter = LinearFilter
+        cloudText.unpackAlignment = 1
+        cloudText.needsUpdate = true
         
         return {
             base: { value: new Color(color) },
