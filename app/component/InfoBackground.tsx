@@ -1,12 +1,12 @@
 import { deg } from "@/utils/angle"
 import { MeshReflectorMaterial } from "@react-three/drei"
 import { Vector2 } from "three/webgpu"
-import { DebugMesh } from "./materials/DebugGeometry"
-import { StarsF } from "./materials/Stars"
-import { SineColorPlane } from "./materials/SineColorPlane"
-import { GenshinCloud } from "./materials/cloud/CustomCloud"
-import CharaSky from "./CharaSky"
-import CharacterMist from "./materials/Mist"
+import { DebugMesh } from "./models/materials/DebugGeometry"
+import { StarsF } from "./models/materials/Stars"
+import { SineColorPlane } from "./models/materials/SineColorPlane"
+import { GenshinCloud } from "./models/materials/cloud/CustomCloud"
+import CharacterMist from "./models/materials/Mist"
+import CharaSky from "./models/CharaSky"
 
 const InfoBackground = () => {
     return (
@@ -32,6 +32,11 @@ const InfoBackground = () => {
             <SineColorPlane />
             
             <DebugMesh />
+
+            <CharaSky 
+                color={0x19566d}
+                radius={1.5}
+            />
             
             <mesh 
                 rotation={[-deg(90), 0, 0]}

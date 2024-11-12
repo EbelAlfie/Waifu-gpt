@@ -1,18 +1,17 @@
-import { EnvironmentCube } from "@react-three/drei"
-import { ReactNode } from "react"
-import { BackSide, ColorRepresentation, DoubleSide, Spherical } from "three"
+import { BackSide, ColorRepresentation} from "three"
 
 type SkyProps = {
     color?: ColorRepresentation
+    radius: number
 }
 
-const CharaSky = ({color = 0xffffff, ...props}: SkyProps) => {
+const CharaSky = ({radius = 1.5, color = 0xffffff, ...props}: SkyProps) => {
     return (
         <>
             <mesh
                 scale={100}
             >
-                <sphereGeometry args={[1.5]} />
+                <sphereGeometry args={[radius]} />
                 <meshBasicMaterial 
                     side={BackSide}
                     color={color}

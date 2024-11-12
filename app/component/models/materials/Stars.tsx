@@ -33,7 +33,7 @@ class StarfieldMaterial extends ShaderMaterial {
 
         vec4 mvPosition = modelViewMatrix * vec4(orbitPos, 0.5);
         
-        gl_PointSize = size * (30.0 / -mvPosition.z) * (3.0 + sin(time + 100.0));
+        gl_PointSize = size * (15.0 / -mvPosition.z) * (3.0 + sin(time + 100.0));
         gl_Position = projectionMatrix * mvPosition;
       }`,
       fragmentShader: /* glsl */ `

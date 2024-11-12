@@ -4,7 +4,7 @@ import { CloudInstance, Clouds } from "@react-three/drei"
 import { Color, useFrame } from "@react-three/fiber"
 import { Group, InstancedMesh, Material, MeshLambertMaterial, MeshPhongMaterial, MeshStandardMaterial, Object3DEventMap, REVISION, ShaderMaterial, Spherical, Vector3, WebGLProgramParametersWithUniforms } from "three"
 import texture from "@/assets/tex/cloud.png"
-import { useCallback, useRef } from "react"
+import { useCallback, useEffect, useMemo, useRef } from "react"
 import { GenshinClouds, MistMaterial } from "./cloud/GenshinCloud";
 
 type MistProp = {
@@ -19,7 +19,7 @@ const CharacterMist = (props: MistProp)=> {
     const mesh = cloudRef.current?.children[1];
 
     const material: Material = 
-      (mesh instanceof InstancedMesh) && mesh.material
+      (mesh instanceof InstancedMesh) && mesh.material ;
     
     return (material instanceof MistMaterial) && (material.shaders) &&
       (material.shaders.uniforms.time.value = state.clock.getElapsedTime())
@@ -43,7 +43,7 @@ const CharacterMist = (props: MistProp)=> {
               concentrate = "inside"
               volume={30}
               scale={5.0}
-              growth={10}
+              growth={30}
               segments={100}
           />
         </Clouds>

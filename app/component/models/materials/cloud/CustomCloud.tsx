@@ -148,7 +148,7 @@ export const GenshinCloud = ({color = 0xffffff}: CloudProp) => {
     const meshRef = useRef<Mesh>(null)
 
     const uniform = useMemo(() => {
-        const size = 128;
+        const size = 100;
         const data = new Uint8Array( size * size * size );
 
         let i = 0;
@@ -198,7 +198,6 @@ export const GenshinCloud = ({color = 0xffffff}: CloudProp) => {
         (ref.material as RawShaderMaterial).uniforms.cameraPos.value.copy( 
             state.camera.position 
         );
-        // ref.rotation.y = - performance.now() / 7500;
 
         (ref.material as RawShaderMaterial).uniforms.frame.value ++
     })
@@ -206,8 +205,7 @@ export const GenshinCloud = ({color = 0xffffff}: CloudProp) => {
     return (
         <group>
             <mesh ref={meshRef} position={[0,5,0]}>
-                <boxGeometry args={[1, 1, 1]} >
-                </boxGeometry>
+                <boxGeometry args={[1, 1, 1]} />
                 <rawShaderMaterial 
                     glslVersion={GLSL3}
                     uniforms={uniform}
