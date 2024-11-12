@@ -1,11 +1,11 @@
 import { deg } from "@/utils/angle"
 import { MeshReflectorMaterial } from "@react-three/drei"
 import { Vector2 } from "three/webgpu"
-import { DebugMesh } from "./models/materials/DebugGeometry"
-import { StarsF } from "./models/materials/Stars"
-import { SineColorPlane } from "./models/materials/SineColorPlane"
+import { DebugMesh } from "./models/DebugGeometry"
+import { StarsF } from "./models/Stars"
+import { SineColorPlane } from "./models/SineColorPlane"
 import { GenshinCloud } from "./models/materials/cloud/CustomCloud"
-import CharacterMist from "./models/materials/Mist"
+import CharacterMist from "./models/Mist"
 import CharaSky from "./models/CharaSky"
 
 const InfoBackground = () => {
@@ -44,7 +44,7 @@ const InfoBackground = () => {
                 receiveShadow={true}
             >
                 <circleGeometry 
-                    args={[3]}
+                    args={[2.5]}
                     attach="geometry"
                 />
                 <MeshReflectorMaterial 

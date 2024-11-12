@@ -5,7 +5,7 @@ import { Color, useFrame } from "@react-three/fiber"
 import { Group, InstancedMesh, Material, MeshLambertMaterial, MeshPhongMaterial, MeshStandardMaterial, Object3DEventMap, REVISION, ShaderMaterial, Spherical, Vector3, WebGLProgramParametersWithUniforms } from "three"
 import texture from "@/assets/tex/cloud.png"
 import { useCallback, useEffect, useMemo, useRef } from "react"
-import { GenshinClouds, MistMaterial } from "./cloud/GenshinCloud";
+import { GenshinClouds, MistMaterial } from "./materials/cloud/GenshinCloud";
 
 type MistProp = {
     color: Color | string | number

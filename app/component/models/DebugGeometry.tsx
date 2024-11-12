@@ -1,8 +1,8 @@
 import { ForwardRefComponent } from "@react-three/drei/helpers/ts-utils";
 import { forwardRef, Ref, useRef } from "react";
 import { Material, Mesh, Points, ShaderMaterial, SphereGeometry } from "three";
-import fragment_shader from "../shader/fragment_shader";
-import vertex_shader from "../shader/vertex_shader";
+import fragment_shader from "./shader/fragment_shader";
+import vertex_shader from "./shader/vertex_shader";
 import { RootState, ThreeEvent, useFrame } from "@react-three/fiber";
 
 export const DebugMesh = () => {
