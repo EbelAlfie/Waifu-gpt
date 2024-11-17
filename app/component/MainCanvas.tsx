@@ -6,7 +6,7 @@ import InfoBackground from "./InfoBackground";
 import { CameraControls } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import CoordHelper, { CoordProps } from "./models/CoordHelper";
-import { FogDefault, NewFog } from "./models/Fog";
+import { NewFog } from "./models/Fog";
 
 const MainCanvas = () => {
     const [coord, setCoord] = useState<CoordProps>()
@@ -42,7 +42,6 @@ const MainCanvas = () => {
                     color={0xffffff}
                     near={1}
                     far={10}
-                    attach="fog"
                 /> */}
             </Canvas>
             <CoordHelper props={coord}/>

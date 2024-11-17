@@ -73,21 +73,18 @@ export const NewFog = (
     
     THREE.ShaderChunk.fog_pars_vertex = `
     #ifdef USE_FOG
-      varying float vFogDepth;
       varying vec3 vWorldPosition;
     #endif
     `
     
     THREE.ShaderChunk.fog_vertex = `
     #ifdef USE_FOG
-      vFogDepth = - mvPosition.z;
       vWorldPosition = mvPosition.xyz;
     #endif
     `
     
     THREE.ShaderChunk.fog_pars_fragment = `
         #ifdef USE_FOG
-            varying float vFogDepth;
             uniform vec3 fogColor;
             varying vec3 vWorldPosition;
             #ifdef FOG_EXP2
@@ -125,7 +122,7 @@ export const NewFog = (
             color={props.color}
             // near={props.near}
             // far={props.far}
-            density={0.5}
+            density={0.000005}
             attach="fog"
         />
     )

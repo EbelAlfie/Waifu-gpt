@@ -8,10 +8,11 @@ import { useCallback, useEffect, useMemo, useRef } from "react"
 import { GenshinClouds, MistMaterial } from "./materials/cloud/GenshinCloud";
 
 type MistProp = {
-    color: Color | string | number
+    color: Color | string | number,
+    radius?: number
 }
 
-const CharacterMist = (props: MistProp)=> {
+const CharacterMist = ({radius = 20, ...props} : MistProp)=> {
 
   const cloudRef = useRef<Group<Object3DEventMap>>(null)
 
@@ -27,7 +28,7 @@ const CharacterMist = (props: MistProp)=> {
 
   const distribute = useCallback(() => {
     return {
-      point: new Vector3().setFromSpherical(new Spherical(20, Math.acos(1 - Math.random() * 2), Math.random() * 2 * Math.PI)),
+      point: new Vector3().setFromSpherical(new Spherical(radius, Math.acos(1 - Math.random() * 2), Math.random() * 2 * Math.PI)),
     }
   }, [])
 

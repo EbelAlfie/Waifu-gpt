@@ -2,7 +2,7 @@ import { deg } from "@/utils/angle"
 import { MeshReflectorMaterial } from "@react-three/drei"
 import { Vector2 } from "three/webgpu"
 import { DebugMesh } from "./models/DebugGeometry"
-import { StarsF } from "./models/Stars"
+import { GenshinStars } from "./models/Stars"
 import { SineColorPlane } from "./models/SineColorPlane"
 import { GenshinCloud } from "./models/materials/cloud/CustomCloud"
 import CharacterMist from "./models/Mist"
@@ -14,10 +14,10 @@ const InfoBackground = () => {
             <ambientLight color={0x19566d} intensity={0.8} />
             <pointLight intensity={1} position={[0, 6, 0]} />
             <hemisphereLight intensity={1} position={[0, 6, 0]} />
-            <StarsF
+            <GenshinStars
                 fade
                 factor={4} 
-                radius={3}
+                radius={1}
                 count={1000}
                 speed={2}
             />
@@ -27,6 +27,7 @@ const InfoBackground = () => {
             />
             <CharacterMist
                 color="#169fc5"
+                radius={25}
             />
 
             <SineColorPlane />
@@ -48,12 +49,10 @@ const InfoBackground = () => {
                     attach="geometry"
                 />
                 <MeshReflectorMaterial 
-                    mirror = {0.75}
+                    mirror = {0.8}
                     mixBlur = {10}
                     mixStrength = {2}
                     resolution = {1080}
-                    blur={[0, 0]}
-                    normalScale = {new Vector2(0)}
                     color="#a0a0a0"
                 />
             </mesh>

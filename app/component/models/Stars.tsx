@@ -18,7 +18,7 @@ const genStar = (r: number) => {
   return new Vector3().setFromSpherical(new Spherical(r, Math.acos(1 - Math.random() * 2), Math.random() * 2 * Math.PI))
 }
 
-export const StarsF = /* @__PURE__ */ React.forwardRef(
+export const GenshinStars = /* @__PURE__ */ React.forwardRef(
   ({ radius = 100, depth = 50, count = 5000, saturation = 0, factor = 4, fade = false, speed = 1 }: Props, ref) => {
     const material = React.useRef<StarfieldMaterial>()
     const [position, color, size] = React.useMemo(() => {
