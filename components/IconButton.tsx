@@ -1,6 +1,10 @@
 import vision from '@/assets/vision/Vision_Mondstadt_Anemo.webp'
 import Image from "next/image"
 
+type IconButtonProps = {
+    image: string
+}
+
 const IconButton = () => {
     return (
         <div className="flex flex-col items-center">

@@ -8,9 +8,9 @@ const NavProps = {
   nationality: Nation
 }
 
-const NavBar = () => {
+const NavBar = ({className}: {className: string}) => {
   return (
-    <header className="w-screen nav_grad bg-gradient-to-b from-gray-600 px-5 pt-2 pb-1 text-start">
+    <header className={`${className} w-screen nav_grad bg-gradient-to-b from-gray-600 px-5 pt-2 pb-1 text-start`}>
     <nav>
       <div className="flex flex-row items-center">
         <Image 
