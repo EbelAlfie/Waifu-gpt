@@ -11,8 +11,10 @@ export const MainRoom = () => {
 
 const ChatList = () => {
     return <>
-        <li>
-
-        </li>
+        <section>
+            <li>
+                
+            </li>
+        </section>
     </>
 }

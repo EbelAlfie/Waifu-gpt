@@ -19,7 +19,7 @@ const NavBar = ({className}: {className: string}) => {
           width={100}
           height={100}
         />
-        <p className="text_genshin">Cryo/ Layla</p>
+        <p className="text_genshin">Element/ Name</p>
       </div>
     </nav>
   </header>

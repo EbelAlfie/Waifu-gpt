@@ -7,6 +7,7 @@ import { SineColorPlane } from "./models/SineColorPlane"
 import { GenshinCloud } from "./models/materials/cloud/CustomCloud"
 import CharacterMist from "./models/Mist"
 import CharaSky from "./models/CharaSky"
+import Character from "./models/Character"
 
 const InfoBackground = () => {
     return (
@@ -22,23 +23,25 @@ const InfoBackground = () => {
                 speed={2}
             />
 
-            <GenshinCloud 
+            {/* <GenshinCloud 
                 color = "#169fc5"
-            />
+            /> */}
             <CharacterMist
                 color="#169fc5"
                 radius={25}
             />
 
-            <SineColorPlane />
+            {/* <SineColorPlane /> */}
             
-            <DebugMesh />
+            {/* <DebugMesh /> */}
 
             <CharaSky 
                 color={0x19566d}
                 radius={1.5}
             />
             
+            <Character />
+
             <mesh 
                 rotation={[-deg(90), 0, 0]}
                 scale={50}
