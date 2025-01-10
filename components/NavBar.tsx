@@ -1,5 +1,5 @@
 import Image from "next/image"
-import vision from "@/assets/vision/Vision_Sumeru_Cryo.webp"
+import vision from "#/assets/vision/Vision_Sumeru_Cryo.webp"
 import { Elements, Nation } from "@/models/ConstEnum"
 
 const NavProps = {

@@ -12,9 +12,9 @@ import Character from "./models/Character"
 const InfoBackground = () => {
     return (
         <>
-            <ambientLight color={0x19566d} intensity={0.8} />
+            <ambientLight color={0xffffff} intensity={0.8} />
             <pointLight intensity={1} position={[0, 6, 0]} />
-            <hemisphereLight intensity={1} position={[0, 6, 0]} />
+            <hemisphereLight color={0xffffff} intensity={1} position={[0, 6, 0]} />
             <GenshinStars
                 fade
                 factor={4} 

@@ -1,8 +1,8 @@
 import { BottomBar } from "./BottomBar"
 
-export const MainRoom = () => {
+export const ChatRoom = () => {
     return <>
-        <section className="flex flex-col before:none after:animate-bounce">
+        <section className="flex flex-col bg-slate-900 opacity-55 max-w-lg max-h-full h-1/4">
             <ChatList />
             {/* <BottomBar /> */}
         </section>
@@ -11,7 +11,7 @@ export const MainRoom = () => {
 
 const ChatList = () => {
     return <>
-        <section>
+        <section className="h-auto">
             <li>
                 
             </li>

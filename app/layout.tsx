@@ -1,5 +1,4 @@
 import "./global.css"
-import NavBar from "@/components/NavBar"
 
 export const metaData = {
     title: "Genshin"

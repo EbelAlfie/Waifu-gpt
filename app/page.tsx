@@ -1,23 +1,18 @@
-import IconButton from "@/components/IconButton"
+"use client"
 import MainCanvas from "./component/MainCanvas"
-import NavBar from "@/components/NavBar"
+import { OverlayContent } from "./component/OverlayContent"
+import { useMemo, useState } from "react"
+import { ChatRoom } from "./component/chat/ChatRoom"
 
 const Home = () => {
-  return (
+  return <>
     <main>
-      <section className="absolute top-0 h-screen w-full flex-row flex">
+      <section className="absolute h-screen w-full">
         <MainCanvas/>
-      </section>
-
-      <section className="absolute top-0 flex flex-col flex-nowrap justify-end pointer-events-none">
-        <NavBar className="pointer-events-auto"/>
-        <div className="flex flex-col me-8 items-end self-end pointer-events-auto">
-          <IconButton />
-          <IconButton />
-        </div>
+        <OverlayContent />
       </section>
     </main>
-  )
+  </>
 }
 
 export default Home

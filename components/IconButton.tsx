@@ -1,22 +1,23 @@
-import vision from '@/assets/vision/Vision_Mondstadt_Anemo.webp'
 import Image from "next/image"
 
 type IconButtonProps = {
-    image: string
+    image: string,
+    label: string,
+    onClick: () => void
 }
 
-const IconButton = () => {
+const IconButton = ({...props}: IconButtonProps) => {
     return (
         <div className="flex flex-col items-center">
-            <button className='icon_button'>
+            <button className='icon_button' onClick={props.onClick}>
             <Image
-                src={vision}
+                src={props.image}
                 alt="button"
                 width={50}
                 height={50}
             />
             </button>
-            <p className="text_genshin">Alarm</p>
+            <p className="text_genshin">{props.label}</p>
         </div>
     )
 }

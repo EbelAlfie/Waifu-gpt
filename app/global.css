@@ -16,7 +16,14 @@
 @layer components {
     .icon_button {
         @apply h-16 w-16 flex justify-center 
-        items-center bg-slate-600 bg-opacity-25 rounded-full
+        items-center bg-slate-600 bg-opacity-50 rounded-full
+        transition-colors duration-500
+    }
+    .icon_button:hover {
+        @apply bg-slate-800 bg-opacity-50
+    }
+    .icon_button:focus {
+        @apply bg-slate-950 bg-opacity-50
     }
 
     .nav_grad {
@@ -33,5 +40,25 @@
 
     .box_overlay {
         @apply bg-black bg-opacity-25
+    }
+
+    @keyframes
+    slide-in {
+        0% {
+            left: -100;
+        }
+        100% {
+            left: 0;  
+        }
+    }
+
+    @keyframes
+    slide-out {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: -100;  
+        }
     }
 }
