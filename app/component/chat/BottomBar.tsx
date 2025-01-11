@@ -1,37 +1,49 @@
 
 type BottomBarProps = {
     textFieldProp: TextFieldProps,
+    onTyping: (text: string) => void
     onSendClicked: () => void
 }
 
 export const BottomBar = (props: BottomBarProps) => {
     return <>
         <div className="my-8 mx-5 flex flex-row justify-center">
-            <TextField props={props.textFieldProp}/>
+            <TextField 
+                props={props.textFieldProp}
+                onTyping={props.onTyping}
+            />
             <SendButton onClick={props.onSendClicked}/>
         </div>
     </>
 }
 
-type TextFieldProps = {
+export type TextFieldProps = {
     text: string,
-    placeholder: string,
-    onTyping: (text: string) => void,
+    placeholder: string
 }
 
-const TextField = ({props}: {props: TextFieldProps}) => {
+const TextField = (
+    {onTyping, props}: {onTyping: (text: string) => void, props: TextFieldProps}
+) => {
     return <>
-        <div className="border-slate-500 rounded-xl">
-            <input type="text" onChange={(event) => props.onTyping(event.target.value)}>
-                {props.text != null ? props.text : props.placeholder}
-            </input>
+        <div>
+            <input 
+                className="border-slate-500 rounded-lg p-2 bg-yellow-100"
+                type="text" 
+                onChange={(event) => onTyping(event.target.value)}
+                placeholder={props.placeholder}
+                value={props.text}
+            />
         </div>
     </>
 }
 
 const SendButton = ({onClick}: { onClick :() => void }) => {
     return <>
-        <button onClick={onClick}>
+        <button 
+            className="bg-yellow-100 rounded-lg"
+            onClick={onClick}
+        >
             <image></image>
         </button>
     </>

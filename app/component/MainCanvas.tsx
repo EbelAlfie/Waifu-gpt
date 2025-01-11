@@ -4,7 +4,7 @@ import { Canvas, } from "@react-three/fiber";
 import { Color, Fog, Scene, Vector3 } from "three";
 import InfoBackground from "./InfoBackground";
 import { CameraControls } from "@react-three/drei";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import CoordHelper, { CoordProps } from "./models/CoordHelper";
 import { NewFog } from "./models/Fog";
 
@@ -18,32 +18,36 @@ const MainCanvas = () => {
     const updateCurrentCoord = () => {
         const position = new Vector3()
         camRef.current && camRef.current.getPosition(position)
-        // setCoord({
-        //     x: position.x,
-        //     y: position.y,
-        //     z: position.z
-        // })
+        setCoord({
+            x: position.x,
+            y: position.y,
+            z: position.z
+        })
     }
+
+    const CanvasContent = useMemo(() => 
+        <Canvas
+            shadows = {true}
+            scene = {scene}
+        > 
+            <CameraControls 
+                ref={camRef}
+                onChange={updateCurrentCoord}
+                makeDefault 
+            />  
+            <axesHelper scale={10}/>
+            <InfoBackground />
+            {/* <NewFog 
+                color={0xffffff}
+                near={1}
+                far={10}
+            /> */}
+        </Canvas>
+    , [])
 
     return (
         <>
-            <Canvas
-                shadows = {true}
-                scene = {scene}
-            > 
-                <CameraControls 
-                    ref={camRef}
-                    onChange={updateCurrentCoord}
-                    makeDefault 
-                />  
-                <axesHelper scale={10}/>
-                <InfoBackground />
-                {/* <NewFog 
-                    color={0xffffff}
-                    near={1}
-                    far={10}
-                /> */}
-            </Canvas>
+            {CanvasContent}     
             <CoordHelper props={coord}/>
         </>
     )

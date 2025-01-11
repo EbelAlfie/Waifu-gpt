@@ -38,7 +38,9 @@ export const OverlayContent = () => {
 
           </div>
 
-          <section className="pointer-events-auto absolute top-0 w-max">
+          <section 
+            className={`translate-x-${chatState ? "full":"0"} transition-all pointer-events-auto w-max`}
+          >
             <ChatRoom />
           </section>
   
