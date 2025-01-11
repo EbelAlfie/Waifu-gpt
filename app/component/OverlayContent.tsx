@@ -21,9 +21,9 @@ export const OverlayContent = () => {
     return <>
       <section className="absolute top-0 flex flex-row h-screen w-full pointer-events-none">
           <div className="flex flex-col flex-nowrap w-screen">
-            <NavBar className="relative top-0"/>
+            <NavBar className="pointer-events-auto relative top-0"/>
 
-            <div className="flex flex-col mt-8 me-8 items-end self-end h-auto">
+            <div className="pointer-events-auto flex flex-col mt-8 me-8 items-end self-end h-auto">
               <IconButton 
                 image={imageSrc} 
                 onClick={() => { onAlarmClicked() }} 
@@ -38,7 +38,7 @@ export const OverlayContent = () => {
 
           </div>
 
-          <section className="absolute top-0 w-max">
+          <section className="pointer-events-auto absolute top-0 w-max">
             <ChatRoom />
           </section>
   
