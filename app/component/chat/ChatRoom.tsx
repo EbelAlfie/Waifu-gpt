@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from "react"
+import { HTMLAttributes, useMemo, useState } from "react"
 import { BottomBar, TextFieldProps } from "./BottomBar"
 
 export const ChatRoom = () => {
@@ -37,9 +37,12 @@ export const ChatRoom = () => {
 
 type ChatListProps = { 
     className?: string
+    chatList?: string[]
 }
 
 const ChatList = ({...props}: ChatListProps) => {
+    const chatBubble = useMemo(() => props?.chatList, [])
+
     return <>
         <section className={props.className}>
             <li>
