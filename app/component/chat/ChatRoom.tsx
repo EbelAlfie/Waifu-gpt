@@ -9,7 +9,14 @@ export const ChatRoom = () => {
     })
 
     const onType = (message: string) => {
+        const {
+            placeholder
+        } = textField
 
+        setTextField({
+            text: message,
+            placeholder: placeholder
+        })
     }
 
     const onSend = () => {
@@ -17,7 +24,7 @@ export const ChatRoom = () => {
     }
 
     return <>
-        <section className="h-screen flex flex-col bg-slate-900 opacity-55 max-w-lg max-h-full">
+        <section className="h-screen rounded-tr-lg rounded-br-lg flex flex-col bg-slate-900 border-opacity-25 opacity-75 max-w-lg max-h-full">
             <ChatList className="flex-grow" />
             <BottomBar 
                 textFieldProp={textField}
