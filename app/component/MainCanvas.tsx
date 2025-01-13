@@ -29,6 +29,9 @@ const MainCanvas = () => {
         <Canvas
             shadows = {true}
             scene = {scene}
+            camera = {
+                { fov: 75, near: 0.1, far: 1000, position: [0, 5.1, 8.5] }
+            }
         > 
             <CameraControls 
                 ref={camRef}

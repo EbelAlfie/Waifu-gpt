@@ -7,7 +7,7 @@ type BottomBarProps = {
 
 export const BottomBar = (props: BottomBarProps) => {
     return <>
-        <div className="my-8 mx-5 flex flex-row justify-around items-center">
+        <div className="my-8 mx-5 flex flex-row gap-5 justify-around items-center">
             <TextField 
                 props={props.textFieldProp}
                 onTyping={props.onTyping}
@@ -28,7 +28,7 @@ const TextField = (
     return <>
         <div>
             <input 
-                className="border-slate-500 rounded-lg p-2 bg-yellow-100"
+                className="border-slate-500 rounded-xl p-2 bg-yellow-100"
                 type="text" 
                 onChange={(event) => onTyping(event.target.value)}
                 placeholder={props.placeholder}
@@ -41,11 +41,11 @@ const TextField = (
 const SendButton = ({onClick}: { onClick :() => void }) => {
     return <>
         <button 
-            className="flex flex-row items-center py-2 px-5 bg-yellow-100 rounded-lg"
+            className="flex flex-row items-center py-2 px-5 bg-yellow-100 rounded-xl"
             onClick={onClick}
         >
             <SendIcon />
-            <p className="ms-5 bold">Send</p>
+            <p className="ms-5 bold font-[genshin]">Send</p>
         </button>
     </>
 }

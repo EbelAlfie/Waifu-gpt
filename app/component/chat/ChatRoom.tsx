@@ -24,7 +24,7 @@ export const ChatRoom = () => {
     }
 
     return <>
-        <section className="h-screen rounded-tr-lg rounded-br-lg flex flex-col bg-slate-900 border-opacity-25 opacity-75 max-w-lg max-h-full">
+        <section className="h-screen rounded-tr-lg rounded-br-lg flex flex-col bg-slate-950 opacity-80 max-w-lg max-h-full">
             <ChatList className="flex-grow" />
             <BottomBar 
                 textFieldProp={textField}
@@ -42,7 +42,7 @@ type ChatListProps = {
 
 const ChatList = ({...props}: ChatListProps) => {
     const chatBubble = useMemo(() => props?.chatList, [])
-
+    
     return <>
         <section className={props.className}>
             <li>
