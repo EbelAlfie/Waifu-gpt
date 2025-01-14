@@ -33,7 +33,7 @@ export class ChatUseCase {
     public async loadChatHistory(chatId: string): Promise<ChatTurnHistory[]> {
         return this.repository.loadChatHistory(chatId)
             .then(response => {
-                const turns = response.data.turns
+                const turns = response.data?.turns ?? []
 
                 const chatData = turns.map((turn: any) => {
                     const turn_key = turn?.turn_key ?? {}
@@ -67,6 +67,7 @@ export class ChatUseCase {
                     }
                 })
 
+                console.log(chatData)
                 return chatData
             })
             .catch(error => {

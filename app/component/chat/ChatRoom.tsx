@@ -1,23 +1,26 @@
-import { useEffect, useMemo, useState } from "react"
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { BottomBar, TextFieldProps } from "./BottomBar"
 import { ChatUseCase } from "@/domain/ChatUseCase"
 import { ChatListModel } from "./ChatListState"
+import { CharacterData } from "./CharacterData"
+import { ChatBubble } from "./ChatBubble"
 
 type ChatRoomProps = {
     isChatOpened: Boolean
 }
 export const ChatRoom = ({...props} : ChatRoomProps) => {
+    const charId = useContext(CharacterData)
+
     const [chatListState, setChatList] = useState<ChatListModel[]>([])
     
     const useCase = useMemo(() => new ChatUseCase(), [props.isChatOpened])
     useEffect(() => {
-        // if (!props.isChatOpened) return
-        useCase.fetchRecentChat("BlmjOrRW8fhjbCx6iG5saWgDJtz6VtpXOcEnLZy05YE")
+        if (!props.isChatOpened) return
+        useCase.fetchRecentChat(charId)
             .then(resultModel => {
                 useCase.loadChatHistory(resultModel.chatId)
                 .then(chatHistory => {
                     const chatList = chatHistory.map(chat => {
-                        console.log(chat.candidates)
                         return {
                             message: chat.candidates[0]?.rawContent,
                             author: chat.author,
@@ -28,7 +31,6 @@ export const ChatRoom = ({...props} : ChatRoomProps) => {
                 })
             })
     }, [props.isChatOpened])
-
 
 
     const [textField, setTextField] = useState<TextFieldProps>({
@@ -54,7 +56,7 @@ export const ChatRoom = ({...props} : ChatRoomProps) => {
     return <>
         <section className="h-screen rounded-tr-lg rounded-br-lg flex flex-col bg-slate-950 opacity-80 max-w-lg max-h-full">
             <ChatList 
-                className="flex-grow" 
+                className="flex flex-col flex-grow overflow-y-scroll" 
                 chats={chatListState}
             />
             <BottomBar 
@@ -72,15 +74,13 @@ type ChatListProps = {
 }
 
 const ChatList = ({...props}: ChatListProps) => {
-    const chatBubble = props.chats.map(item =>  
-        <li><p>{item.message}</p></li>
+    const chatBubble = props.chats.map((item, index) =>  
+        <ChatBubble model={item} key={index}/>
     )
     
     return (
-        <section className={props.className}>
-            <ul>
-                {chatBubble}
-            </ul>
-        </section>
+        <ul className={props.className}>
+            {chatBubble}
+        </ul>
     )
 }

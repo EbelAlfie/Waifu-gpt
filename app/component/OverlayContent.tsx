@@ -4,6 +4,7 @@ import IconButton from "@/components/IconButton"
 import NavBar from "@/components/NavBar"
 import { useState } from "react"
 import { ChatRoom } from './chat/ChatRoom'
+import { CharacterData } from './chat/CharacterData'
 
 export const OverlayContent = () => {
     const imageSrc = vision.src
@@ -19,8 +20,8 @@ export const OverlayContent = () => {
     }
 
     return <>
-      <section className="absolute top-0 flex flex-row h-screen w-full pointer-events-none">
-          <div className="flex flex-col flex-nowrap w-screen">
+      <section className="absolute top-0 flex flex-row flex-nowrap h-screen w-full pointer-events-none">
+          <div className="flex flex-col w-screen">
             <NavBar className="pointer-events-auto relative top-0"/>
 
             <div className="pointer-events-auto flex flex-col mt-8 me-8 items-end self-end h-auto">
@@ -39,9 +40,11 @@ export const OverlayContent = () => {
           </div>
 
           <section 
-            className={`${chatState?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
+            className={`${!chatState?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
           >
-            <ChatRoom isChatOpened={chatState}/>
+            <CharacterData.Provider value="AQGwzrW9BFEBHhYt93wVih5SZmfxCH5AXAm_qQiPFj8">
+              <ChatRoom isChatOpened={chatState}/>
+            </CharacterData.Provider>
           </section>
   
       </section>

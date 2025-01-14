@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from "axios"
 
 export class ChatRepository {
     webSocket: WebSocket | null = null
+    token: string| undefined = "" //process.env.TOKEN
 
     public openChatConnection() {
         this.webSocket = new WebSocket("wss://neo.character.ai/ws/") 
@@ -19,7 +20,7 @@ export class ChatRepository {
             method: "GET",
             url: `https://neo.character.ai/chats/recent/${characterId}`,
             headers: {
-                'authorization': 'Token '
+                'authorization': `Token ${this.token}`
             }
         }
 
@@ -31,7 +32,7 @@ export class ChatRepository {
             method: "GET",
             url: `https://neo.character.ai/turns/${chatId}/`,
             headers: {
-                'authorization': 'Token '
+                'authorization': `Token ${this.token}`
             }
         }
 
