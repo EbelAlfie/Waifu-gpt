@@ -41,7 +41,7 @@ export const OverlayContent = () => {
           <section 
             className={`${chatState?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
           >
-            <ChatRoom />
+            <ChatRoom isChatOpened={chatState}/>
           </section>
   
       </section>
