@@ -1,6 +1,12 @@
 import { useContext } from "react"
-import { ChatListModel } from "./ChatListState"
 import { CharacterData } from "./CharacterData"
+import { AuthorModel } from "@/domain/response_model/ChatTurnHistory"
+
+export type ChatListModel = {
+    message: string,
+    author: AuthorModel,
+    createTime: string
+}
 
 export const ChatBubble = ({model}: {model : ChatListModel}) => {
     const recipientId = useContext(CharacterData) 

@@ -1,18 +1,24 @@
-import { ChatTurnHistory, TurnResponse } from "@/domain/model/ChatTurnHistory"
+import { ChatTurnHistory, TurnResponse } from "@/domain/response_model/ChatTurnHistory"
 import axios, { AxiosResponse } from "axios"
 
 export class ChatRepository {
     webSocket: WebSocket | null = null
     token: string| undefined = "" //process.env.TOKEN
 
+    public onMessage(event: MessageEvent) {}
+    
+    public onOpen(event: Event) { }
+
+    public onError(event: Event) { }
+
+    public sendMessage(message: string) {
+        this.webSocket?.send(message)
+    }
+
     public openChatConnection() {
         this.webSocket = new WebSocket("wss://neo.character.ai/ws/") 
         this.webSocket.onopen = this.onOpen.bind(this)
-        
-    }
-
-    private onOpen() {
-        
+        this.webSocket.onmessage = this.onMessage.bind(this)      
     }
 
     public async fetchRecentChat(characterId: string) {
@@ -37,11 +43,5 @@ export class ChatRepository {
         }
 
         return axios.request(config)
-    }
-
-    public async sendMessage(message: string) {
-        const messagePayload = {
-
-        }
     }
 }

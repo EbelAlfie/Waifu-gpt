@@ -7,7 +7,7 @@ type BottomBarProps = {
 
 export const BottomBar = (props: BottomBarProps) => {
     return <>
-        <div className="my-8 mx-5 flex flex-row gap-5 justify-around items-center">
+        <div className="my-8 mx-5 flex flex-row gap-3 justify-around items-center">
             <TextField 
                 props={props.textFieldProp}
                 onTyping={props.onTyping}
@@ -26,15 +26,13 @@ const TextField = (
     {onTyping, props}: {onTyping: (text: string) => void, props: TextFieldProps}
 ) => {
     return <>
-        <div>
-            <input 
-                className="border-slate-500 rounded-xl p-2 bg-yellow-100"
-                type="text" 
-                onChange={(event) => onTyping(event.target.value)}
-                placeholder={props.placeholder}
-                value={props.text}
-            />
-        </div>
+        <input 
+            className="flex-grow border-slate-500 rounded-xl p-2 bg-yellow-100"
+            type="text" 
+            onChange={(event) => onTyping(event.target.value)}
+            placeholder={props.placeholder}
+            value={props.text}
+        />
     </>
 }
 

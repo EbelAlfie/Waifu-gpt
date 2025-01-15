@@ -40,9 +40,9 @@ export const OverlayContent = () => {
           </div>
 
           <section 
-            className={`${!chatState?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
+            className={`${chatState?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
           >
-            <CharacterData.Provider value="AQGwzrW9BFEBHhYt93wVih5SZmfxCH5AXAm_qQiPFj8">
+            <CharacterData.Provider value="BlmjOrRW8fhjbCx6iG5saWgDJtz6VtpXOcEnLZy05YE">
               <ChatRoom isChatOpened={chatState}/>
             </CharacterData.Provider>
           </section>

@@ -16,3 +16,8 @@ export enum Nation {
     Natlan,
     Sneznaya
 }
+
+export enum ChatEventType {
+    CREATE = "create",
+    CREATE_GENERATE = "create_and_generate_turn"
+}

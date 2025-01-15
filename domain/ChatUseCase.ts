@@ -1,8 +1,7 @@
 import { ChatRepository } from "@/data/ChatRepository";
-import { RecentChatResponse } from "./model/RecentChatResponse";
-import { ChatTurnHistory, TurnKey } from "./model/ChatTurnHistory";
-import { AxiosResponse } from "axios";
-import { Any } from "@react-spring/three";
+import { RecentChatResponse } from "./response_model/RecentChatResponse";
+import { ChatTurnHistory, parseTurn, TurnKey } from "./response_model/ChatTurnHistory";
+import { ChatEventType } from "@/models/ConstEnum";
 
 export class ChatUseCase {
     repository: ChatRepository = new ChatRepository()
@@ -36,35 +35,7 @@ export class ChatUseCase {
                 const turns = response.data?.turns ?? []
 
                 const chatData = turns.map((turn: any) => {
-                    const turn_key = turn?.turn_key ?? {}
-                    const turnKey: TurnKey = {
-                        chatId: turn_key?.chat_id ?? "",
-                        turnId: turn_key?.turn_id ?? ""
-                    }
-                    const author = {
-                        authorId: turn.author.author_id,
-                        isHuman: turn.author.is_human ?? false,
-                        name: turn.author.name
-                    }
-
-                    const candidates = turn.candidates.map((item: any) => {
-                        const candidateData = {
-                            candidateId: item.candidate_id,
-                            createTime: item.create_time,
-                            rawContent: item.raw_content,
-                            isFinal: item.is_final
-                        }
-                        return candidateData
-                    })
-                    return {
-                        turnKey: turnKey,
-                        createTime: turn.create_time,
-                        lastUpdatedTime: turn.last_updated_time,
-                        state: turn.state,
-                        author: author,
-                        candidates: candidates,
-                        primaryId: turn.primary_id
-                    }
+                    return parseTurn(turn)
                 })
 
                 console.log(chatData)
@@ -76,33 +47,45 @@ export class ChatUseCase {
             })
     }
 
-    public async sendMessage(message: string) {
+    public openWebsocketConnection() {
+        this.repository.openChatConnection()
+    }
+
+    public async sendMessage(
+        characterId: string,
+        message: string
+    ) {
+        const eventType = ChatEventType.CREATE_GENERATE
+        const requestId = crypto.randomUUID().slice(0, 24) + ""
+        const primaryCandidateId = crypto.randomUUID() 
+        const turnId = crypto.randomUUID() 
+
         const model = {
-            "command": "create_and_generate_turn",
-            "request_id": "61a627fa-a41f-47c6-bd4c-XOcEnLZy05YE",
-            "payload": {
-                "num_candidates": 1,
-                "tts_enabled": false,
-                "selected_language": "",
-                "character_id": "BlmjOrRW8fhjbCx6iG5saWgDJtz6VtpXOcEnLZy05YE",
-                "user_name": "SethAriblaze",
-                "turn": {
-                    "turn_key": {
-                        "turn_id": "00549e37-adb9-4b69-809e-db6689078af2",
-                        "chat_id": "83c7ae9e-f153-4d67-9f27-3d1accb53b95"
+            command: eventType,
+            request_id: requestId,
+            payload: {
+                num_candidates: 1,
+                tts_enabled: false,
+                selected_language: "",
+                character_id: characterId,
+                user_name: "SethAriblaze",
+                turn: {
+                    turn_key: {
+                        turn_id: turnId,
+                        chat_id: "83c7ae9e-f153-4d67-9f27-3d1accb53b95"
                     },
-                    "author": {
-                        "author_id": "58584831",
-                        "is_human": true,
-                        "name": "SethAriblaze"
+                    author: {
+                        author_id: "58584831",
+                        is_human: true,
+                        name: "SethAriblaze"
                     },
-                    "candidates": [
+                    candidates: [
                         {
-                            "candidate_id": "24baaab4-c0bd-42b7-b746-61691d94d58c",
-                            "raw_content": "Ping"
+                            candidate_id: primaryCandidateId,
+                            raw_content: message
                         }
                     ],
-                    "primary_candidate_id": "24baaab4-c0bd-42b7-b746-61691d94d58c"
+                    primary_candidate_id: primaryCandidateId
                 },
                 "previous_annotations": {
                     "boring": 0,
@@ -131,28 +114,27 @@ export class ChatUseCase {
             }
         }
 
-        // this.repository.sendMessage(model)
+        this.repository.sendMessage(JSON.stringify(model))
+    }
+
+    registerOpenListener(listener: (message: Event) => void) {
+        this.repository.onOpen = listener
+    }
+
+    registerErrorListener(listener: (message: Event) => void) {
+        this.repository.onError = listener
+    }
+
+    registerMessageListener(listener: (messageTurn: ChatTurnHistory) => void) {
+        const messageParser = (message: MessageEvent) => {
+            const data = JSON.parse(message?.data).turn ?? {}
+            console.log(data)
+
+            const turn = parseTurn(data)
+            console.log(`turns ${turn}`)
+
+            listener(turn)
+        }
+        this.repository.onMessage = messageParser
     }
 }
-
-// const temp = (response: AxiosResponse<Any, Any>) => {
-//     const data = response?.data ?? {}
-
-//     const turns = data.turns ?? []
-
-//     const chatData = turns.map(turn => {
-//     const turn_key = turn?.turn_key ?? {}
-//     const turnKey = {
-
-//     }
-//     const chat: ChatTurnHistory = {
-//         turnKey: TurnKey,
-//         createTime: string,
-//         lastUpdatedTime: string,
-//         state: string,
-//         author: AuthorModel,
-//         canditates: CandidatesModel,
-//         primaryId: string
-//     }
-//     })
-// }
