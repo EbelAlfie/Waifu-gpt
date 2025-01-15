@@ -18,7 +18,8 @@ export class ChatRepository {
     public openChatConnection() {
         this.webSocket = new WebSocket("wss://neo.character.ai/ws/") 
         this.webSocket.onopen = this.onOpen.bind(this)
-        this.webSocket.onmessage = this.onMessage.bind(this)      
+        this.webSocket.onmessage = this.onMessage.bind(this)
+        this.webSocket.onerror = this.onError.bind(this)  
     }
 
     public async fetchRecentChat(characterId: string) {

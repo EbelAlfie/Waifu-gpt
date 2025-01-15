@@ -7,7 +7,7 @@ type ChatListProps = {
 
 export const ChatList = ({...props}: ChatListProps) => {
     const chatBubble = props.chats.map((item, index) =>  
-        <ChatBubble model={item} key={index}/>
+        <ChatBubble model={item} key={item.turnId}/>
     )
     
     return (

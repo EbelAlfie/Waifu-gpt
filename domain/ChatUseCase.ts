@@ -128,10 +128,9 @@ export class ChatUseCase {
     registerMessageListener(listener: (messageTurn: ChatTurnHistory) => void) {
         const messageParser = (message: MessageEvent) => {
             const data = JSON.parse(message?.data).turn ?? {}
-            console.log(data)
 
             const turn = parseTurn(data)
-            console.log(`turns ${turn}`)
+            console.log(`turns ${JSON.stringify(turn)}`)
 
             listener(turn)
         }

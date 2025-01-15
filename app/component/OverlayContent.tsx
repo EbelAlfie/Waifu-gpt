@@ -5,6 +5,7 @@ import NavBar from "@/components/NavBar"
 import { useState } from "react"
 import { ChatRoom } from './chat/ChatRoom'
 import { CharacterData } from './chat/CharacterData'
+import { ChatRoomLayout } from './chat/ChatRoomLayout'
 
 export const OverlayContent = () => {
     const imageSrc = vision.src
@@ -43,7 +44,7 @@ export const OverlayContent = () => {
             className={`${chatState?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
           >
             <CharacterData.Provider value="BlmjOrRW8fhjbCx6iG5saWgDJtz6VtpXOcEnLZy05YE">
-              <ChatRoom isChatOpened={chatState}/>
+              <ChatRoomLayout isChatOpened={chatState}/>
             </CharacterData.Provider>
           </section>
   
