@@ -3,17 +3,9 @@ import { ChatListModel } from "./ChatBubble"
 import { ChatUseCase } from "@/domain/ChatUseCase"
 import { CharacterData } from "./CharacterData"
 import { ChatTurnHistory } from "@/domain/response_model/ChatTurnHistory"
-import { ChatRoom } from "./ChatRoom"
-
-type Loading = { type:"loading" }
-type Loaded<T> = { type:"loaded", data: T } 
-type Failed = { type:"error", error: Error }
-
-function setLoaded<dataType>(data: dataType): Loaded<dataType> { 
-    return { type:"loaded", data: data } 
-}
-function setLoading(): Loading { return { type:"loading" } }
-function setError(error: Error): Failed { return { type:"error", error: error } }
+import { ChatRoom } from "./ChatRoomContent"
+import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "@/global/UiState"
+import { CommandType } from "@/models/ConstEnum"
 
 type ChatRoomUiState = Loading | Loaded<ChatListModel[]> | Failed
 
@@ -56,7 +48,8 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
             setChatRoomUiState(setError(Error("Error connecting web socket")))
         })
 
-        useCase.registerMessageListener((turn: ChatTurnHistory) => {
+        useCase.registerMessageListener((turn: ChatTurnHistory, command: string) => {
+            if (chatRoomUiState.type !== "loaded") return 
             const newMessage = {
                 turnId: turn.turnKey.turnId,
                 message: turn.candidates[0]?.rawContent,
@@ -64,18 +57,38 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                 createTime: turn.createTime
             };
 
-            if (chatRoomUiState.type !== "loaded") return 
             const newList = chatRoomUiState.data
-            newList.push(newMessage)
-            setChatRoomUiState(setLoaded(newList))
+            console.log(newMessage)
+
+            switch(command) {
+                case CommandType.ADD : {
+                    newList.push(newMessage)
+                    setChatRoomUiState(setLoaded([...newList, newMessage]))
+                    break
+                }
+                case CommandType.UPDATE : {
+                    const updateIndex = newList.findIndex((item) => { 
+                        item.turnId === newMessage.turnId
+                    })
+                    if (updateIndex > -1) 
+                        newList[updateIndex] = newMessage
+                    setChatRoomUiState(setLoaded(newList))
+                    break
+                }
+            }
         })
 
         useCase.openWebsocketConnection()
 
+        return () => {
+            if (props.isChatOpened) return 
+            useCase.closeWebsocketConnection()
+            setChatRoomUiState(setLoading())
+        }
     }, [props.isChatOpened])
 
     return <>
-        <section className="h-screen rounded-tr-lg rounded-br-lg flex flex-col bg-slate-950 opacity-80 max-w-xl max-h-full">
+        <section className="w-lvw h-screen rounded-tr-lg rounded-br-lg flex flex-col bg-slate-950 opacity-80 max-w-xl max-h-full">
             {chatRoomUiState.type === "loading" && <LoadingLottie/>}
             {chatRoomUiState.type === "loaded" && 
                 <ChatRoom
@@ -90,8 +103,8 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
 
 const LoadingLottie = () => {
     return (
-        <div className="gap-80 place-self-center justify-self-center bg-black opacity-80 rounded-lg p-8">
-            <div className="bg-slate-200 rounded-full"/>
+        <div className="place-self-center justify-self-center bg-green-300 rounded-lg p-8">
+            <div className="border-white border-spacing-2 rounded-full w-10 h-10"/>
         </div>
     )
 }

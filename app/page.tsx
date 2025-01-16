@@ -2,7 +2,7 @@
 import MainCanvas from "./component/MainCanvas"
 import { OverlayContent } from "./component/OverlayContent"
 import { useMemo, useState } from "react"
-import { ChatRoom } from "./component/chat/ChatRoom"
+import { ChatRoom } from "./component/chat/ChatRoomContent"
 
 const Home = () => {
   return <>

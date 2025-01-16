@@ -38,7 +38,6 @@ export class ChatUseCase {
                     return parseTurn(turn)
                 })
 
-                console.log(chatData)
                 return chatData
             })
             .catch(error => {
@@ -49,6 +48,10 @@ export class ChatUseCase {
 
     public openWebsocketConnection() {
         this.repository.openChatConnection()
+    }
+
+    public closeWebsocketConnection() {
+        this.repository.closeConnection()
     }
 
     public async sendMessage(
@@ -125,14 +128,14 @@ export class ChatUseCase {
         this.repository.onError = listener
     }
 
-    registerMessageListener(listener: (messageTurn: ChatTurnHistory) => void) {
+    registerMessageListener(listener: (messageTurn: ChatTurnHistory, command: string) => void) {
         const messageParser = (message: MessageEvent) => {
-            const data = JSON.parse(message?.data).turn ?? {}
+            const data = JSON.parse(message?.data) ?? {}
+            const command = data?.command ?? ""
+            const turn = data?.turn ?? {}
+            const parsedTurn = parseTurn(turn)
 
-            const turn = parseTurn(data)
-            console.log(`turns ${JSON.stringify(turn)}`)
-
-            listener(turn)
+            listener(parsedTurn, command)
         }
         this.repository.onMessage = messageParser
     }

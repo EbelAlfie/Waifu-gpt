@@ -3,21 +3,21 @@ import vision from '#/assets/vision/Vision_Mondstadt_Anemo.webp'
 import IconButton from "@/components/IconButton"
 import NavBar from "@/components/NavBar"
 import { useState } from "react"
-import { ChatRoom } from './chat/ChatRoom'
+import { ChatRoom } from './chat/ChatRoomContent'
 import { CharacterData } from './chat/CharacterData'
 import { ChatRoomLayout } from './chat/ChatRoomLayout'
 
 export const OverlayContent = () => {
     const imageSrc = vision.src
 
-    const [chatState, setChatState] = useState<Boolean>(false)
+    const [isChatVisible, setChatVisibility] = useState<Boolean>(false)
 
     const onAlarmClicked = () => {
         
     }
 
     const onChatClicked = (newState: Boolean) => {
-        setChatState(newState)
+      setChatVisibility(newState)
     }
 
     return <>
@@ -33,7 +33,7 @@ export const OverlayContent = () => {
               />
               <IconButton 
                 image={imageSrc} 
-                onClick={() => { onChatClicked(!chatState) }}
+                onClick={() => { onChatClicked(!isChatVisible) }}
                 label="Chat"  
               />
             </div>
@@ -41,10 +41,10 @@ export const OverlayContent = () => {
           </div>
 
           <section 
-            className={`${chatState?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
+            className={`${isChatVisible?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
           >
             <CharacterData.Provider value="BlmjOrRW8fhjbCx6iG5saWgDJtz6VtpXOcEnLZy05YE">
-              <ChatRoomLayout isChatOpened={chatState}/>
+              <ChatRoomLayout isChatOpened={isChatVisible}/>
             </CharacterData.Provider>
           </section>
   
