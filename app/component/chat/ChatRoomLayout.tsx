@@ -25,23 +25,31 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     useEffect(() => {
         if (!props.isChatOpened) return
 
-        useCase.registerOpenListener((message: Event) => {
-            useCase.fetchRecentChat(charId)
-                .then(resultModel => {
-                    useCase.loadChatHistory(resultModel.chatId)
-                    .then(chatHistory => {
-                        const chatList = chatHistory.map(chat => {
-                            return {
-                                turnId: chat.turnKey.turnId,
-                                message: chat.candidates[0]?.rawContent,
-                                author: chat.author,
-                                createTime: chat.createTime
-                            }
-                        })
-                        setChatRoomUiState(setLoaded(chatList.reverse()))
-                    })
-                })
-        })
+        const fetchInitialData = async () => {
+            const chatData = await useCase.fetchRecentChat(charId)
+            if (chatData instanceof Error) {
+                setChatRoomUiState(setError(chatData))
+                return 
+            }
+
+            const chatHistory = await useCase.loadChatHistory(chatData.chatId)
+            if (chatHistory instanceof Error) {
+                setChatRoomUiState(setError(chatHistory))
+                return 
+            }
+
+            const chatList = chatHistory.map(chat => {
+                return {
+                    turnId: chat.turnKey.turnId,
+                    message: chat.candidates[0]?.rawContent,
+                    author: chat.author,
+                    createTime: chat.createTime
+                }
+            })
+            setChatRoomUiState(setLoaded(chatList.reverse()))    
+        }
+
+        useCase.registerOpenListener((message: Event) => fetchInitialData)
 
         useCase.registerErrorListener((message: Event) => {
             setChatRoomUiState(setError(Error("Error connecting web socket")))
