@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react"
+import { useContext, useEffect, useMemo, useRef, useState } from "react"
 import { ChatListModel } from "./ChatBubble"
 import { ChatUseCase } from "@/domain/ChatUseCase"
 import { CharacterData } from "./CharacterData"
@@ -18,6 +18,9 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     const useCase = useMemo(() => new ChatUseCase(), [])
 
     const [chatRoomUiState, setChatRoomUiState] = useState<ChatRoomUiState>(setLoading())
+    
+    const uiStateRef = useRef(chatRoomUiState) //TODO optimize ? 
+    useEffect(() => {uiStateRef.current = chatRoomUiState},[chatRoomUiState])
 
     useEffect(() => {
         if (!props.isChatOpened) return
@@ -45,7 +48,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
         })
 
         useCase.registerMessageListener((turn: ChatTurnHistory, command: string) => {
-            if (chatRoomUiState.type !== "loaded") return 
+            if (uiStateRef.current.type !== "loaded") return 
 
             const newMessage = {
                 turnId: turn.turnKey.turnId,
@@ -53,8 +56,10 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                 author: turn.author,
                 createTime: turn.createTime
             };
+            
+            const currentState = uiStateRef.current
 
-            const newList = chatRoomUiState.data
+            const newList = currentState.data
 
             switch(command) {
                 case CommandType.ADD : {
