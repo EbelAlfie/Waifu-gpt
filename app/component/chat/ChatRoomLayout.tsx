@@ -22,7 +22,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     useEffect(() => {
         if (!props.isChatOpened) return
 
-        const fetchInitialData = () => {
+        useCase.registerOpenListener((message: Event) => {
             useCase.fetchRecentChat(charId)
                 .then(resultModel => {
                     useCase.loadChatHistory(resultModel.chatId)
@@ -38,10 +38,6 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                         setChatRoomUiState(setLoaded(chatList.reverse()))
                     })
                 })
-        }
-
-        useCase.registerOpenListener((message: Event) => {
-            fetchInitialData()
         })
 
         useCase.registerErrorListener((message: Event) => {
@@ -50,6 +46,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
 
         useCase.registerMessageListener((turn: ChatTurnHistory, command: string) => {
             if (chatRoomUiState.type !== "loaded") return 
+
             const newMessage = {
                 turnId: turn.turnKey.turnId,
                 message: turn.candidates[0]?.rawContent,
@@ -58,20 +55,20 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
             };
 
             const newList = chatRoomUiState.data
-            console.log(newMessage)
 
             switch(command) {
                 case CommandType.ADD : {
                     newList.push(newMessage)
-                    setChatRoomUiState(setLoaded([...newList, newMessage]))
+                    setChatRoomUiState(setLoaded(newList))
                     break
                 }
                 case CommandType.UPDATE : {
-                    const updateIndex = newList.findIndex((item) => { 
+                    const updateIndex = newList.findIndex(item => 
                         item.turnId === newMessage.turnId
-                    })
-                    if (updateIndex > -1) 
-                        newList[updateIndex] = newMessage
+                    )
+                    
+                    if (updateIndex > -1) newList[updateIndex] = newMessage
+
                     setChatRoomUiState(setLoaded(newList))
                     break
                 }
