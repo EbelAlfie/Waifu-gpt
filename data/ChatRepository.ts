@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios"
 
 export class ChatRepository {
     webSocket: WebSocket | null = null
-    token: string| undefined = "" //process.env.TOKEN
+    token: string| undefined = process.env.NEXT_PUBLIC_TOKEN
 
     public onMessage(event: MessageEvent) {}
     

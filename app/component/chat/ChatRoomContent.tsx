@@ -34,15 +34,16 @@ export const ChatRoom = ({...props}: ChatRoomData) => {
         props.chatUseCase.sendMessage(charId, textField.text)
     }
 
-    return <>
-        <ChatList
-            className="p-8 flex flex-col flex-grow overflow-y-scroll" 
-            chats={props.chatListState}
-        />
-        <BottomBar 
-            textFieldProp={textField}
-            onTyping={onType}
-            onSendClicked={onSend}
-        />
-    </>
+    return <div className="flex flex-col">
+        
+            <ChatList
+                className="p-8 flex flex-col flex-grow overflow-y-scroll" 
+                chats={props.chatListState}
+            />
+            <BottomBar 
+                textFieldProp={textField}
+                onTyping={onType}
+                onSendClicked={onSend}
+            />
+        </div>
 }

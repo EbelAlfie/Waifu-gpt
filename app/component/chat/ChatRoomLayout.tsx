@@ -5,7 +5,7 @@ import { CharacterData } from "./CharacterData"
 import { ChatTurnHistory } from "@/domain/response_model/ChatTurnHistory"
 import { ChatRoom } from "./ChatRoomContent"
 import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "@/global/UiState"
-import { CommandType } from "@/models/ConstEnum"
+import { CommandType } from "@/global/models/ConstEnum"
 
 type ChatRoomUiState = Loading | Loaded<ChatListModel[]> | Failed
 
@@ -98,7 +98,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     }, [props.isChatOpened])
 
     return <>
-        <section className="w-lvw h-screen rounded-tr-lg rounded-br-lg flex flex-col bg-slate-950 opacity-80 max-w-xl max-h-full">
+        <section className="relative w-lvw max-w-xl h-screen rounded-tr-lg rounded-br-lg bg-slate-950 opacity-80">
             {chatRoomUiState.type === "loading" && <LoadingLottie/>}
             {chatRoomUiState.type === "loaded" && 
                 <ChatRoom
@@ -106,23 +106,27 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                     chatListState={chatRoomUiState.data}
                 />
             }
-            {chatRoomUiState.type === "error" && <ErrorLayout/>}
+            {chatRoomUiState.type === "error" && <LoadingLottie/>}
         </section>
     </>
 }
 
 const LoadingLottie = () => {
     return (
-        <div className="place-self-center justify-self-center bg-green-300 rounded-lg p-8">
-            <div className="border-white border-spacing-2 rounded-full w-10 h-10"/>
+        <div className="h-screen flex justify-center items-center">
+            <div className="bg-black rounded-lg p-8">
+                <div className="rounded-full w-50 h-50 loading-spinner p-8"/>
+            </div>
         </div>
     )
 }
 
-const ErrorLayout = () => {
+const ErrorLayout = (errorMessage: string) => {
     return (
-        <div className="self-center place-self-center justify-self-center bg-black opacity-80 rounded-lg p-8">
-            
+        <div className="h-screen flex justify-center items-center">
+            <div className="self-center place-self-center justify-self-center bg-black opacity-80 rounded-lg p-8">
+                <h3></h3>
+            </div>
         </div>
     )
 }

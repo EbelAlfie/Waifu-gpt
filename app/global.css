@@ -61,4 +61,15 @@
             left: -100;  
         }
     }
+
+    .loading-spinner {
+        background: radial-gradient(farthest-side,#ffffff 94%,#0000) top/9px 9px no-repeat,
+               conic-gradient(#0000 30%,#ffffff);
+        -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+        animation: loading 1s infinite linear;
+     }
+     
+     @keyframes loading {
+        100% { transform: rotate(1turn); }
+     }
 }
