@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useCallback, useContext, useState } from "react"
 import { BottomBar, TextFieldProps } from "./BottomBar"
 import { ChatUseCase } from "@/domain/ChatUseCase"
 import { CharacterData } from "./CharacterData"
@@ -34,16 +34,15 @@ export const ChatRoom = ({...props}: ChatRoomData) => {
         props.chatUseCase.sendMessage(charId, textField.text)
     }
 
-    return <div className="flex flex-col">
-        
-            <ChatList
-                className="p-8 flex flex-col flex-grow overflow-y-scroll" 
-                chats={props.chatListState}
-            />
-            <BottomBar 
-                textFieldProp={textField}
-                onTyping={onType}
-                onSendClicked={onSend}
-            />
-        </div>
+    return <>
+        <ChatList
+            className="p-8 flex flex-col flex-grow overflow-y-scroll" 
+            chats={props.chatListState}
+        />
+        <BottomBar 
+            textFieldProp={textField}
+            onTyping={onType}
+            onSendClicked={onSend}
+        />
+    </>
 }

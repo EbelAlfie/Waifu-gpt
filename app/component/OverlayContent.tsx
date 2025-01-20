@@ -21,7 +21,7 @@ export const OverlayContent = () => {
     }
 
     return <>
-      <section className="absolute top-0 flex flex-row flex-nowrap h-screen w-full pointer-events-none">
+      <section className="absolute top-0 flex flex-row flex-nowrap h-screen w-screen pointer-events-none">
           <div className="flex flex-col w-screen">
             <NavBar className="pointer-events-auto relative top-0"/>
 

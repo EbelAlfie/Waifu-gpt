@@ -49,7 +49,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
             setChatRoomUiState(setLoaded(chatList.reverse()))    
         }
 
-        useCase.registerOpenListener((message: Event) => fetchInitialData)
+        useCase.registerOpenListener((message: Event) => fetchInitialData())
 
         useCase.registerErrorListener((message: Event) => {
             setChatRoomUiState(setError(Error("Error connecting web socket")))
@@ -98,7 +98,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     }, [props.isChatOpened])
 
     return <>
-        <section className="relative w-lvw max-w-xl h-screen rounded-tr-lg rounded-br-lg bg-slate-950 opacity-80">
+        <section className="flex flex-col w-lvw max-w-xl h-screen rounded-tr-lg rounded-br-lg bg-slate-950 opacity-80">
             {chatRoomUiState.type === "loading" && <LoadingLottie/>}
             {chatRoomUiState.type === "loaded" && 
                 <ChatRoom
@@ -106,7 +106,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                     chatListState={chatRoomUiState.data}
                 />
             }
-            {chatRoomUiState.type === "error" && <LoadingLottie/>}
+            {chatRoomUiState.type === "error" && <ErrorLayout errorMessage={chatRoomUiState.error.message}/>}
         </section>
     </>
 }
@@ -121,11 +121,11 @@ const LoadingLottie = () => {
     )
 }
 
-const ErrorLayout = (errorMessage: string) => {
+const ErrorLayout = ({errorMessage}: {errorMessage: string}) => {
     return (
         <div className="h-screen flex justify-center items-center">
             <div className="self-center place-self-center justify-self-center bg-black opacity-80 rounded-lg p-8">
-                <h3></h3>
+                <h3 className="text_genshin">{errorMessage}</h3>
             </div>
         </div>
     )
