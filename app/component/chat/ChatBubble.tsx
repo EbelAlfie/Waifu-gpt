@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { CharacterData } from "./CharacterData"
+import { GlobalCharacterData } from "./CharacterData"
 import { AuthorModel } from "@/domain/response_model/ChatTurnHistory"
 
 export type ChatListModel = {
@@ -10,7 +10,7 @@ export type ChatListModel = {
 }
 
 export const ChatBubble = ({model}: {model : ChatListModel}) => {
-    const recipientId = useContext(CharacterData) 
+    const recipientId = useContext(GlobalCharacterData).characterAiData.characterId
     
     return <>
         <li className={`${recipientId === model.author.authorId ? "place-self-start" : "place-self-end"}`}>

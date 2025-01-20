@@ -3,8 +3,6 @@ import vision from '#/assets/vision/Vision_Mondstadt_Anemo.webp'
 import IconButton from "@/components/IconButton"
 import NavBar from "@/components/NavBar"
 import { useState } from "react"
-import { ChatRoom } from './chat/ChatRoomContent'
-import { CharacterData } from './chat/CharacterData'
 import { ChatRoomLayout } from './chat/ChatRoomLayout'
 
 export const OverlayContent = () => {
@@ -43,9 +41,7 @@ export const OverlayContent = () => {
           <section 
             className={`${isChatVisible?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
           >
-            <CharacterData.Provider value="BlmjOrRW8fhjbCx6iG5saWgDJtz6VtpXOcEnLZy05YE">
-              <ChatRoomLayout isChatOpened={isChatVisible}/>
-            </CharacterData.Provider>
+            <ChatRoomLayout isChatOpened={isChatVisible}/>
           </section>
   
       </section>

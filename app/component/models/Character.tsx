@@ -1,12 +1,12 @@
 "use client"
 import { useFBX } from '@react-three/drei'
-import { useLoader } from '@react-three/fiber'
-import { FBXLoader, GLTFLoader } from 'three/examples/jsm/Addons.js'
-
-const model = '/assets/models/char.fbx'
+import { useContext } from 'react'
+import { GlobalCharacterData } from '../chat/CharacterData'
 
 const Character = () => {
-    const object = useFBX(model)
+    const character = useContext(GlobalCharacterData)
+
+    const object = useFBX(character.modelPath)
     return <primitive 
         object={object} 
         scale={[0.04, 0.04, 0.04]}

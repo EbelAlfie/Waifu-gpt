@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo, useRef, useState } from "react"
 import { ChatListModel } from "./ChatBubble"
 import { ChatUseCase } from "@/domain/ChatUseCase"
-import { CharacterData } from "./CharacterData"
+import { GlobalCharacterData } from "./CharacterData"
 import { ChatTurnHistory } from "@/domain/response_model/ChatTurnHistory"
 import { ChatRoom } from "./ChatRoomContent"
 import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "@/global/UiState"
@@ -14,7 +14,8 @@ type ChatRoomProps = {
 }
 
 export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
-    const charId = useContext(CharacterData)
+    const character = useContext(GlobalCharacterData)
+
     const useCase = useMemo(() => new ChatUseCase(), [])
 
     const [chatRoomUiState, setChatRoomUiState] = useState<ChatRoomUiState>(setLoading())
@@ -26,7 +27,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
         if (!props.isChatOpened) return
 
         const fetchInitialData = async () => {
-            const chatData = await useCase.fetchRecentChat(charId)
+            const chatData = await useCase.fetchRecentChat(character.characterAiData.characterId)
             if (chatData instanceof Error) {
                 setChatRoomUiState(setError(chatData))
                 return 

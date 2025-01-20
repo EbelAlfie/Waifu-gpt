@@ -1,9 +1,9 @@
 import { useCallback, useContext, useState } from "react"
 import { BottomBar, TextFieldProps } from "./BottomBar"
 import { ChatUseCase } from "@/domain/ChatUseCase"
-import { CharacterData } from "./CharacterData"
 import { ChatListModel } from "./ChatBubble"
 import { ChatList } from "./ChatList"
+import { GlobalCharacterData } from "./CharacterData"
 
 type ChatRoomData = {
     chatUseCase: ChatUseCase,
@@ -11,7 +11,7 @@ type ChatRoomData = {
 }
 
 export const ChatRoom = ({...props}: ChatRoomData) => {
-    const charId = useContext(CharacterData)
+    const charId = useContext(GlobalCharacterData).characterAiData.characterId
     
     const [textField, setTextField] = useState<TextFieldProps>({
         text: "",

@@ -2,7 +2,7 @@ import axios from "axios"
 
 export class ChatRepository {
     webSocket: WebSocket | null = null
-    token: string| undefined = "" //process.env.NEXT_PUBLIC_TOKEN
+    token: string| undefined = process.env.NEXT_PUBLIC_TOKEN
 
     public onMessage(event: MessageEvent) {}
     
