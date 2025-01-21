@@ -8,13 +8,13 @@ export enum Elements {
 }
 
 export enum Nation {
-    Mondstadt,
-    Liyue,
-    Inazuma,
-    Sumeru,
-    Fontaine,
-    Natlan,
-    Sneznaya
+    Mondstadt = "Mondstadt",
+    Liyue = "Liyue",
+    Inazuma = "Inazuma",
+    Sumeru = "Sumeru",
+    Fontaine = "Fontaine",
+    Natlan = "Natlan",
+    Sneznaya = "Sneznaya"
 }
 
 export enum ChatEventType {

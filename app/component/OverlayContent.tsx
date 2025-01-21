@@ -10,7 +10,7 @@ import { provideVision } from '@/global/utils'
 
 export const OverlayContent = () => {
     const character = useContext(GlobalCharacterData)
-    const imageSrc = useMemo(() => provideVision(character.nationality), [character])
+    const imageSrc = useMemo(() => provideVision(character), [character])
 
     const [isChatVisible, setChatVisibility] = useState<Boolean>(false)
 
@@ -30,7 +30,7 @@ export const OverlayContent = () => {
             <NavBar 
               className="pointer-events-auto relative top-0"
               label={`${character.element}/${character.name}`}
-              logoSrc=''
+              logoSrc={imageSrc}
             />
 
             <div className="pointer-events-auto flex flex-col mt-8 me-8 items-end self-end h-auto">
