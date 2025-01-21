@@ -25,7 +25,11 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     useEffect(() => {uiStateRef.current = chatRoomUiState},[chatRoomUiState])
 
     useEffect(() => {
-        if (!props.isChatOpened) return
+        if (!props.isChatOpened) {
+            useCase.closeWebsocketConnection()
+            setChatRoomUiState(setLoading())
+            return
+        }
 
         const fetchInitialData = async () => {
             const chatData = await useCase.fetchRecentChat(character.characterAiData.characterId)
@@ -100,7 +104,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     }, [props.isChatOpened])
 
     return <>
-        <section className="flex flex-col w-lvw max-w-xl h-screen rounded-tr-lg rounded-br-lg bg-slate-950 opacity-80">
+        <section className="flex flex-col w-lvw max-w-xl h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80">
             {chatRoomUiState.type === "loading" && <LoadingLottie/>}
             {chatRoomUiState.type === "loaded" && 
                 <ChatRoom

@@ -2,12 +2,15 @@
 import vision from '#/assets/vision/Vision_Mondstadt_Anemo.webp'
 import IconButton from "@/components/IconButton"
 import NavBar from "@/components/NavBar"
-import { useState } from "react"
+import { useContext, useMemo, useState } from "react"
 import { ChatRoomLayout } from './chat/ChatRoomLayout'
-import { Any } from '@react-spring/three'
+import { GlobalCharacterData } from './chat/CharacterData'
+import { Nation } from '@/global/models/ConstEnum'
+import { provideVision } from '@/global/utils'
 
 export const OverlayContent = () => {
-    const imageSrc = vision.src
+    const character = useContext(GlobalCharacterData)
+    const imageSrc = useMemo(() => provideVision(character.nationality), [character])
 
     const [isChatVisible, setChatVisibility] = useState<Boolean>(false)
 
@@ -24,7 +27,11 @@ export const OverlayContent = () => {
     return <>
       <section className="absolute top-0 flex flex-row flex-nowrap h-screen w-screen pointer-events-none">
           <div className="flex flex-col w-screen">
-            <NavBar className="pointer-events-auto relative top-0"/>
+            <NavBar 
+              className="pointer-events-auto relative top-0"
+              label={`${character.element}/${character.name}`}
+              logoSrc=''
+            />
 
             <div className="pointer-events-auto flex flex-col mt-8 me-8 items-end self-end h-auto">
               <IconButton 

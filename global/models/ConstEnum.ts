@@ -1,10 +1,10 @@
 export enum Elements {
-    Pyro,
-    Anemo,
-    Cryo,
-    Hydro,
-    Geo,
-    Dendro,
+    Pyro = "Pyro",
+    Anemo = "Anemo",
+    Cryo = "Cryo",
+    Hydro = "Hydro",
+    Geo = "Geo",
+    Dendro = "Dendro",
 }
 
 export enum Nation {
