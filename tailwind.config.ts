@@ -14,6 +14,7 @@ const config: Config = {
         'cryo_cloud': "#2594b5",
         'cryo_base' : '#19566d',
         'back_light': '#ede5d7',
+        'back_hovered': '#c9c2b5',
         'border_icon': '#858486'
       },
     },

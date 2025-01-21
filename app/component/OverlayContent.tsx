@@ -4,6 +4,7 @@ import IconButton from "@/components/IconButton"
 import NavBar from "@/components/NavBar"
 import { useState } from "react"
 import { ChatRoomLayout } from './chat/ChatRoomLayout'
+import { Any } from '@react-spring/three'
 
 export const OverlayContent = () => {
     const imageSrc = vision.src
@@ -11,7 +12,9 @@ export const OverlayContent = () => {
     const [isChatVisible, setChatVisibility] = useState<Boolean>(false)
 
     const onAlarmClicked = () => {
-        
+        if (!(window as any)?.MobileGateBox?.setAlarm) return 
+
+        (window as any).MobileGateBox.setAlarm(true)
     }
 
     const onChatClicked = (newState: Boolean) => {

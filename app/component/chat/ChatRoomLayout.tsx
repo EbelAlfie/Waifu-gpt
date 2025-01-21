@@ -106,7 +106,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                 <ChatRoom
                     chatUseCase={useCase}
                     chatListState={chatRoomUiState.data}
-                    onBackPressed={() => { props.onBackPressed(props.isChatOpened) }}
+                    onBackPressed={() => { props.onBackPressed(!props.isChatOpened) }}
                 />
             }
             {chatRoomUiState.type === "error" && <ErrorLayout errorMessage={chatRoomUiState.error.message}/>}
