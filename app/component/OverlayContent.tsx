@@ -41,7 +41,10 @@ export const OverlayContent = () => {
           <section 
             className={`${isChatVisible?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
           >
-            <ChatRoomLayout isChatOpened={isChatVisible}/>
+            <ChatRoomLayout 
+              isChatOpened={isChatVisible}
+              onBackPressed={onChatClicked}
+            />
           </section>
   
       </section>

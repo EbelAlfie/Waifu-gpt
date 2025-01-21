@@ -11,6 +11,7 @@ type ChatRoomUiState = Loading | Loaded<ChatListModel[]> | Failed
 
 type ChatRoomProps = {
     isChatOpened: Boolean
+    onBackPressed: (chatOpened: Boolean) => void
 }
 
 export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
@@ -105,6 +106,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                 <ChatRoom
                     chatUseCase={useCase}
                     chatListState={chatRoomUiState.data}
+                    onBackPressed={() => { props.onBackPressed(props.isChatOpened) }}
                 />
             }
             {chatRoomUiState.type === "error" && <ErrorLayout errorMessage={chatRoomUiState.error.message}/>}

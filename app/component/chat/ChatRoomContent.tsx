@@ -4,10 +4,12 @@ import { ChatUseCase } from "@/domain/ChatUseCase"
 import { ChatListModel } from "./ChatBubble"
 import { ChatList } from "./ChatList"
 import { GlobalCharacterData } from "./CharacterData"
+import { ChatHeader } from "./ChatHeader"
 
 type ChatRoomData = {
     chatUseCase: ChatUseCase,
-    chatListState: ChatListModel[]
+    chatListState: ChatListModel[],
+    onBackPressed: () => void
 }
 
 export const ChatRoom = ({...props}: ChatRoomData) => {
@@ -35,6 +37,7 @@ export const ChatRoom = ({...props}: ChatRoomData) => {
     }
 
     return <>
+        <ChatHeader onClick={props.onBackPressed}/>
         <ChatList
             className="p-8 flex flex-col flex-grow overflow-y-scroll" 
             chats={props.chatListState}
