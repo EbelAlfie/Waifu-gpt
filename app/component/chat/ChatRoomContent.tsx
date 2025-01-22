@@ -2,13 +2,13 @@ import { useCallback, useContext, useState } from "react"
 import { BottomBar, TextFieldProps } from "./BottomBar"
 import { ChatUseCase } from "@/app/domain/ChatUseCase"
 import { ChatListModel } from "./ChatBubble"
-import { ChatList } from "./ChatList"
+import { ChatList, ChatListState } from "./ChatList"
 import { GlobalCharacterData } from "./CharacterData"
 import { ChatHeader } from "./ChatHeader"
 
 type ChatRoomData = {
     chatUseCase: ChatUseCase,
-    chatListState: ChatListModel[],
+    chatListState: ChatListState,
     onBackPressed: () => void
 }
 
@@ -33,14 +33,14 @@ export const ChatRoom = ({...props}: ChatRoomData) => {
 
     const onSend = () => {
         if (!textField.text || textField.text === "") return 
-        props.chatUseCase.sendMessage(charId, textField.text)
+        props.chatUseCase.sendMessage(props.chatListState.chatId, charId, textField.text)
     }
 
     return <>
         <ChatHeader onClick={props.onBackPressed}/>
         <ChatList
             className="p-8 flex flex-col flex-grow overflow-y-scroll" 
-            chats={props.chatListState}
+            chats={props.chatListState.chatList}
         />
         <BottomBar 
             textFieldProp={textField}

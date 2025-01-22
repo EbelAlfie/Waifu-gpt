@@ -6,8 +6,9 @@ import { ChatTurnHistory } from "@/app/domain/response_model/ChatTurnHistory"
 import { ChatRoom } from "./ChatRoomContent"
 import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "@/app/global/UiState"
 import { CommandType } from "@/app/global/models/ConstEnum"
+import { ChatListState } from "./ChatList"
 
-type ChatRoomUiState = Loading | Loaded<ChatListModel[]> | Failed
+type ChatRoomUiState = Loading | Loaded<ChatListState> | Failed
 
 type ChatRoomProps = {
     isChatOpened: Boolean
@@ -52,7 +53,12 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                     createTime: chat.createTime
                 }
             })
-            setChatRoomUiState(setLoaded(chatList.reverse()))    
+            setChatRoomUiState(setLoaded(
+                {
+                    chatId: chatData.chatId,
+                    chatList: chatList.reverse()
+                }
+            ))    
         }
 
         useCase.registerOpenListener((message: Event) => fetchInitialData())
@@ -73,12 +79,16 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
             
             const currentState = uiStateRef.current
 
-            const newList = currentState.data
+            const uiState =  currentState.data
+            
+            const newList = uiState.chatList
 
             switch(command) {
                 case CommandType.ADD : {
                     newList.push(newMessage)
-                    setChatRoomUiState(setLoaded(newList))
+                    
+                    uiState.chatList = newList
+                    setChatRoomUiState(setLoaded(uiState))
                     break
                 }
                 case CommandType.UPDATE : {
@@ -88,7 +98,8 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                     
                     if (updateIndex > -1) newList[updateIndex] = newMessage
 
-                    setChatRoomUiState(setLoaded(newList))
+                    uiState.chatList = newList
+                    setChatRoomUiState(setLoaded(uiState))
                     break
                 }
             }
@@ -104,7 +115,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     }, [props.isChatOpened])
 
     return <>
-        <section className="flex flex-col w-lvw max-w-xl h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80">
+        <section className="flex flex-col w-lvw max-w-screen-xl h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80">
             {chatRoomUiState.type === "loading" && <LoadingLottie/>}
             {chatRoomUiState.type === "loaded" && 
                 <ChatRoom

@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useRef } from "react"
 import { ChatBubble, ChatListModel } from "./ChatBubble"
 
+export type ChatListState = {
+    chatId: string,
+    chatList: ChatListModel[]
+}
+
 type ChatListProps = { 
     className?: string
     chats: ChatListModel[]

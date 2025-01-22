@@ -55,6 +55,7 @@ export class ChatUseCase {
     }
 
     public async sendMessage(
+        chatId: string,
         characterId: string,
         message: string
     ) {
@@ -75,7 +76,7 @@ export class ChatUseCase {
                 turn: {
                     turn_key: {
                         turn_id: turnId,
-                        chat_id: "83c7ae9e-f153-4d67-9f27-3d1accb53b95"
+                        chat_id: chatId
                     },
                     author: {
                         author_id: "58584831",
