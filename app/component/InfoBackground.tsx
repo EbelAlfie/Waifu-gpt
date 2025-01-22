@@ -1,4 +1,4 @@
-import { deg } from "@/global/utils"
+import { deg } from "@/app/global/utils"
 import { MeshReflectorMaterial } from "@react-three/drei"
 import { Vector2 } from "three/webgpu"
 import { DebugMesh } from "./models/DebugGeometry"

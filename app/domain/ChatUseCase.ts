@@ -1,7 +1,7 @@
-import { ChatRepository } from "@/data/ChatRepository";
+import { ChatRepository } from "@/app/data/ChatRepository";
 import { RecentChatResponse } from "./response_model/RecentChatResponse";
 import { ChatTurnHistory, parseTurn, TurnKey } from "./response_model/ChatTurnHistory";
-import { ChatEventType } from "@/global/models/ConstEnum";
+import { ChatEventType } from "@/app/global/models/ConstEnum";
 
 export class ChatUseCase {
     repository: ChatRepository = new ChatRepository()

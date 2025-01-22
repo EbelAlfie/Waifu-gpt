@@ -1,4 +1,4 @@
-import { deg } from "@/global/utils"
+import { deg } from "@/app/global/utils"
 import { DoubleSide } from "three"
 
 const vertShader = `

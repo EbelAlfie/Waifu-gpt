@@ -1,4 +1,4 @@
-import { BackIcon, BackIconProps } from "@/components/BackIcon"
+import { BackIcon, BackIconProps } from "@/app/component/common/BackIcon"
 
 export const ChatHeader = ({...props}: BackIconProps) => {
     return <>

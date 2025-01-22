@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { GlobalCharacterData } from "./CharacterData"
-import { AuthorModel } from "@/domain/response_model/ChatTurnHistory"
+import { AuthorModel } from "@/app/domain/response_model/ChatTurnHistory"
 
 export type ChatListModel = {
     turnId: string,

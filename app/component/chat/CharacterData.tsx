@@ -1,5 +1,5 @@
-import { CharacterModel } from "@/global/CharacterModel";
-import { Elements, Nation } from "@/global/models/ConstEnum";
+import { CharacterModel } from "@/app/global/CharacterModel";
+import { Elements, Nation } from "@/app/global/models/ConstEnum";
 import { createContext } from "react";
 
 export const dummyData = {
