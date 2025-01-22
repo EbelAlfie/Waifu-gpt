@@ -33,7 +33,11 @@ export const ChatRoom = ({...props}: ChatRoomData) => {
 
     const onSend = () => {
         if (!textField.text || textField.text === "") return 
-        props.chatUseCase.sendMessage(props.chatListState.chatId, charId, textField.text)
+        props.chatUseCase.sendMessage(
+            props.chatListState.metadata.chatId, 
+            charId, 
+            textField.text
+        )
     }
 
     return <>

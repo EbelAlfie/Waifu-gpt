@@ -16,6 +16,7 @@ export class ChatUseCase {
 
                 const result: RecentChatResponse = {
                     chatId : chat?.chat_id ?? "",
+                    characterAvatar : chat?.character_avatar_uri ?? "",
                     createTime: chat?.create_time ?? "",
                     creatorId: chat?.creator_id ?? "",
                     characterId: chat?.character_id ?? "",

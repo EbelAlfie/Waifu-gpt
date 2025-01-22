@@ -1,11 +1,9 @@
 "use client"
-import vision from '#/assets/vision/Vision_Mondstadt_Anemo.webp'
 import IconButton from "@/app/component/common/IconButton"
 import NavBar from "@/app/component/common/NavBar"
 import { useContext, useMemo, useState } from "react"
 import { ChatRoomLayout } from './chat/ChatRoomLayout'
 import { GlobalCharacterData } from './chat/CharacterData'
-import { Nation } from '@/app/global/models/ConstEnum'
 import { provideVision } from '@/app/global/utils'
 
 export const OverlayContent = () => {

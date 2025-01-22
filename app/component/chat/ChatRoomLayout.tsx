@@ -7,6 +7,7 @@ import { ChatRoom } from "./ChatRoomContent"
 import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "@/app/global/UiState"
 import { CommandType } from "@/app/global/models/ConstEnum"
 import { ChatListState } from "./ChatList"
+import { ChatHeader } from "./ChatHeader"
 
 type ChatRoomUiState = Loading | Loaded<ChatListState> | Failed
 
@@ -45,17 +46,19 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                 return 
             }
 
-            const chatList = chatHistory.map(chat => {
+            const chatList: ChatListModel[] = chatHistory.map(chat => {
+                const isCharMessage = chat.author.authorId === character.characterAiData.characterId
                 return {
                     turnId: chat.turnKey.turnId,
                     message: chat.candidates[0]?.rawContent,
                     author: chat.author,
+                    authorAvatar: isCharMessage? chatData.characterAvatar : "",
                     createTime: chat.createTime
                 }
             })
             setChatRoomUiState(setLoaded(
                 {
-                    chatId: chatData.chatId,
+                    metadata: chatData,
                     chatList: chatList.reverse()
                 }
             ))    
@@ -68,18 +71,21 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
         })
 
         useCase.registerMessageListener((turn: ChatTurnHistory, command: string) => {
-            if (uiStateRef.current.type !== "loaded") return 
+            const currentState = uiStateRef.current
+            if (currentState.type !== "loaded") return 
 
-            const newMessage = {
+            const isCharMessage = 
+                turn.author.authorId === character.characterAiData.characterId
+            
+            const uiState =  currentState.data
+
+            const newMessage: ChatListModel = {
                 turnId: turn.turnKey.turnId,
                 message: turn.candidates[0]?.rawContent,
                 author: turn.author,
+                authorAvatar: isCharMessage ? uiState.metadata.characterAvatar : "",
                 createTime: turn.createTime
             };
-            
-            const currentState = uiStateRef.current
-
-            const uiState =  currentState.data
             
             const newList = uiState.chatList
 
@@ -115,7 +121,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     }, [props.isChatOpened])
 
     return <>
-        <section className="flex flex-col w-lvw max-w-screen-xl h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80">
+        <section className="flex flex-col w-lvw max-w-screen-lg h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80">
             {chatRoomUiState.type === "loading" && <LoadingLottie/>}
             {chatRoomUiState.type === "loaded" && 
                 <ChatRoom
