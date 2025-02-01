@@ -12,6 +12,7 @@
     "@react-spring/three": "^9.7.5",
     "@react-three/drei": "^9.114.6",
     "@react-three/fiber": "^8.17.10",
+    "@types/express": "^5.0.0",
     "@types/three": "^0.169.0",
     "axios": "^1.7.9",
     "next": "14.2.15",

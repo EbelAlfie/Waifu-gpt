@@ -26,6 +26,18 @@ export class ChatRepository {
         this.webSocket = null
     }
 
+    public async resurectCharacter(charId: string) {
+        const config = {
+            method: "GET",
+            url: `https://neo.character.ai/chat/${charId}/resurrect`,
+            headers: {
+                'authorization': `Token ${this.token}`
+            }
+        }
+
+        return axios.request(config)
+    }
+
     public async fetchRecentChat(characterId: string) {
         const config = {
             method: "GET",

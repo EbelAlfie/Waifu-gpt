@@ -7,7 +7,6 @@ import { ChatRoom } from "./ChatRoomContent"
 import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "@/app/global/UiState"
 import { CommandType } from "@/app/global/models/ConstEnum"
 import { ChatListState } from "./ChatList"
-import { ChatHeader } from "./ChatHeader"
 
 type ChatRoomUiState = Loading | Loaded<ChatListState> | Failed
 

@@ -6,7 +6,13 @@ import { ChatEventType } from "@/app/global/models/ConstEnum";
 export class ChatUseCase {
     repository: ChatRepository = new ChatRepository()
 
+    public async resurectCharacter(charId: string) {
+        return this.repository.resurectCharacter(charId)
+            .catch(error => error)
+    }
+
     public async fetchRecentChat(characterId: string): Promise<RecentChatResponse> {
+        "use server"
         return this.repository.fetchRecentChat(characterId)
             .then(response => {
                 const data = response.data
@@ -31,6 +37,7 @@ export class ChatUseCase {
     }
 
     public async loadChatHistory(chatId: string): Promise<ChatTurnHistory[]> {
+        "use server"
         return this.repository.loadChatHistory(chatId)
             .then(response => {
                 const turns = response.data?.turns ?? []

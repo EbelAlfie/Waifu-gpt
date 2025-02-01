@@ -1,7 +1,6 @@
-import { useCallback, useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { BottomBar, TextFieldProps } from "./BottomBar"
 import { ChatUseCase } from "@/app/domain/ChatUseCase"
-import { ChatListModel } from "./ChatBubble"
 import { ChatList, ChatListState } from "./ChatList"
 import { GlobalCharacterData } from "./CharacterData"
 import { ChatHeader } from "./ChatHeader"
