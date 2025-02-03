@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { BottomBar, TextFieldProps } from "./BottomBar"
-import { ChatUseCase } from "@/app/domain/ChatUseCase"
+import { ChatUseCase } from "@/api/domain/ChatUseCase"
 import { ChatList, ChatListState } from "./ChatList"
 import { GlobalCharacterData } from "./CharacterData"
 import { ChatHeader } from "./ChatHeader"
