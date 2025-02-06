@@ -1,5 +1,4 @@
 import axios from "axios"
-import { fetchRecentChat, loadChatHistory, resurrectCharacter } from "./server/ChatAction"
 
 export class ChatRepository {
     webSocket: WebSocket | null = null
@@ -28,14 +27,38 @@ export class ChatRepository {
     }
 
     public async resurectCharacter(charId: string) {
-        return resurrectCharacter(charId, this.token)
+        const config = {
+            method: "GET",
+            url: `https://neo.character.ai/chat/${charId}/resurrect`,
+            headers: {
+                'authorization': `Token ${this.token}`
+            }
+        }
+    
+        return axios.request(config)
     }
 
     public async fetchRecentChat(characterId: string) {
-        return fetchRecentChat(characterId, this.token)
+        const config = {
+            method: "GET",
+            url: `https://neo.character.ai/chats/recent/${characterId}`,
+            headers: {
+                'authorization': `Token ${this.token}`
+            }
+        }
+    
+        return axios.request(config)
     }
 
     public async loadChatHistory(chatId: string) {
-        return loadChatHistory(chatId, this.token)
+        const config = {
+            method: "GET",
+            url: `https://neo.character.ai/turns/${chatId}/`,
+            headers: {
+                'authorization': `Token ${this.token}`
+            }
+        }
+    
+        return axios.request(config)
     }
 }

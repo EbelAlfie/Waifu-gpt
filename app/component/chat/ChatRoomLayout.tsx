@@ -1,12 +1,13 @@
+"use client"
 import { useContext, useEffect, useMemo, useRef, useState } from "react"
 import { ChatListModel } from "./ChatBubble"
-import { ChatUseCase } from "@/api/domain/ChatUseCase"
-import { GlobalCharacterData } from "./CharacterData"
+import { GlobalCharacterData } from "../../context/CharacterData"
 import { ChatTurnHistory } from "@/api/domain/response_model/ChatTurnHistory"
-import { ChatRoom } from "./ChatRoomContent"
+import { ChatRoom } from "./ChatRoomPage"
 import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "@/app/global/UiState"
 import { CommandType } from "@/app/global/models/ConstEnum"
 import { ChatListState } from "./ChatList"
+import { ChatUseCase } from "@/domain/ChatUseCase"
 
 type ChatRoomUiState = Loading | Loaded<ChatListState> | Failed
 
@@ -32,12 +33,16 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
             return
         }
 
-        useCase.resurectCharacter(character.characterAiData.characterId)
-
         const fetchInitialData = async () => {
             const chatData = await useCase.fetchRecentChat(character.characterAiData.characterId)
             if (chatData instanceof Error) {
                 setChatRoomUiState(setError(chatData))
+                return 
+            }
+
+            const resurrect = await useCase.resurectCharacter(chatData.chatId)
+            if (resurrect instanceof Error) {
+                setChatRoomUiState(setError(resurrect))
                 return 
             }
 
@@ -65,10 +70,10 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
             ))    
         }
 
-        useCase.registerOpenListener((message: Event) => fetchInitialData())
+        useCase.registerOpenListener(() => fetchInitialData())
 
         useCase.registerErrorListener((message: Event) => {
-            setChatRoomUiState(setError(Error("Error connecting web socket")))
+            setChatRoomUiState(setError(Error(JSON.stringify(message))))
         })
 
         useCase.registerMessageListener((turn: ChatTurnHistory, command: string) => {
@@ -101,8 +106,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                 case CommandType.UPDATE : {
                     const updateIndex = newList.findIndex(item => 
                         item.turnId === newMessage.turnId
-                    )
-                    
+                    )  
                     if (updateIndex > -1) newList[updateIndex] = newMessage
 
                     uiState.chatList = newList

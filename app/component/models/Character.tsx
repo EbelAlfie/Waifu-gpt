@@ -1,7 +1,7 @@
 "use client"
 import { useFBX } from '@react-three/drei'
 import { useContext } from 'react'
-import { GlobalCharacterData } from '../chat/CharacterData'
+import { GlobalCharacterData } from '../../context/CharacterData'
 
 const Character = () => {
     const character = useContext(GlobalCharacterData)

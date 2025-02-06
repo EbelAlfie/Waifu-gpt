@@ -5,7 +5,7 @@ import { createContext } from "react";
 export const dummyData = {
     name: "Layla",
     characterAiData: {
-      characterId: "AQGwzrW9BFEBHhYt93wVih5SZmfxCH5AXAm_qQiPFj8"
+      characterId: "BlmjOrRW8fhjbCx6iG5saWgDJtz6VtpXOcEnLZy05YE"
     },
     modelPath: "/assets/models/char.fbx",
     element: Elements.Cryo,

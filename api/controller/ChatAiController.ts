@@ -1,6 +1,6 @@
 import { ChatUseCase } from "@/api/domain/ChatUseCase"
-import axios from "axios"
 import { Request, Response } from "express"
+import WebSocket from "ws"
 
 const chatAiUseCase = new ChatUseCase()
 
@@ -32,4 +32,10 @@ export async function loadChatHistory(request: Request, response: Response) {
     const result = await chatAiUseCase.loadChatHistory(chatId?.toString() ?? "")
 
     response.send(result)
+}
+
+export async function chat(ws: WebSocket) {
+    ws.on("message", (event: MessageEvent) => {
+        console.log("Message")
+    })
 }

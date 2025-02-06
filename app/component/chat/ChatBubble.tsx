@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { GlobalCharacterData } from "./CharacterData"
+import { GlobalCharacterData } from "../../context/CharacterData"
 import { AuthorModel } from "@/api/domain/response_model/ChatTurnHistory"
 import { Avatar } from "./Avatar"
 
