@@ -1,4 +1,6 @@
-import { fetchRecentChat, loadChatHistory, resurrectCharacter } from "./server/ChatAction"
+import axios, { AxiosResponse } from "axios"
+import { RecentChatResponse } from "./model/RecentChatResponse"
+import { TurnResponse } from "./model/TurnResponse"
 
 export class ChatRepository {
     webSocket: WebSocket | null = null
@@ -26,15 +28,39 @@ export class ChatRepository {
         this.webSocket = null
     }
 
-    public async resurectCharacter(chatId: string) {
-        return resurrectCharacter(chatId)
+    public async resurectCharacter(charId: string) {
+        const config = {
+            method: "GET",
+            url: `https://neo.character.ai/chat/${charId}/resurrect`,
+            headers: {
+                'authorization': `Token ${this.token}`
+            }
+        }
+    
+        return axios.request(config)
     }
 
-    public async fetchRecentChat(characterId: string) {
-        return fetchRecentChat(characterId)
+    public async fetchRecentChat(characterId: string): Promise<AxiosResponse<RecentChatResponse, any>> {
+        const config = {
+            method: "GET",
+            url: `https://neo.character.ai/chats/recent/${characterId}`,
+            headers: {
+                'authorization': `Token ${this.token}`
+            }
+        }
+    
+        return axios.request<any, AxiosResponse<RecentChatResponse>, any>(config)
     }
 
-    public async loadChatHistory(chatId: string) {
-        return loadChatHistory(chatId)
+    public async loadChatHistory(chatId: string): Promise<AxiosResponse<TurnResponse, any>> {
+        const config = {
+            method: "GET",
+            url: `https://neo.character.ai/turns/${chatId}/`,
+            headers: {
+                'authorization': `Token ${this.token}`
+            }
+        }
+    
+        return axios.request<any, AxiosResponse<TurnResponse>, any>(config)
     }
 }

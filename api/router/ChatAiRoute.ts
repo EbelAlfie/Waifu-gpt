@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { loadRecentChat, loadChatHistory, resurrectCharacter, chat } from "../controller/ChatAiController"
+import { loadRecentChat, loadChatHistory, resurrectCharacter } from "../controller/CharacterController"
 
 type RouteModel = { 
     name: string,
@@ -19,9 +19,4 @@ export const RecentChat: RouteModel = {
 export const ChatHistory: RouteModel = {
     name: "/chat-history",
     controller: loadChatHistory
-}
-
-export const Chat = {
-    name: "/chat",
-    controller: chat
 }

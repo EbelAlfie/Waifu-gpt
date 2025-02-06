@@ -1,6 +1,6 @@
 "use server";
 
-import { ChatUseCase } from "@/api/domain/ChatUseCase";
+import { ChatUseCase } from "@/domain/ChatUseCase";
 
 export async function resurrectCharacter(chatId: string) {
     const chatUsecase = new ChatUseCase()

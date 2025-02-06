@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { ChatBubble, ChatListModel } from "./ChatBubble"
-import { RecentChatResponse } from "@/api/domain/response_model/RecentChatResponse"
+import { RecentChatModel } from "@/domain/response_model/RecentChat"
 
 export type ChatListState = {
-    metadata: RecentChatResponse,
+    metadata: RecentChatModel,
     chatList: ChatListModel[]
 }
 

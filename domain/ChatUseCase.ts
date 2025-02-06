@@ -1,19 +1,20 @@
-import { ChatTurnHistory, parseTurn } from "@/api/domain/response_model/ChatTurnHistory";
-import { RecentChatResponse } from "@/api/domain/response_model/RecentChatResponse";
-import { ChatEventType } from "@/app/global/models/ConstEnum";
 import { ChatRepository } from "@/data/ChatRepository";
+import { mapRecentChat, RecentChatModel } from "./response_model/RecentChat";
+import { ChatTurnHistory, mapTurnHistory, parseTurn } from "./response_model/ChatTurnHistory";
+import { ChatEventType } from "@/app/global/models/ConstEnum";
 
 export class ChatUseCase {
     repository: ChatRepository = new ChatRepository()
 
     public async resurectCharacter(charId: string) {
         return this.repository.resurectCharacter(charId)
+            .then(response => response)
             .catch(error => error)
     }
 
-    public async fetchRecentChat(characterId: string): Promise<RecentChatResponse> {
+    public async fetchRecentChat(characterId: string): Promise<RecentChatModel> {
         return this.repository.fetchRecentChat(characterId)
-            .then(response =>  JSON.parse(response) ?? {})
+            .then(response => mapRecentChat(response.data))
             .catch(error => {
                 console.log(error)
                 return error
@@ -22,7 +23,7 @@ export class ChatUseCase {
 
     public async loadChatHistory(chatId: string): Promise<ChatTurnHistory[]> {
         return this.repository.loadChatHistory(chatId)
-            .then(response => JSON.parse(response) ?? [])
+            .then(response => mapTurnHistory(response.data))
             .catch(error => {
                 console.log(error)
                 return error
