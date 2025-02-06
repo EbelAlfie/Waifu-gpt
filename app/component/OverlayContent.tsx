@@ -1,6 +1,6 @@
 "use client"
-import IconButton from "@/app/component/common/IconButton"
-import NavBar from "@/app/component/common/NavBar"
+import IconButton from "@/app/common/IconButton"
+import NavBar from "@/app/common/NavBar"
 import { useContext, useMemo, useState } from "react"
 import { ChatRoomLayout } from './chat/ChatRoomLayout'
 import { GlobalCharacterData } from '../context/CharacterData'
