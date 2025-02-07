@@ -14,7 +14,7 @@ export class ChatUseCase {
 
     public async fetchRecentChat(characterId: string): Promise<RecentChatModel> {
         return this.repository.fetchRecentChat(characterId)
-            .then(response => mapRecentChat(response.data))
+            .then(response => mapRecentChat(response))
             .catch(error => {
                 console.log(error)
                 return error
@@ -23,7 +23,7 @@ export class ChatUseCase {
 
     public async loadChatHistory(chatId: string): Promise<ChatTurnHistory[]> {
         return this.repository.loadChatHistory(chatId)
-            .then(response => mapTurnHistory(response.data))
+            .then(response => mapTurnHistory(response))
             .catch(error => {
                 console.log(error)
                 return error

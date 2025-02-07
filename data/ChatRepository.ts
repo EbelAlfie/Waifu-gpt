@@ -30,17 +30,14 @@ export class ChatRepository {
     }
 
     public async resurectCharacter(chatId: string) {
-        const response = resurrectCharacter(chatId, this.token)
-        return axios.request(config)
+        return resurrectCharacter(chatId, this.token)
     }
 
-    public async fetchRecentChat(characterId: string): Promise<AxiosResponse<RecentChatResponse, any>> {
-        const response = fetchRecentChat(characterId, this.token)
-        return axios.request<any, AxiosResponse<RecentChatResponse>, any>(config)
+    public async fetchRecentChat(characterId: string): Promise<RecentChatResponse> {
+        return fetchRecentChat(characterId, this.token)
     }
 
-    public async loadChatHistory(chatId: string): Promise<AxiosResponse<TurnResponse, any>> {
-        const response = loadChatHistory(chatId, token)
-        return axios.request<any, AxiosResponse<TurnResponse>, any>(config)
+    public async loadChatHistory(chatId: string): Promise<TurnResponse> {
+        return loadChatHistory(chatId, this.token)
     }
 }

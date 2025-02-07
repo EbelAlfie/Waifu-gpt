@@ -13,8 +13,8 @@ export async function resurrectCharacter(chatId: string, token: string|undefined
     }
 
     return await axios.request(config)
-    .then(response => JSON.stringify(response.data))
-    .catch(error => JSON.stringify(error))
+        .then(response => response.data)
+        .catch(error => error)
 }
 
 export async function fetchRecentChat(characterId: string, token: string|undefined) {
@@ -27,8 +27,8 @@ export async function fetchRecentChat(characterId: string, token: string|undefin
     }
 
     return await axios.request<any, AxiosResponse<RecentChatResponse>, any>(config)
-        .then(response => JSON.stringify(response.data))
-        .catch(error => JSON.stringify(error))
+        .then(response => response.data)
+        .catch(error => error)
 }
 
 export async function loadChatHistory(chatId: string, token: string|undefined) {
@@ -41,6 +41,6 @@ export async function loadChatHistory(chatId: string, token: string|undefined) {
     }
 
     return await axios.request<any, AxiosResponse<TurnResponse>, any>(config)
-        .then(response => JSON.stringify(response.data))
-        .catch(error => JSON.stringify(error))
+        .then(response => response.data)
+        .catch(error => error)
 }
