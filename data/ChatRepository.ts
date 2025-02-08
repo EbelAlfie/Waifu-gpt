@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from "axios"
+import { GeneralError } from "./model/GeneralError"
 import { RecentChatResponse } from "./model/RecentChatResponse"
 import { TurnResponse } from "./model/TurnResponse"
-import { fetchRecentChat, loadChatHistory, resurrectCharacter } from "@/app/component/chat/action/ChatAction"
+import { fetchRecentChat, loadChatHistory, resurrectCharacter } from "@/data/action/ChatAction"
 
 export class ChatRepository {
     webSocket: WebSocket | null = null
@@ -33,11 +33,11 @@ export class ChatRepository {
         return resurrectCharacter(chatId, this.token)
     }
 
-    public async fetchRecentChat(characterId: string): Promise<RecentChatResponse> {
+    public async fetchRecentChat(characterId: string): Promise<RecentChatResponse|GeneralError> {
         return fetchRecentChat(characterId, this.token)
     }
 
-    public async loadChatHistory(chatId: string): Promise<TurnResponse> {
+    public async loadChatHistory(chatId: string): Promise<TurnResponse|GeneralError> {
         return loadChatHistory(chatId, this.token)
     }
 }

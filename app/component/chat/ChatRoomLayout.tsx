@@ -7,8 +7,10 @@ import { CommandType } from "@/app/global/models/ConstEnum"
 import { ChatListState } from "./ChatList"
 import { ChatUseCase } from "@/domain/ChatUseCase"
 import { ChatTurnHistory } from "@/domain/response_model/ChatTurnHistory"
+import { RecentChatModel } from "@/domain/response_model/RecentChat"
+import { useChat } from "../../hooks/useChat"
 
-type ChatRoomUiState = Loading | Loaded<ChatListState> | Failed
+export type ChatRoomUiState = Loading | Loaded<ChatListState> | Failed
 
 type ChatRoomProps = {
     isChatOpened: Boolean
@@ -20,109 +22,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
 
     const useCase = useMemo(() => new ChatUseCase(), [])
 
-    const [chatRoomUiState, setChatRoomUiState] = useState<ChatRoomUiState>(setLoading())
-    
-    const uiStateRef = useRef(chatRoomUiState) //TODO optimize ? 
-    useEffect(() => {uiStateRef.current = chatRoomUiState},[chatRoomUiState])
-
-    useEffect(() => {
-        if (!props.isChatOpened) {
-            useCase.closeWebsocketConnection()
-            setChatRoomUiState(setLoading())
-            return
-        }
-
-        const fetchInitialData = async () => {
-            const chatData = await useCase.fetchRecentChat(character.characterAiData.characterId)
-            if (chatData instanceof Error) {
-                setChatRoomUiState(setError(chatData))
-                return 
-            }
-
-            const resurrect = await useCase.resurectCharacter(chatData.chatId)
-            if (resurrect instanceof Error) {
-                setChatRoomUiState(setError(resurrect))
-                return 
-            }
-
-            const chatHistory = await useCase.loadChatHistory(chatData.chatId)
-            if (chatHistory instanceof Error) {
-                setChatRoomUiState(setError(chatHistory))
-                return 
-            }
-
-            const chatList: ChatListModel[] = chatHistory.map(chat => {
-                const isCharMessage = chat.author.authorId === character.characterAiData.characterId
-                return {
-                    turnId: chat.turnKey.turnId,
-                    message: chat.candidates[0]?.rawContent,
-                    author: chat.author,
-                    authorAvatar: isCharMessage? chatData.characterAvatar : "",
-                    createTime: chat.createTime
-                }
-            })
-            setChatRoomUiState(setLoaded(
-                {
-                    metadata: chatData,
-                    chatList: chatList.reverse()
-                }
-            ))    
-        }
-
-        useCase.registerOpenListener(() => fetchInitialData())
-
-        useCase.registerErrorListener((message: Event) => {
-            setChatRoomUiState(setError(Error(JSON.stringify(message))))
-        })
-
-        useCase.registerMessageListener((turn: ChatTurnHistory, command: string) => {
-            const currentState = uiStateRef.current
-            if (currentState.type !== "loaded") return 
-
-            const isCharMessage = 
-                turn.author.authorId === character.characterAiData.characterId
-            
-            const uiState =  currentState.data
-
-            const newMessage: ChatListModel = {
-                turnId: turn.turnKey.turnId,
-                message: turn.candidates[0]?.rawContent,
-                author: turn.author,
-                authorAvatar: isCharMessage ? uiState.metadata.characterAvatar : "",
-                createTime: turn.createTime
-            };
-            
-            const newList = uiState.chatList
-
-            switch(command) {
-                case CommandType.ADD : {
-                    newList.push(newMessage)
-                    
-                    uiState.chatList = newList
-                    setChatRoomUiState(setLoaded(uiState))
-                    break
-                }
-                case CommandType.UPDATE : {
-                    const updateIndex = newList.findIndex(item => 
-                        item.turnId === newMessage.turnId
-                    )  
-                    if (updateIndex > -1) newList[updateIndex] = newMessage
-
-                    uiState.chatList = newList
-                    setChatRoomUiState(setLoaded(uiState))
-                    break
-                }
-            }
-        })
-
-        useCase.openWebsocketConnection()
-
-        return () => {
-            if (props.isChatOpened) return 
-            useCase.closeWebsocketConnection()
-            setChatRoomUiState(setLoading())
-        }
-    }, [props.isChatOpened])
+    const chatRoomUiState = useChat(useCase, props.isChatOpened)
 
     return <>
         <section className="flex flex-col w-lvw max-w-screen-lg h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80">

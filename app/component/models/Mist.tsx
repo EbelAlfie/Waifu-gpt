@@ -4,8 +4,8 @@ import { CloudInstance, Clouds } from "@react-three/drei"
 import { Color, useFrame } from "@react-three/fiber"
 import { Group, InstancedMesh, Material, MeshLambertMaterial, MeshPhongMaterial, MeshStandardMaterial, Object3DEventMap, REVISION, ShaderMaterial, Spherical, Vector3, WebGLProgramParametersWithUniforms } from "three"
 import texture from "#/assets/tex/cloud.png"
-import { useCallback, useEffect, useMemo, useRef } from "react"
-import { GenshinClouds, MistMaterial } from "./materials/cloud/GenshinCloud";
+import { useCallback, useRef } from "react"
+import { MistMaterial } from "./materials/cloud/GenshinCloud";
 
 type MistProp = {
     color: Color | string | number,
@@ -44,6 +44,7 @@ const CharacterMist = ({radius = 20, ...props} : MistProp)=> {
               concentrate = "inside"
               volume={30}
               scale={5.0}
+              speed={0.2}
               growth={30}
               segments={100}
           />
