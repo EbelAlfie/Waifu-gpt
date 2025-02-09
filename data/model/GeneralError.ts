@@ -1,4 +1,4 @@
-export type GeneralError = {
-    code: Number,
+export interface GeneralError extends Error {
+    code: string | undefined,
     message: string
 }

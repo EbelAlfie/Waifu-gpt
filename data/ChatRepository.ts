@@ -33,11 +33,17 @@ export class ChatRepository {
         return resurrectCharacter(chatId, this.token)
     }
 
-    public async fetchRecentChat(characterId: string): Promise<RecentChatResponse|GeneralError> {
+    public async fetchRecentChat(characterId: string): Promise<RecentChatResponse> {
         return fetchRecentChat(characterId, this.token)
+            .then((response: RecentChatResponse) => {
+                return response
+            })
     }
 
-    public async loadChatHistory(chatId: string): Promise<TurnResponse|GeneralError> {
+    public async loadChatHistory(chatId: string): Promise<TurnResponse> {
         return loadChatHistory(chatId, this.token)
+            .then((response: TurnResponse) => {
+                return response
+            })
     }
 }
