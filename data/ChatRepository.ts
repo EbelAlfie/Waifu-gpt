@@ -1,4 +1,3 @@
-import { GeneralError } from "./model/GeneralError"
 import { RecentChatResponse } from "./model/RecentChatResponse"
 import { TurnResponse } from "./model/TurnResponse"
 import { fetchRecentChat, loadChatHistory, resurrectCharacter } from "@/data/action/ChatAction"
