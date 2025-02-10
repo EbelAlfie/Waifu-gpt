@@ -5,8 +5,8 @@ import { setError, setLoaded, setLoading } from "@/app/global/UiState";
 import { RecentChatModel } from "@/domain/response_model/RecentChat";
 import { ChatTurnHistory } from "@/domain/response_model/ChatTurnHistory";
 import { ChatListModel } from "../component/chat/ChatBubble";
-import { CommandType } from "@/app/global/models/ConstEnum";
-import { GlobalCharacterData } from "@/app/context/CharacterData";
+import { CommandType } from "@/app/global/ConstEnum";
+import { GlobalCharacterData } from "@/app/hooks/CharacterData";
 
 export const useChat = (
     useCase: ChatUseCase,

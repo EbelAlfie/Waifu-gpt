@@ -1,5 +1,5 @@
 import { CharacterModel } from "../../domain/response_model/CharacterModel";
-import { Nation } from "./models/ConstEnum";
+import { Nation } from "./ConstEnum";
 
 export const deg = (degree: number) => Math.PI / 180 * degree 
 

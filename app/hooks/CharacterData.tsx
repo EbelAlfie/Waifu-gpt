@@ -1,5 +1,5 @@
 import { CharacterModel } from "@/domain/response_model/CharacterModel";
-import { Elements, Nation } from "@/app/global/models/ConstEnum";
+import { Elements, Nation } from "@/app/global/ConstEnum";
 import { createContext } from "react";
 
 export const dummyData = {

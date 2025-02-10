@@ -1,7 +1,7 @@
 "use client"
 import MainCanvas from "./component/MainCanvas"
 import { OverlayContent } from "./component/OverlayContent"
-import { dummyData, GlobalCharacterData } from "./context/CharacterData"
+import { dummyData, GlobalCharacterData } from "./hooks/CharacterData"
 
 const Home = () => {
   const data = dummyData

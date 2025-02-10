@@ -37,8 +37,8 @@ export class StarfieldMaterial extends ShaderMaterial {
           }
   
           float r = 0.5 * sin(time / 4.0) ;
-          float g = 0.5 * sin(time / 9.5) ;
-          float b = 0.5 * sin(time / 9.0) ;
+          float g = 0.5 * sin(time / 6.5) ;
+          float b = 0.5 * sin(time / 7.0) ;
           r = mix(0.278, 0.769, r);
           g = mix(0.455, 0.71, g);  
           b = mix(0.4, 0.733, b);   

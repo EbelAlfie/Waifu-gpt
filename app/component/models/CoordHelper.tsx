@@ -1,5 +1,3 @@
-import { OrbitControlsChangeEvent } from "@react-three/drei"
-
 export type CoordProps = {
     x?: number,
     y?: number,
