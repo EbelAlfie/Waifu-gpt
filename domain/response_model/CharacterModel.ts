@@ -1,4 +1,4 @@
-import { Elements, Nation } from "./models/ConstEnum"
+import { Elements, Nation } from "../../app/global/models/ConstEnum"
 
 export type CharacterModel = {
     name: string,

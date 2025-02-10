@@ -18,8 +18,6 @@ type ChatRoomProps = {
 }
 
 export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
-    const character = useContext(GlobalCharacterData)
-
     const useCase = useMemo(() => new ChatUseCase(), [])
 
     const chatRoomUiState = useChat(useCase, props.isChatOpened)

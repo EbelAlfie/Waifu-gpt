@@ -8,7 +8,10 @@ export class ChatUseCase {
 
     public async resurectCharacter(charId: string) {
         return this.repository.resurectCharacter(charId)
-            .then(response => response)
+            .then(response => {
+                console.log("resurrect " + response)
+                return response
+            })
             .catch(error => error)
     }
 
