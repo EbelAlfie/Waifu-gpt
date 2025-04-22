@@ -1,4 +1,4 @@
-import { CharacterModel } from "@/domain/response_model/CharacterModel";
+import { CharacterModel } from "@/app/_domain/response_model/CharacterModel";
 import { Elements, Nation } from "@/app/global/ConstEnum";
 import { createContext } from "react";
 

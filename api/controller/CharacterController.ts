@@ -1,22 +1,16 @@
 import { Request, Response } from "express"
+import { CharacterUseCase } from "../domain/CharacterUseCase"
 
-export async function resurrectCharacter(request: Request, response: Response) {
+export async function getCharacterList(request: Request, response: Response) {
+    const useCase = new CharacterUseCase()
+    //token??
+}
+
+export async function getCharacterDetail(request: Request, response: Response) {
     const {
         charId
     } = request.query
 
-}
-
-export async function loadRecentChat(request: Request, response: Response) {
-    const {
-        charId
-    } = request.query
-
-}
-
-export async function loadChatHistory(request: Request, response: Response) {
-    const {
-        chatId
-    } = request.query
+    const useCase = new CharacterUseCase()
 
 }

@@ -5,9 +5,9 @@ import { ChatRoom } from "./ChatRoomPage"
 import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "@/app/global/UiState"
 import { CommandType } from "@/app/global/ConstEnum"
 import { ChatListState } from "./ChatList"
-import { ChatUseCase } from "@/domain/ChatUseCase"
-import { ChatTurnHistory } from "@/domain/response_model/ChatTurnHistory"
-import { RecentChatModel } from "@/domain/response_model/RecentChat"
+import { ChatUseCase } from "@/app/_domain/ChatUseCase"
+import { ChatTurnHistory } from "@/app/_domain/response_model/ChatTurnHistory"
+import { RecentChatModel } from "@/app/_domain/response_model/RecentChat"
 import { useChat } from "../../hooks/useChat"
 
 export type ChatRoomUiState = Loading | Loaded<ChatListState> | Failed

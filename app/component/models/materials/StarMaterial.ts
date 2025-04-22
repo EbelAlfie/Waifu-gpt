@@ -36,7 +36,7 @@ export class StarfieldMaterial extends ShaderMaterial {
             opacity = 1.0 / (1.0 + exp(16.0 * (d - 0.25)));
           }
   
-          float r = 0.5 * sin(time / 4.0) ;
+          float r = 0.5 * sin(time / 9.0) ;
           float g = 0.5 * sin(time / 6.5) ;
           float b = 0.5 * sin(time / 7.0) ;
           r = mix(0.278, 0.769, r);

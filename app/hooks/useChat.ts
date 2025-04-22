@@ -1,9 +1,9 @@
-import { ChatUseCase } from "@/domain/ChatUseCase";
+import { ChatUseCase } from "@/app/_domain/ChatUseCase";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ChatRoomUiState } from "../component/chat/ChatRoomLayout";
 import { setError, setLoaded, setLoading } from "@/app/global/UiState";
-import { RecentChatModel } from "@/domain/response_model/RecentChat";
-import { ChatTurnHistory } from "@/domain/response_model/ChatTurnHistory";
+import { RecentChatModel } from "@/app/_domain/response_model/RecentChat";
+import { ChatTurnHistory } from "@/app/_domain/response_model/ChatTurnHistory";
 import { ChatListModel } from "../component/chat/ChatBubble";
 import { CommandType } from "@/app/global/ConstEnum";
 import { GlobalCharacterData } from "@/app/hooks/CharacterData";

@@ -1,4 +1,4 @@
-import { RecentChatResponse } from "@/data/model/RecentChatResponse"
+import { RecentChatResponse } from "@/app/_data/model/RecentChatResponse"
 
 export type RecentChatModel = {
     chatId : string,

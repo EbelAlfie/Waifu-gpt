@@ -1,6 +1,6 @@
 import { RecentChatResponse } from "./model/RecentChatResponse"
 import { TurnResponse } from "./model/TurnResponse"
-import { fetchRecentChat, loadChatHistory, resurrectCharacter } from "@/data/action/ChatAction"
+import { fetchRecentChat, loadChatHistory, resurrectCharacter } from "@/action/ChatAction"
 
 export class ChatRepository {
     webSocket: WebSocket | null = null

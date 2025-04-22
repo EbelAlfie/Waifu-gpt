@@ -1,11 +1,11 @@
 import express from "express"
-import { ChatHistory, RecentChat, ResurectRoute } from "./router/ChatAiRoute"
+import { CharacterDetail, CharacterList } from "./router/ChatAiRoute"
 
 const api = express()
 
-api.get(ResurectRoute.name, ResurectRoute.controller)
-api.get(RecentChat.name, RecentChat.controller)
-api.get(ChatHistory.name, ChatHistory.controller)
+//api.use(cors())
+api.get(CharacterList.name, CharacterList.controller)
+api.get(CharacterDetail.name, CharacterDetail.controller)
 
 console.log("Listening on 4000")
 api.listen("4000", () => {

@@ -1,22 +1,17 @@
 import { Request, Response } from "express"
-import { loadRecentChat, loadChatHistory, resurrectCharacter } from "../controller/CharacterController"
+import { getCharacterDetail, getCharacterList } from "../controller/CharacterController"
 
 type RouteModel = { 
     name: string,
     controller: (request: Request, response: Response) => void
 }
 
-export const ResurectRoute: RouteModel = {
-    name: "/resurrect",
-    controller: resurrectCharacter
+export const CharacterList: RouteModel = {
+    name: "/characters",
+    controller: getCharacterList
 }
 
-export const RecentChat: RouteModel = {
-    name: "/recent-chat",
-    controller: loadRecentChat
-}
-
-export const ChatHistory: RouteModel = {
-    name: "/chat-history",
-    controller: loadChatHistory
+export const CharacterDetail: RouteModel = {
+    name: "/character",
+    controller: getCharacterDetail
 }
