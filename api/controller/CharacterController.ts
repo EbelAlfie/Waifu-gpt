@@ -3,6 +3,8 @@ import { CharacterUseCase } from "../domain/CharacterUseCase"
 
 export async function getCharacterList(request: Request, response: Response) {
     const useCase = new CharacterUseCase()
+    const characters = await useCase.getCharacterList()
+    
     //token??
 }
 

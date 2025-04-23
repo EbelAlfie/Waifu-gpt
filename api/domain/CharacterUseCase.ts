@@ -6,9 +6,14 @@ export class CharacterUseCase {
 
     async getCharacterList() {
         return this.repository.getCharacterList()
-        .then(response => console.log(response))
+        .then(response => {
+            const data = response.data
+            console.log(data)
+            return data
+        })
         .catch(error => {
             console.log(error)
+            return null
         })
     }
 

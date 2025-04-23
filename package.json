@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "deploy": "node api/index.ts",
+    "all": "npm run dev & npm run deploy",
+    "deploy": "npx tsx watch api",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -16,6 +17,7 @@
     "@types/express": "^5.0.0",
     "@types/three": "^0.169.0",
     "axios": "^1.7.9",
+    "dotenv": "^16.5.0",
     "express": "^4.21.2",
     "next": "14.2.15",
     "react": "^18",

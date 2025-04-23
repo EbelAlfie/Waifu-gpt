@@ -1,11 +1,14 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { BaseResponse } from "./model/BaseResponse";
+import { CharacterResponse } from "./model/Character";
 
 export class CharacterRepository {
     async getCharacterList() {
-        const request = JSON.stringify({
+        const request = {
             "server": "os_asia",
             "role_id": "879370443"
-          })
+        }
+        const cookie = process.env.HOYO_COOKIE ?? ""
 
         const config = {
             method: "POST",
@@ -14,9 +17,10 @@ export class CharacterRepository {
             data: request,
             headers: {
                 "x-rpc-language": "en-us",
+                "cookie": cookie
             },
         }
-        return axios.request(config)
+        return axios.request<BaseResponse<CharacterResponse>, AxiosResponse<BaseResponse<CharacterResponse>>>(config)
     }
 
     async getCharacterDetail() {
