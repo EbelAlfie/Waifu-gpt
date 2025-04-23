@@ -5,8 +5,8 @@ import { Color, Fog, Scene, Vector3 } from "three";
 import InfoBackground from "./InfoBackground";
 import { CameraControls } from "@react-three/drei";
 import { useEffect, useMemo, useRef, useState } from "react";
-import CoordHelper, { CoordProps } from "./models/CoordHelper";
-import { NewFog } from "./models/Fog";
+import CoordHelper, { CoordProps } from "./3dmodels/CoordHelper";
+import { NewFog } from "./3dmodels/Fog";
 
 const MainCanvas = () => {
     const [coord, setCoord] = useState<CoordProps>()

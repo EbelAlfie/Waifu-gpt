@@ -1,13 +1,9 @@
 import { deg } from "@/app/global/utils"
 import { MeshReflectorMaterial } from "@react-three/drei"
-import { Vector2 } from "three/webgpu"
-import { DebugMesh } from "./models/DebugGeometry"
-import { GenshinStars } from "./models/Stars"
-import { SineColorPlane } from "./models/SineColorPlane"
-import { GenshinCloud } from "./models/materials/cloud/CustomCloud"
-import CharacterMist from "./models/Mist"
-import CharaSky from "./models/CharaSky"
-import Character from "./models/Character"
+import { GenshinStars } from "./3dmodels/Stars"
+import CharacterMist from "./3dmodels/Mist"
+import CharaSky from "./3dmodels/CharaSky"
+import Character from "./3dmodels/Character"
 
 const InfoBackground = () => {
     return (
@@ -20,7 +16,7 @@ const InfoBackground = () => {
                 factor={4} 
                 radius={1}
                 count={1000}
-                speed={2}
+                speed={3}
             />
 
             {/* <GenshinCloud 
