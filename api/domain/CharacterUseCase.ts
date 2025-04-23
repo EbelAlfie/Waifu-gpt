@@ -6,7 +6,7 @@ export class CharacterUseCase {
 
     async getCharacterList() {
         return this.repository.getCharacterList()
-        .then(response => {})
+        .then(response => console.log(response))
         .catch(error => {
             console.log(error)
         })

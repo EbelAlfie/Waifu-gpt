@@ -9,6 +9,8 @@ export const useCharacter = () => {
     useEffect(() => {
         const getMyCharacter = async () => {
             const characters = await useCase.getCharacterList()
+            console.log("characters")
+            console.log(characters)
             if (characters === Error) {
                 return //TODO handle error
             }

@@ -1,4 +1,4 @@
-import { CharacterRepository } from "@/api/data/CharacterRepository";
+import { CharacterRepository } from "../_data/CharacterRepository"
 
 export class CharacterUseCase {
     repository = new CharacterRepository()

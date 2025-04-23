@@ -1,9 +1,9 @@
 import { deg } from "@/app/global/utils"
 import { MeshReflectorMaterial } from "@react-three/drei"
-import { GenshinStars } from "./3dmodels/Stars"
-import CharacterMist from "./3dmodels/Mist"
-import CharaSky from "./3dmodels/CharaSky"
-import Character from "./3dmodels/Character"
+import { GenshinStars } from "./models/Stars"
+import CharacterMist from "./models/Mist"
+import CharaSky from "./models/CharaSky"
+import Character from "./models/Character"
 
 const InfoBackground = () => {
     return (
