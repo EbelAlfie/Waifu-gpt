@@ -42,6 +42,10 @@
         @apply bg-black bg-opacity-25
     }
 
+    .scroll-none {
+        scrollbar-width: none;
+    }
+
     @keyframes
     slide-in {
         0% {

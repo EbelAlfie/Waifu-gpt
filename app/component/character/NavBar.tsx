@@ -1,5 +1,6 @@
 import { CharacterModel } from "@/api/domain/model/Character"
 import Image from "next/image"
+import { CharacterSlider } from "./CharacterSlider"
 
 type NavProps = {
   className: string,
@@ -9,13 +10,10 @@ type NavProps = {
 }
 
 const NavBar = ({...props}: NavProps) => {
-  const characters = props.characterList.map((chara) => {
-    return <p>{chara.name}</p>
-  })
   return (
     <header className={`${props.className} w-screen nav_grad bg-gradient-to-b from-gray-600 px-5 pt-2 pb-1 text-start`}>
-    <nav className="flex flex-row justify-evenly">
-      <div className="flex flex-row items-center">
+    <nav className="w-full flex flex-row items-center">
+      <div className="flex flex-row items-center me-16">
         <Image 
           src = {props.logoSrc}
           alt = "Vision"
@@ -24,9 +22,8 @@ const NavBar = ({...props}: NavProps) => {
         />
         <p className="text_genshin">{props.label}</p>
       </div>
-      <div className="flex flex-row">
-        {characters}
-      </div>
+
+      <CharacterSlider list={props.characterList}/>
     </nav>
   </header>
   )
