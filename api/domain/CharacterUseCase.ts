@@ -1,19 +1,20 @@
 import { CharacterRepository } from "../data/CharacterRepository";
+import { mapCharacterModel } from "./Mapper";
+import { CharacterModel } from "./model/Character";
 import { CharacterRequest } from "./request/CharDetailRequest";
 
 export class CharacterUseCase {
     repository: CharacterRepository = new CharacterRepository()
 
-    async getCharacterList() {
+    async getCharacterList(): Promise<CharacterModel[]> {
         return this.repository.getCharacterList()
         .then(response => {
             const data = response.data
-            console.log(data)
             return data
         })
         .catch(error => {
             console.log(error)
-            return null
+            return error
         })
     }
 

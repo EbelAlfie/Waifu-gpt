@@ -1,21 +1,25 @@
 "use client"
 import MainCanvas from "./component/MainCanvas"
-import { OverlayContent } from "./component/OverlayContent"
+import { OverlayContent } from "./component/character/OverlayContent"
 import { dummyData, GlobalCharacterData } from "./hooks/CharacterData"
-import { useCharacter } from "./hooks/useCharacter"
+import { useCharacterList } from "./hooks/useCharacter"
 
 const Home = () => {
   const data = dummyData
 
-  useCharacter()
+  const charaList = useCharacterList()
 
   return <>
     <main>
       <section className="absolute h-screen w-full">
-        <GlobalCharacterData.Provider value={data}>
-          <MainCanvas/>
-          <OverlayContent />
-        </GlobalCharacterData.Provider>
+        {charaList.type === "loading" && <p>Loading</p>}
+        {charaList.type === "loaded" && 
+          <GlobalCharacterData.Provider value={data}>
+            <MainCanvas/>
+            <OverlayContent characterList={charaList.data}/>
+          </GlobalCharacterData.Provider>
+        }
+        {charaList.type === "error" && <p>Error</p>}
       </section>
     </main>
   </>

@@ -1,5 +1,5 @@
 export type CharacterListResponse = {
-    list: CharacterListResponse[]
+    list: CharacterResponse[]
 }
 
 export type CharacterResponse = { 

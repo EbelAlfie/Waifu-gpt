@@ -1,13 +1,8 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react"
-import { ChatListModel } from "./ChatBubble"
-import { GlobalCharacterData } from "../../hooks/CharacterData"
+import { useMemo } from "react"
 import { ChatRoom } from "./ChatRoomPage"
-import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "@/app/global/UiState"
-import { CommandType } from "@/app/global/ConstEnum"
+import { Failed, Loaded, Loading } from "@/app/global/UiState"
 import { ChatListState } from "./ChatList"
 import { ChatUseCase } from "@/app/_domain/ChatUseCase"
-import { ChatTurnHistory } from "@/app/_domain/response_model/ChatTurnHistory"
-import { RecentChatModel } from "@/app/_domain/response_model/RecentChat"
 import { useChat } from "../../hooks/useChat"
 
 export type ChatRoomUiState = Loading | Loaded<ChatListState> | Failed

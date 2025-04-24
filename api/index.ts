@@ -1,11 +1,12 @@
 import express from "express"
+import cors from "cors"
 import { CharacterDetail, CharacterList } from "./router/ChatAiRoute"
 import dotenv from "dotenv"
 
 const api = express()
 dotenv.config()
 
-//api.use(cors())
+api.use(cors())
 api.get(CharacterList.name, CharacterList.controller)
 api.get(CharacterDetail.name, CharacterDetail.controller)
 

@@ -1,12 +1,17 @@
 "use client"
 import IconButton from "@/app/common/IconButton"
-import NavBar from "@/app/common/NavBar"
+import NavBar from "@/app/component/character/NavBar"
 import { useContext, useMemo, useState } from "react"
-import { ChatRoomLayout } from './chat/ChatRoomLayout'
-import { GlobalCharacterData } from '../hooks/CharacterData'
+import { ChatRoomLayout } from '../chat/ChatRoomLayout'
+import { GlobalCharacterData } from '../../hooks/CharacterData'
 import { provideVision } from '@/app/global/utils'
+import { CharacterModel } from "@/api/domain/model/Character"
 
-export const OverlayContent = () => {
+export type OverlayProps = {
+  characterList: CharacterModel[]
+}
+
+export const OverlayContent = ({...props}: OverlayProps) => {
     const character = useContext(GlobalCharacterData)
     const imageSrc = useMemo(() => provideVision(character), [character])
 
@@ -29,6 +34,7 @@ export const OverlayContent = () => {
               className="pointer-events-auto relative top-0"
               label={`${character.element}/${character.name}`}
               logoSrc={imageSrc}
+              characterList={props.characterList}
             />
 
             <div className="pointer-events-auto flex flex-col mt-8 me-8 items-end self-end h-auto">

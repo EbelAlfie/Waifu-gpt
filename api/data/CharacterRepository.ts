@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { BaseResponse } from "./model/BaseResponse";
-import { CharacterResponse } from "./model/Character";
+import { CharacterListResponse } from "./model/CharacterResponse";
 
 export class CharacterRepository {
     async getCharacterList() {
@@ -20,7 +20,7 @@ export class CharacterRepository {
                 "cookie": cookie
             },
         }
-        return axios.request<BaseResponse<CharacterResponse>, AxiosResponse<BaseResponse<CharacterResponse>>>(config)
+        return axios.request<BaseResponse<CharacterListResponse>, AxiosResponse<BaseResponse<CharacterListResponse>>>(config)
     }
 
     async getCharacterDetail() {

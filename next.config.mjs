@@ -3,7 +3,7 @@ const nextConfig = {
     transpilePackages: ['three'],
     experimental: {
       serverActions: {
-        allowedOrigins: ["localhost:3000", "gtw32lpt-3000.asse.devtunnels.ms"],
+        allowedOrigins: ["localhost:3001", "gtw32lpt-3001.asse.devtunnels.ms", "localhost:4000"],
       },
     },
 }
