@@ -1,18 +1,18 @@
 import { ChatUseCase } from "@/app/_domain/ChatUseCase";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChatRoomUiState } from "../component/chat/ChatRoomLayout";
 import { setError, setLoaded, setLoading } from "@/app/global/UiState";
 import { RecentChatModel } from "@/app/_domain/response_model/RecentChat";
 import { ChatTurnHistory } from "@/app/_domain/response_model/ChatTurnHistory";
 import { ChatListModel } from "../component/chat/ChatBubble";
 import { CommandType } from "@/app/global/ConstEnum";
-import { GlobalCharacterData } from "@/app/hooks/CharacterData";
+import { useCharacterContext } from "@/app/hooks/CharacterData";
 
 export const useChat = (
     useCase: ChatUseCase,
     openChat: Boolean,
 ): ChatRoomUiState => {
-    const character = useContext(GlobalCharacterData)
+    const character = useCharacterContext()
     const [chatRoomUiState, setChatRoomUiState] = useState<ChatRoomUiState>(setLoading())
 
     const uiStateRef = useRef(chatRoomUiState) //TODO optimize ? 

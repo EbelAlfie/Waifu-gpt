@@ -1,6 +1,6 @@
 import { CharacterModel } from "@/app/_domain/response_model/CharacterModel";
 import { Elements, Nation } from "@/app/global/ConstEnum";
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 export const dummyData = {
     name: "Layla",
@@ -12,4 +12,9 @@ export const dummyData = {
     nationality: Nation.Sumeru,
   }
   
-export const GlobalCharacterData = createContext<CharacterModel>(dummyData)
+export const GlobalCharacterData = createContext<CharacterModel| undefined>(undefined)
+
+export const useCharacterContext = () : CharacterModel => {
+  const character = useContext(GlobalCharacterData) 
+  return character as CharacterModel
+}

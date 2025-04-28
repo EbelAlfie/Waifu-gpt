@@ -3,7 +3,7 @@ import IconButton from "@/app/common/IconButton"
 import NavBar from "@/app/component/character/NavBar"
 import { useContext, useMemo, useState } from "react"
 import { ChatRoomLayout } from '../chat/ChatRoomLayout'
-import { GlobalCharacterData } from '../../hooks/CharacterData'
+import { GlobalCharacterData, useCharacterContext } from '../../hooks/CharacterData'
 import { provideVision } from '@/app/global/utils'
 import { Character } from "@/api/domain/model/Character"
 
@@ -13,7 +13,7 @@ export type OverlayProps = {
 }
 
 export const OverlayContent = ({...props}: OverlayProps) => {
-    const character = useContext(GlobalCharacterData)
+    const character = useCharacterContext()
     const imageSrc = useMemo(() => provideVision(character), [character])
 
     const [isChatVisible, setChatVisibility] = useState<Boolean>(false)

@@ -5,6 +5,8 @@ import { OverlayContent } from "./component/character/OverlayContent"
 import { dummyData, GlobalCharacterData } from "./hooks/CharacterData"
 import { useCharacterList } from "./hooks/useCharacter"
 import { Character } from "@/api/domain/model/Character"
+import { info } from "console"
+import { Elements, Nation } from "./global/ConstEnum"
 
 const Home = () => {
   const charaList = useCharacterList()
@@ -32,9 +34,19 @@ type MainContentProps = {
   data: Character[]
 }
 const MainContent = ({data}: MainContentProps) => {
-
+  const realData = {
+      name: "Layla",
+      characterAiData: {
+        characterId: "AQGwzrW9BFEBHhYt93wVih5SZmfxCH5AXAm_qQiPFj8"
+      },
+      modelPath: "/assets/models/char.fbx",
+      element: Elements.Cryo,
+      nationality: Nation.Sumeru,
+      charInfo: data[0]
+    }
+    
   return (
-    <GlobalCharacterData.Provider value={dummyData}>
+    <GlobalCharacterData.Provider value={realData}>
       <MainCanvas/>
       <OverlayContent 
         characterList={data}

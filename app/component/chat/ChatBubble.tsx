@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { GlobalCharacterData } from "../../hooks/CharacterData"
+import { GlobalCharacterData, useCharacterContext } from "../../hooks/CharacterData"
 import { Avatar } from "./Avatar"
 import { AuthorModel } from "@/app/_domain/response_model/ChatTurnHistory"
 
@@ -12,7 +12,7 @@ export type ChatListModel = {
 }
 
 export const ChatBubble = ({model}: {model : ChatListModel}) => {
-    const recipientId = useContext(GlobalCharacterData).characterAiData.characterId
+    const recipientId = useCharacterContext().characterAiData.characterId
 
     const baseAvatarUrl = "https://characterai.io/i/80/static/avatars/"
     const isCharacter = recipientId === model.author.authorId

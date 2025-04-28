@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import { BottomBar, TextFieldProps } from "./BottomBar"
 import { ChatUseCase } from "@/app/_domain/ChatUseCase"
 import { ChatList, ChatListState } from "./ChatList"
-import { GlobalCharacterData } from "../../hooks/CharacterData"
+import { GlobalCharacterData, useCharacterContext } from "../../hooks/CharacterData"
 import { ChatHeader } from "./ChatHeader"
 
 type ChatRoomData = {
@@ -12,7 +12,7 @@ type ChatRoomData = {
 }
 
 export const ChatRoom = ({...props}: ChatRoomData) => {
-    const charId = useContext(GlobalCharacterData).characterAiData.characterId
+    const charId = useCharacterContext().characterAiData.characterId
     
     const [textField, setTextField] = useState<TextFieldProps>({
         text: "",

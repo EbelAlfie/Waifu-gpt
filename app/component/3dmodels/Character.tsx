@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { GlobalCharacterData } from '../../hooks/CharacterData'
 
 const Character = () => {
-    const character = useContext(GlobalCharacterData)
+    const character = useCharacterContext(GlobalCharacterData)
 
     const object = useFBX(character.modelPath)
     return <primitive 
