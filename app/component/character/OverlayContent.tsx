@@ -5,10 +5,11 @@ import { useContext, useMemo, useState } from "react"
 import { ChatRoomLayout } from '../chat/ChatRoomLayout'
 import { GlobalCharacterData } from '../../hooks/CharacterData'
 import { provideVision } from '@/app/global/utils'
-import { CharacterModel } from "@/api/domain/model/Character"
+import { Character } from "@/api/domain/model/Character"
 
 export type OverlayProps = {
-  characterList: CharacterModel[]
+  characterList: Character[]
+  onCharacterSelected: (id: number) => void
 }
 
 export const OverlayContent = ({...props}: OverlayProps) => {
@@ -35,6 +36,7 @@ export const OverlayContent = ({...props}: OverlayProps) => {
               label={`${character.element}/${character.name}`}
               logoSrc={imageSrc}
               characterList={props.characterList}
+              onCharacterSelected={props.onCharacterSelected}
             />
 
             <div className="pointer-events-auto flex flex-col mt-8 me-8 items-end self-end h-auto">

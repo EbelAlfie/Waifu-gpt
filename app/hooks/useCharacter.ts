@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react"
 import { CharacterUseCase } from "../_domain/CharacterUseCase"
 import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "../global/UiState"
-import { CharacterModel } from "@/api/domain/model/Character"
+import { Character } from "@/api/domain/model/Character"
 
-type CharacterListState = Loading | Loaded<CharacterModel[]> | Failed
+type CharacterListState = Loading | Loaded<Character[]> | Failed
 
 export const useCharacterList = (): CharacterListState => {
     const useCase = useMemo(() => { return new CharacterUseCase() }, [])

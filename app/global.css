@@ -46,6 +46,14 @@
         scrollbar-width: none;
     }
 
+    .item-active {
+        background-image: url("../public/assets/icon/charaSelect.png");
+    }
+
+    .item-normal {
+        background-image: url("../public/assets/icon/charaSelect.png");
+    }
+
     @keyframes
     slide-in {
         0% {

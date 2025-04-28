@@ -1,4 +1,4 @@
-export type CharacterModel = {
+export type Character = {
     id: number,
     icon: string,
     name: string,

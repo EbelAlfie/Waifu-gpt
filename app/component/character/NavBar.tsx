@@ -1,4 +1,4 @@
-import { CharacterModel } from "@/api/domain/model/Character"
+import { Character } from "@/api/domain/model/Character"
 import Image from "next/image"
 import { CharacterSlider } from "./CharacterSlider"
 
@@ -6,7 +6,8 @@ type NavProps = {
   className: string,
   label: string,
   logoSrc: string,
-  characterList: CharacterModel[]
+  characterList: Character[],
+  onCharacterSelected: (id: number) => void
 }
 
 const NavBar = ({...props}: NavProps) => {
@@ -23,7 +24,10 @@ const NavBar = ({...props}: NavProps) => {
         <p className="text_genshin">{props.label}</p>
       </div>
 
-      <CharacterSlider list={props.characterList}/>
+      <CharacterSlider 
+        list={props.characterList} 
+        onCharacterSelected={props.onCharacterSelected}
+      />
     </nav>
   </header>
   )
