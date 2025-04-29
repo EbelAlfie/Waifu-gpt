@@ -41,11 +41,13 @@ export const OverlayContent = ({...props}: OverlayProps) => {
 
             <div className="pointer-events-auto flex flex-col mt-8 me-8 items-end self-end h-auto">
               <IconButton 
+                className="self-start"
                 image={imageSrc} 
                 onClick={() => { onAlarmClicked() }} 
                 label="Alarm"
               />
               <IconButton 
+                className="self-start"
                 image={imageSrc} 
                 onClick={() => { onChatClicked(!isChatVisible) }}
                 label="Chat"  
