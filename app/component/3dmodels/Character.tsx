@@ -1,10 +1,9 @@
 "use client"
 import { useFBX } from '@react-three/drei'
-import { useContext } from 'react'
-import { GlobalCharacterData } from '../../hooks/CharacterData'
+import { useCharacterContext } from '../../hooks/CharacterData'
 
 const Character = () => {
-    const character = useCharacterContext(GlobalCharacterData)
+    const character = useCharacterContext()
 
     const object = useFBX(character.modelPath)
     return <primitive 

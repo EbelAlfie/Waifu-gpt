@@ -47,7 +47,7 @@
     }
 
     .item-active {
-        background-image: url("../public/assets/icon/charaSelect.png");
+        background-image: url("../public/assets/icon/charaSelectActive.png");
     }
 
     .item-normal {

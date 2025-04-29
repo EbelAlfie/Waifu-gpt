@@ -1,7 +1,7 @@
-import { CharacterModel } from "@/api/domain/model/Character"
+import { Character } from "@/api/domain/model/Character"
 
 type CharacterIconProps = {
-    model: CharacterModel, 
+    model: Character, 
     selected?: boolean, 
     onClick: (id: number) => void
 }
@@ -13,7 +13,7 @@ export const CharacterIcon = ({model, selected = false, onClick}: CharacterIconP
         />
         <img 
             className="size-24 -translate-y-3"
-            src={model.icon}
+            src={model.sideIcon}
         />
     </div>
 }

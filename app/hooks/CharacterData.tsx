@@ -18,3 +18,5 @@ export const useCharacterContext = () : CharacterModel => {
   const character = useContext(GlobalCharacterData) 
   return character as CharacterModel
 }
+
+export const CharacterAction = createContext<((id: number) => void)| null>(null)

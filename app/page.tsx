@@ -2,7 +2,7 @@
 import { useState } from "react"
 import MainCanvas from "./component/MainCanvas"
 import { OverlayContent } from "./component/character/OverlayContent"
-import { dummyData, GlobalCharacterData } from "./hooks/CharacterData"
+import { CharacterAction, dummyData, GlobalCharacterData } from "./hooks/CharacterData"
 import { useCharacterList } from "./hooks/useCharacter"
 import { Character } from "@/api/domain/model/Character"
 import { info } from "console"
@@ -34,6 +34,8 @@ type MainContentProps = {
   data: Character[]
 }
 const MainContent = ({data}: MainContentProps) => {
+  const [selectedChar, setSelected] = useState(0)
+
   const realData = {
       name: "Layla",
       characterAiData: {
@@ -42,16 +44,23 @@ const MainContent = ({data}: MainContentProps) => {
       modelPath: "/assets/models/char.fbx",
       element: Elements.Cryo,
       nationality: Nation.Sumeru,
-      charInfo: data[0]
+      charInfo: data[selectedChar]
     }
+  
+  const onSelected = (id: number) => { 
+    const index = data.findIndex(char => char.id == id ) 
+    setSelected(index) 
+  }
     
   return (
     <GlobalCharacterData.Provider value={realData}>
-      <MainCanvas/>
-      <OverlayContent 
-        characterList={data}
-        onCharacterSelected={(id) => { }}
-      />
+      <CharacterAction.Provider value = {onSelected}>
+        <MainCanvas/>
+        <OverlayContent 
+          characterList={data}
+          onCharacterSelected={onSelected}
+        />
+      </CharacterAction.Provider>
     </GlobalCharacterData.Provider>
   )
 }
