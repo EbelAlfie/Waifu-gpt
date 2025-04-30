@@ -6,5 +6,5 @@ type TextProps = {
 }
 
 export const GenshinText = ({...props}: TextProps) => {
-    return <p className={`font-[Genshin] text-white ${props.classname}`}>{props.children}</p>
+    return <p className={`font-[Genshin] ${props.classname}`}>{props.children}</p>
 }

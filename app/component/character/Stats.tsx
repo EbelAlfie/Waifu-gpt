@@ -6,10 +6,16 @@ type StatsProps = {
     value: number
 }
 
-export const CharacterStats = ({...props}: StatsProps) => {
-    return <div className="flex flex-row">
-        <img src={props.icon}/>
-        <GenshinText classname="flex-grow">{props.stats}</GenshinText>
-        <GenshinText>{props.value}</GenshinText>
+export const CharacterStat = ({...props}: StatsProps) => {
+    return <div className="flex flex-row items-center grow">
+        <img className="size-7 me-2" src={props.icon}/>
+        <GenshinText classname="flex-grow text-white text-lg">{props.stats}</GenshinText>
+        <GenshinText classname="ms-4 text-white">{props.value}</GenshinText>
+    </div>
+}
+
+export const CharacterStats = () => {
+    return <div className="flex flex-grid">
+        
     </div>
 }

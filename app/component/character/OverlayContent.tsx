@@ -6,6 +6,7 @@ import { ChatRoomLayout } from '../chat/ChatRoomLayout'
 import { useCharacterContext } from '../../hooks/CharacterData'
 import { provideVision } from '@/app/global/utils'
 import { Character } from "@/api/domain/model/Character"
+import { CharacterAttribute } from "./CharacterAttributes"
 
 export type OverlayProps = {
   characterList: Character[]
@@ -39,7 +40,8 @@ export const OverlayContent = ({...props}: OverlayProps) => {
               onCharacterSelected={props.onCharacterSelected}
             />
 
-            <div className="pointer-events-auto flex flex-col mt-8 me-8 items-end self-end h-auto">
+            <CharacterAttribute classname="self-end flex-grow-0"/>
+            <div className="pointer-events-auto flex flex-col mt-8 ms-8 items-end self-start h-auto">
               <IconButton 
                 className="self-start"
                 image={imageSrc} 
