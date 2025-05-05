@@ -1,6 +1,8 @@
-import { CharacterDetailResponse } from "../data/model/CharacterDetailResponse";
+import { Statistic } from "@/app/_domain/response_model/Statistic";
+import { CharacterDetailResponse, CharacterProperties } from "../data/model/CharacterDetailResponse";
 import { CharacterResponse } from "../data/model/CharacterResponse";
 import { Character } from "./model/Character";
+import { CharacterDetail } from "@/app/_domain/response_model/CharacterDetail";
 
 export function mapCharacterModel(res: CharacterResponse): Character {
     return {
@@ -19,7 +21,21 @@ export function mapCharacterModel(res: CharacterResponse): Character {
     }
 }
 
-export function mapCharacterDetail(res: CharacterDetailResponse) {
-    const data = res.list[0]?.base ?? {}
-    return 
+export function mapCharacterDetail(res: CharacterDetailResponse): CharacterDetail {
+    const data = res.list[0] ?? {}
+    const charStats = new Map(
+        data.selected_properties.map(item => [item.property_type, mapCharacterStats(item)])
+    ) 
+    return {
+        properties: charStats
+    }
+}
+
+function mapCharacterStats(props: CharacterProperties): Statistic {
+    return {
+        propertyType: props.property_type,
+        base: props.base,
+        add: props.add,
+        final: props.final
+    }
 }

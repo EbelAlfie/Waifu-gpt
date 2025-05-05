@@ -1,5 +1,6 @@
 import { Character } from "@/api/domain/model/Character"
 import { Elements, Nation } from "../../global/ConstEnum"
+import { CharacterDetail } from "./CharacterDetail"
 
 export type CharacterModel = {
     name: string,
@@ -7,7 +8,8 @@ export type CharacterModel = {
     characterAiData: CharacterAiData,
     element: Elements,
     nationality: Nation,
-    charInfo: Character
+    charInfo: Character,
+    charStats: CharacterDetail| undefined
 }
 
 export type CharacterAiData = {

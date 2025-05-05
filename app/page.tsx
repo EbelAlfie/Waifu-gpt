@@ -2,16 +2,13 @@
 import { useState } from "react"
 import MainCanvas from "./component/MainCanvas"
 import { OverlayContent } from "./component/character/OverlayContent"
-import { CharacterAction, dummyData, GlobalCharacterData } from "./hooks/CharacterData"
-import { useCharacterList } from "./hooks/useCharacter"
+import { CharacterAction, GlobalCharacterData } from "./hooks/CharacterData"
+import { useCharacterDetail, useCharacterList } from "./hooks/useCharacter"
 import { Character } from "@/api/domain/model/Character"
-import { info } from "console"
 import { Elements, Nation } from "./global/ConstEnum"
 
 const Home = () => {
   const charaList = useCharacterList()
-
-  const [selectedChar, setChar] = useState<number>(0)
 
   const loadingContent = <p>Loading</p>
   const errorContent = <p>Error</p>
@@ -34,8 +31,9 @@ type MainContentProps = {
   data: Character[]
 }
 const MainContent = ({data}: MainContentProps) => {
-  const [selectedChar, setSelected] = useState(0)
-
+  const [selectedChar, setSelected] = useState<number>(0)
+  
+  const character = useCharacterDetail(data[selectedChar].id)
   const realData = {
       name: "Layla",
       characterAiData: {
@@ -44,7 +42,8 @@ const MainContent = ({data}: MainContentProps) => {
       modelPath: "/assets/models/char.fbx",
       element: Elements.Cryo,
       nationality: Nation.Sumeru,
-      charInfo: data[selectedChar]
+      charInfo: data[selectedChar],
+      charStats: character
     }
   
   const onSelected = (id: number) => { 

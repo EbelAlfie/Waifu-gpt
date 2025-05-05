@@ -3,14 +3,13 @@ export type CharacterDetail = {
     name: string,
     vision: string,
     nation: string,
-    additionalProps: Properties,
+    additionalProps: Array<Properties>,
     friendship: number
 }
 
-type Properties = {
-    maxHp: number,
-    atk: number,
-    def: number,
-    em: number,
-    maxStamina: number
+export type Properties = {
+    property_type: number,
+    base: string,
+    add: string,
+    final: string
 }

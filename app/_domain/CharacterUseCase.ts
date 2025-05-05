@@ -1,4 +1,4 @@
-import { mapCharacterModel } from "@/api/domain/Mapper"
+import { mapCharacterDetail, mapCharacterModel } from "@/api/domain/Mapper"
 import { CharacterRepository } from "../_data/CharacterRepository"
 
 export class CharacterUseCase {
@@ -19,8 +19,8 @@ export class CharacterUseCase {
         return this.repository.getCharacterDetail(characterId)
             .then(response => {
                 const data = response.data
-                // const character = mapCharacterDetail()
-                return data
+                const character = mapCharacterDetail(data.data)
+                return character
             })
             .catch(error => {
                 return error

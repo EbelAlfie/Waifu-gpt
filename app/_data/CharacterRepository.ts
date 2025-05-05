@@ -20,7 +20,7 @@ export class CharacterRepository {
         const config = {
             method: "GET",
             maxBodyLength: Infinity,
-            url: "http://localhost:4000/character",
+            url: `http://localhost:4000/character?charId=${characterId}`,
             headers: { 
                 "accept": "application/json"
             }

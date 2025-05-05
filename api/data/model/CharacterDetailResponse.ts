@@ -1,5 +1,8 @@
 export type CharacterDetailResponse = {
-    list: Array<{base: CharacterDetail}>
+    list: Array<{
+        base: CharacterDetail,
+        selected_properties: Array<CharacterProperties>
+    }>
 }
 
 type CharacterDetail = {
@@ -15,4 +18,11 @@ type CharacterDetail = {
     is_chosen: boolean,
     side_icon: string,
     weapon_type: number,
+}
+
+export type CharacterProperties = {
+    property_type: number,
+    base: string,
+    add: string,
+    final: string
 }

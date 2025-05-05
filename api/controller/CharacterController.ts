@@ -17,9 +17,20 @@ export async function getCharacterList(request: Request, response: Response) {
 
 export async function getCharacterDetail(request: Request, response: Response) {
     const {
-        charId
+        charId = ""
     } = request.query
 
     const useCase = new CharacterUseCase()
 
+    const characterDetail = useCase.getCharacterDetail({
+        id: Number.parseInt(charId.toString())
+    })
+    
+    if (characterDetail instanceof Error) {
+        response.status(500).json({ error : characterDetail.cause ?? "Internal Error" })
+        return
+    }
+
+    //token??
+    response.status(200).json(characterDetail)
 }
