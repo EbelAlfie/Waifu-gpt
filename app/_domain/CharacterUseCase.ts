@@ -14,4 +14,16 @@ export class CharacterUseCase {
                 return error
             })
     }
+
+    async getCharacterDetail(characterId: number) {
+        return this.repository.getCharacterDetail(characterId)
+            .then(response => {
+                const data = response.data
+                // const character = mapCharacterDetail()
+                return data
+            })
+            .catch(error => {
+                return error
+            })
+    }
 }

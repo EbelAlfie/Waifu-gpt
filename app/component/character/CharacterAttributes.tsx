@@ -16,7 +16,7 @@ export const CharacterAttribute = ({classname}: {classname?: string}) => {
             <div className="flex flex-row w-fit">
                 {rarity}
             </div>
-            <p className="text_genshin text-2xl mb-3">Level X / X</p>
+            <p className="text_genshin text-2xl mb-3">Level {characterInfo.level} / 90</p>
             <CharacterStats />            
             <LongButton classname="flex-grow" onClick={onDetailClicked}/>
         </div>

@@ -1,7 +1,8 @@
+import { CharacterDetailResponse } from "../data/model/CharacterDetailResponse";
 import { CharacterResponse } from "../data/model/CharacterResponse";
-import { CharacterModel } from "./model/Character";
+import { Character } from "./model/Character";
 
-export function mapCharacterModel(res: CharacterResponse): CharacterModel {
+export function mapCharacterModel(res: CharacterResponse): Character {
     return {
         id: res?.id ?? 0,
         icon: res?.icon ?? "",
@@ -16,4 +17,9 @@ export function mapCharacterModel(res: CharacterResponse): CharacterModel {
         sideIcon: res.side_icon ?? "",
         weaponType: res.weapon_type ?? 0,
     }
+}
+
+export function mapCharacterDetail(res: CharacterDetailResponse) {
+    const data = res.list[0]?.base ?? {}
+    return 
 }

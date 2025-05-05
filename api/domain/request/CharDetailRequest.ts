@@ -1,3 +1,3 @@
 export type CharacterRequest = {
-    id: string
+    id: number
 }

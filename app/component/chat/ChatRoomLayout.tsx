@@ -18,17 +18,19 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     const chatRoomUiState = useChat(useCase, props.isChatOpened)
 
     return <>
-        <section className="flex flex-col w-lvw max-w-screen-lg h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80">
-            {chatRoomUiState.type === "loading" && <LoadingLottie/>}
-            {chatRoomUiState.type === "loaded" && 
-                <ChatRoom
-                    chatUseCase={useCase}
-                    chatListState={chatRoomUiState.data}
-                    onBackPressed={() => { props.onBackPressed(!props.isChatOpened) }}
-                />
-            }
-            {chatRoomUiState.type === "error" && <ErrorLayout errorMessage={chatRoomUiState.error.message}/>}
-        </section>
+        <div className="w-screen h-screen" onClick={() => {props.onBackPressed(props.isChatOpened)}}>
+            <section className="flex flex-col w-lvw max-w-screen-lg h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80">
+                {chatRoomUiState.type === "loading" && <LoadingLottie/>}
+                {chatRoomUiState.type === "loaded" && 
+                    <ChatRoom
+                        chatUseCase={useCase}
+                        chatListState={chatRoomUiState.data}
+                        onBackPressed={() => { props.onBackPressed(!props.isChatOpened) }}
+                    />
+                }
+                {chatRoomUiState.type === "error" && <ErrorLayout errorMessage={chatRoomUiState.error.message}/>}
+            </section>
+        </div>
     </>
 }
 
