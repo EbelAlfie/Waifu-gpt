@@ -40,21 +40,24 @@ export const OverlayContent = ({...props}: OverlayProps) => {
               onCharacterSelected={props.onCharacterSelected}
             />
 
-            <CharacterAttribute classname="self-end flex-grow-0"/>
-            <div className="pointer-events-auto flex flex-col mt-8 ms-8 items-end self-start h-auto">
-              <IconButton 
-                className="self-start"
-                image={imageSrc} 
-                onClick={() => { onAlarmClicked() }} 
-                label="Alarm"
-              />
-              <IconButton 
-                className="self-start"
-                image={imageSrc} 
-                onClick={() => { onChatClicked(!isChatVisible) }}
-                label="Chat"  
-              />
+            <div className="relative flex">
+              <CharacterAttribute classname="absolute top-0 right-0 self-end flex-grow-0"/>
+              <div className="absolute left-0 pointer-events-auto flex flex-col mt-8 ms-8 items-end self-start h-auto">
+                <IconButton 
+                  className="self-start"
+                  image={imageSrc} 
+                  onClick={() => { onAlarmClicked() }} 
+                  label="Alarm"
+                />
+                <IconButton 
+                  className="self-start"
+                  image={imageSrc} 
+                  onClick={() => { onChatClicked(!isChatVisible) }}
+                  label="Chat"  
+                />
+              </div>
             </div>
+            
           </div>
 
           <section 
