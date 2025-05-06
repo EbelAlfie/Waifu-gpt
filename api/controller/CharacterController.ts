@@ -22,7 +22,7 @@ export async function getCharacterDetail(request: Request, response: Response) {
 
     const useCase = new CharacterUseCase()
 
-    const characterDetail = useCase.getCharacterDetail({
+    const characterDetail = await useCase.getCharacterDetail({
         id: Number.parseInt(charId.toString())
     })
     
@@ -30,6 +30,8 @@ export async function getCharacterDetail(request: Request, response: Response) {
         response.status(500).json({ error : characterDetail.cause ?? "Internal Error" })
         return
     }
+
+    console.log(characterDetail)
 
     //token??
     response.status(200).json(characterDetail)

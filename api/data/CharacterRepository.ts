@@ -31,7 +31,7 @@ export class CharacterRepository {
             "character_ids": characterId
         }
         const config = {
-            method: "GET",
+            method: "POST",
             url: "https://sg-public-api.hoyolab.com/event/game_record/genshin/api/character/detail",
             maxBodyLength : Infinity,
             data: request,

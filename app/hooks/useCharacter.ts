@@ -48,7 +48,7 @@ export const useCharacterDetail = (charId: number) => {
         }
 
         getMyCharacter()
-    }, [useCase])
+    }, [useCase, charId])
 
     return character
 } 
