@@ -15,6 +15,7 @@ export type OverlayProps = {
 
 export const OverlayContent = ({...props}: OverlayProps) => {
     const character = useCharacterContext()
+    const charInfo = character.charInfo
     const imageSrc = useMemo(() => provideVision(character), [character])
 
     const [isChatVisible, setChatVisibility] = useState<Boolean>(false)
@@ -30,19 +31,19 @@ export const OverlayContent = ({...props}: OverlayProps) => {
     }
 
     return <>
-      <section className="absolute top-0 flex flex-row flex-nowrap h-screen w-screen">
-          <div className="flex flex-col w-screen">
+      <section className="absolute top-0 flex flex-row flex-nowrap h-screen w-screen pointer-events-none">
+          <div className="flex flex-col w-screen pointer-events-none">
             <NavBar 
               className="pointer-events-auto relative top-0"
-              label={`${character.element}/${character.name}`}
+              label={`${charInfo.element}/${charInfo.name}`}
               logoSrc={imageSrc}
               characterList={props.characterList}
               onCharacterSelected={props.onCharacterSelected}
             />
 
             <div className="relative flex">
-              <CharacterAttribute classname="absolute top-0 right-0 self-end flex-grow-0"/>
-              <div className="absolute left-0 pointer-events-auto flex flex-col mt-8 ms-8 items-end self-start h-auto">
+              <CharacterAttribute classname="pointer-events-auto absolute top-0 right-0 self-end flex-grow-0"/>
+              <div className="pointer-events-auto absolute left-0 flex flex-col mt-8 ms-8 items-end self-start h-auto">
                 <IconButton 
                   className="self-start"
                   image={imageSrc} 

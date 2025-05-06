@@ -26,3 +26,10 @@ export enum CommandType {
     ADD = "add_turn",
     UPDATE = "update_turn"
 }
+
+export enum StatsCode {
+    MAX_HP = 2000,
+    ATK = 2001,
+    DEF = 2002,
+    EM = 28
+}
