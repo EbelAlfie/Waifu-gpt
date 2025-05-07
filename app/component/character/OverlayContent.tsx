@@ -32,7 +32,7 @@ export const OverlayContent = ({...props}: OverlayProps) => {
 
     return <>
       <section className="absolute top-0 flex flex-row flex-nowrap h-screen w-screen pointer-events-none">
-          <div className="flex flex-col w-screen pointer-events-none">
+          <div className="flex flex-col w-full pointer-events-none overflow-hidden">
             <NavBar 
               className="pointer-events-auto relative top-0"
               label={`${charInfo.element}/${charInfo.name}`}
@@ -62,7 +62,7 @@ export const OverlayContent = ({...props}: OverlayProps) => {
           </div>
 
           <section 
-            className={`${isChatVisible?"translate-x-0":"-translate-x-full"} absolute w-max transition-all pointer-events-auto`}
+            className={`${isChatVisible?"translate-x-0":"-translate-x-full"} absolute w-max transition-transform pointer-events-auto`}
           >
             <ChatRoomLayout 
               isChatOpened={isChatVisible}
