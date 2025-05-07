@@ -24,7 +24,7 @@ export const CharacterSlider = ({list, onCharacterSelected}: CharacterSliderProp
     }
 
     return (
-        <div className="flex w-screen ">
+        <div className="flex w-screen">
             <NextButton onClick={() => {}}/>
             <div 
                 className="flex w-auto items-center overflow-x-scroll scroll-none"

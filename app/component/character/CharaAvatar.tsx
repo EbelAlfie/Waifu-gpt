@@ -7,7 +7,7 @@ type CharacterIconProps = {
 }
 
 export const CharacterIcon = ({model, selected = false, onClick}: CharacterIconProps) => {
-    return <div className="relative shrink-0" onClick={() => {onClick(model.id)}}>
+    return <div className="relative shrink-0 hover:cursor-pointer" onClick={() => {onClick(model.id)}}>
         <div 
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full size-20 bg-contain bg-center ${selected ? "item-active": "item-normal"}`}
         />

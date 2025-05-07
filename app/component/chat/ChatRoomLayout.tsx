@@ -18,7 +18,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     const chatRoomUiState = useChat(useCase, props.isChatOpened)
 
     return <>
-        <div className="w-screen h-screen" onClick={() => {props.onBackPressed(props.isChatOpened)}}>
+        <div className="w-screen h-screen" onClick={() => {props.onBackPressed(!props.isChatOpened)}}>
             <section className="flex flex-col w-lvw max-w-screen-lg h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80">
                 {chatRoomUiState.type === "loading" && <LoadingLottie/>}
                 {chatRoomUiState.type === "loaded" && 
