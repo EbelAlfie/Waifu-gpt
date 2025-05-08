@@ -1,6 +1,5 @@
 import { Character } from "@/api/domain/model/Character"
-import { CharacterIcon, NextButton } from "./CharaAvatar"
-import { DragEventHandler } from "react"
+import { CharacterIcon } from "./CharaAvatar"
 import { useCharacterContext } from "@/app/hooks/CharacterData"
 
 type CharacterSliderProps = {
@@ -19,21 +18,14 @@ export const CharacterSlider = ({list, onCharacterSelected}: CharacterSliderProp
         />
     })
 
-    const onDrag: DragEventHandler<HTMLDivElement> = (event) => {
-        console.log(event)
-    }
-
     return (
-        <div className="flex w-screen">
-            <NextButton onClick={() => {}}/>
-            <div 
-                className="flex w-auto items-center overflow-x-scroll scroll-none"
+        <div className="flex w-fit">
+            <ul 
+                className="flex w-auto items-center overflow-x-scroll scroll-none list-blur"
                 draggable={true}
-                onDrag={onDrag}
             >
                 {characters}
-            </div>
-            <NextButton onClick={() => {}}/>
+            </ul>
         </div>
     )
 }
