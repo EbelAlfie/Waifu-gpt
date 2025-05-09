@@ -2,10 +2,11 @@
 import { useState } from "react"
 import MainCanvas from "./component/MainCanvas"
 import { OverlayContent } from "./component/character/OverlayContent"
-import { CharacterAction, CharacterDetailData, GlobalCharacterData } from "./hooks/CharacterData"
+import { CharacterDetailData, GlobalCharacterData } from "./hooks/CharacterData"
 import { useCharacterDetail, useCharacterList } from "./hooks/useCharacter"
 import { Character } from "@/api/domain/model/Character"
 import { Elements, Nation } from "./global/ConstEnum"
+import { CharacterAction } from "./hooks/ActionContext"
 
 const Home = () => {
   const charaList = useCharacterList()
@@ -46,20 +47,19 @@ const MainContent = ({data}: MainContentProps) => {
       charInfo: data[selectedChar],
     }
   
-  const onSelected = (id: number) => { 
-    const index = data.findIndex(char => char.id == id ) 
-    setSelected(index) 
+  const actions = {
+    onCharacterSelected :(id: number) => { 
+      const index = data.findIndex(char => char.id == id ) 
+      setSelected(index) 
+    }
   }
     
   return (
     <GlobalCharacterData.Provider value={realData}>
       <CharacterDetailData.Provider value={character}>
-        <CharacterAction.Provider value = {onSelected}>
+        <CharacterAction.Provider value = {actions}>
           <MainCanvas/>
-          <OverlayContent 
-            characterList={data}
-            onCharacterSelected={onSelected}
-          />
+          <OverlayContent characterList={data}/>
         </CharacterAction.Provider>
       </CharacterDetailData.Provider> 
     </GlobalCharacterData.Provider>

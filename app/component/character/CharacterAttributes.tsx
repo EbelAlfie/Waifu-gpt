@@ -16,7 +16,7 @@ export const CharacterAttribute = ({ classname }: { classname?: string }) => {
 
   const transition = useMemo(
     () => (characterDetail.type === "loaded" ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"), 
-    [characterDetail]
+    [characterDetail.type]
   );
 
   return <>
@@ -30,7 +30,7 @@ export const CharacterAttribute = ({ classname }: { classname?: string }) => {
           <p className="text_genshin text-2xl mb-3">
             Level {characterInfo.level} / 90
           </p>
-          <CharacterStats detail={characterDetail.data}/>
+          <CharacterStats detail={characterDetail?.data}/>
           <LongButton
             classname="flex-grow mt-5"
             label="Details"

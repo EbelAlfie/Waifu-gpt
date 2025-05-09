@@ -7,7 +7,6 @@ type NavProps = {
   label: string,
   logoSrc: string,
   characterList: Character[],
-  onCharacterSelected: (id: number) => void
 }
 
 const NavBar = ({...props}: NavProps) => {
@@ -24,10 +23,7 @@ const NavBar = ({...props}: NavProps) => {
         <p className="text_genshin">{props.label}</p>
       </div>
 
-      <CharacterSlider 
-        list={props.characterList} 
-        onCharacterSelected={props.onCharacterSelected}
-      />
+      <CharacterSlider list={props.characterList}/>
     </nav>
   </header>
   )

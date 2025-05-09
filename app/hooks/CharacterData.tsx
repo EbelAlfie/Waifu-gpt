@@ -22,5 +22,3 @@ export const useCharacterContext = () : CharacterModel => {
 }
 
 export const CharacterDetailData = createContext<CharacterDetailState>(setLoading())
-
-export const CharacterAction = createContext<((id: number) => void)| null>(null)

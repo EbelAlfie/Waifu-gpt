@@ -5,6 +5,7 @@ import { Character } from "@/api/domain/model/Character"
 import { CharacterDetail } from "../_domain/response_model/CharacterDetail"
 
 type CharacterListState = Loading | Loaded<Character[]> | Failed
+export type CharacterDetailState = Loading | Loaded<CharacterDetail> | Failed
 
 export const useCharacterList = (): CharacterListState => {
     const useCase = useMemo(() => { return new CharacterUseCase() }, [])
@@ -29,8 +30,6 @@ export const useCharacterList = (): CharacterListState => {
 
     return myChar
 }
-
-export type CharacterDetailState = Loading | Loaded<CharacterDetail> | Failed
 
 export const useCharacterDetail = (charId: number) => {
     const useCase = useMemo(() => { return new CharacterUseCase() }, [])

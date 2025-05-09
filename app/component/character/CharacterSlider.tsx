@@ -1,20 +1,22 @@
 import { Character } from "@/api/domain/model/Character"
 import { CharacterIcon } from "./CharaAvatar"
 import { useCharacterContext } from "@/app/hooks/CharacterData"
+import { useDynamicContext } from "@/app/hooks/utils"
+import { CharacterAction, CharacterActions } from "@/app/hooks/ActionContext"
 
 type CharacterSliderProps = {
     list: Character[],
-    onCharacterSelected: (id: number) => void
 }
 
-export const CharacterSlider = ({list, onCharacterSelected}: CharacterSliderProps) => {
+export const CharacterSlider = ({list}: CharacterSliderProps) => {
+    const selectCharacterAction = useDynamicContext<CharacterActions>(CharacterAction)
     const selectedCharacter = useCharacterContext()
     const characters = list.map((chara) => {
         return <CharacterIcon 
             key={chara.id} 
             model={chara} 
             selected={chara.id === selectedCharacter.charInfo.id}
-            onClick={onCharacterSelected}
+            onClick={selectCharacterAction?.onCharacterSelected}
         />
     })
 
