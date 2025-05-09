@@ -1,3 +1,4 @@
+import { CharacterDetail } from "@/app/_domain/response_model/CharacterDetail"
 import { StatsCode } from "@/app/global/ConstEnum"
 import { useCharacterContext } from "@/app/hooks/CharacterData"
 
@@ -16,9 +17,8 @@ export const CharacterStat = ({...props}: StatsProps) => {
     </div>
 }
 
-export const CharacterStats = () => {
-    const character = useCharacterContext()
-    const characterStats = character.charStats?.properties ?? new Map()
+export const CharacterStats = ({detail}: {detail: CharacterDetail}) => {
+    const characterStats = detail?.properties ?? new Map()
     return <div className="flex flex-col gap-2">
             <CharacterStat
                 classname="bg-gradient-to-r from-transparent via-black/15 to-transparent py-1"

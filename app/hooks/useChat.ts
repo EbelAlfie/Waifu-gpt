@@ -21,9 +21,9 @@ export const useChat = (
     useEffect(() => {
         if (!openChat) {
             useCase.closeWebsocketConnection()
-            setChatRoomUiState(setLoading())
             return
         }
+        setChatRoomUiState(setLoading())
 
         let chatData: RecentChatModel
         

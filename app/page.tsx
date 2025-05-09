@@ -2,7 +2,7 @@
 import { useState } from "react"
 import MainCanvas from "./component/MainCanvas"
 import { OverlayContent } from "./component/character/OverlayContent"
-import { CharacterAction, GlobalCharacterData } from "./hooks/CharacterData"
+import { CharacterAction, CharacterDetailData, GlobalCharacterData } from "./hooks/CharacterData"
 import { useCharacterDetail, useCharacterList } from "./hooks/useCharacter"
 import { Character } from "@/api/domain/model/Character"
 import { Elements, Nation } from "./global/ConstEnum"
@@ -34,6 +34,7 @@ const MainContent = ({data}: MainContentProps) => {
   const [selectedChar, setSelected] = useState<number>(0)
   
   const character = useCharacterDetail(data[selectedChar].id)
+
   const realData = {
       name: "Layla",
       characterAiData: {
@@ -43,7 +44,6 @@ const MainContent = ({data}: MainContentProps) => {
       element: Elements.Cryo,
       nationality: Nation.Sumeru,
       charInfo: data[selectedChar],
-      charStats: character
     }
   
   const onSelected = (id: number) => { 
@@ -53,13 +53,15 @@ const MainContent = ({data}: MainContentProps) => {
     
   return (
     <GlobalCharacterData.Provider value={realData}>
-      <CharacterAction.Provider value = {onSelected}>
-        <MainCanvas/>
-        <OverlayContent 
-          characterList={data}
-          onCharacterSelected={onSelected}
-        />
-      </CharacterAction.Provider>
+      <CharacterDetailData.Provider value={character}>
+        <CharacterAction.Provider value = {onSelected}>
+          <MainCanvas/>
+          <OverlayContent 
+            characterList={data}
+            onCharacterSelected={onSelected}
+          />
+        </CharacterAction.Provider>
+      </CharacterDetailData.Provider> 
     </GlobalCharacterData.Provider>
   )
 }

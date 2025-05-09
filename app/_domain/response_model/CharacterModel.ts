@@ -8,8 +8,7 @@ export type CharacterModel = {
     characterAiData: CharacterAiData,
     element: Elements,
     nationality: Nation,
-    charInfo: Character,
-    charStats: CharacterDetail| undefined
+    charInfo: Character
 }
 
 export type CharacterAiData = {

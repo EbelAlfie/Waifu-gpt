@@ -1,6 +1,8 @@
 import { CharacterModel } from "@/app/_domain/response_model/CharacterModel";
 import { Elements, Nation } from "@/app/global/ConstEnum";
 import { createContext, useContext } from "react";
+import { CharacterDetailState } from "./useCharacter";
+import { setLoading } from "../global/UiState";
 
 export const dummyData = {
     name: "Layla",
@@ -18,5 +20,7 @@ export const useCharacterContext = () : CharacterModel => {
   const character = useContext(GlobalCharacterData) 
   return character as CharacterModel
 }
+
+export const CharacterDetailData = createContext<CharacterDetailState>(setLoading())
 
 export const CharacterAction = createContext<((id: number) => void)| null>(null)

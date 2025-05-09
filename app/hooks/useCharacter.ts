@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react"
 import { CharacterUseCase } from "../_domain/CharacterUseCase"
 import { Failed, Loaded, Loading, setError, setLoaded, setLoading } from "../global/UiState"
 import { Character } from "@/api/domain/model/Character"
-import { CharacterDetailResponse } from "@/api/data/model/CharacterDetailResponse"
 import { CharacterDetail } from "../_domain/response_model/CharacterDetail"
 
 type CharacterListState = Loading | Loaded<Character[]> | Failed
@@ -31,20 +30,23 @@ export const useCharacterList = (): CharacterListState => {
     return myChar
 }
 
+export type CharacterDetailState = Loading | Loaded<CharacterDetail> | Failed
+
 export const useCharacterDetail = (charId: number) => {
     const useCase = useMemo(() => { return new CharacterUseCase() }, [])
 
-    const [character, setCharacter] = useState<CharacterDetail | undefined>(undefined)
+    const [character, setCharacter] = useState<CharacterDetailState>(setLoading())
 
     useEffect(() => {
         const getMyCharacter = async () => {
-            const characters = await useCase.getCharacterDetail(charId)
-            if (characters instanceof Error) {
-                setCharacter(undefined)
+            setCharacter(setLoading())
+            const character = await useCase.getCharacterDetail(charId)
+            if (character instanceof Error) {
+                setCharacter(setError(character))
                 return //TODO handle error
             }
 
-            setCharacter(characters)
+            setCharacter(setLoaded(character))
         }
 
         getMyCharacter()
