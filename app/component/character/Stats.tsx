@@ -10,16 +10,24 @@ type StatsProps = {
 }
 
 export const CharacterStat = ({...props}: StatsProps) => {
-    return <div className={`grid grid-cols-[0.5fr_2fr_0.5fr] items-center ${props.classname}`}>
-        <img className="size-7 me-2" src={props.icon}/>
-        <p className="text_genshin text-lg">{props.stats}</p>
-        <p className="justify-self-end ms-4 text_genshin">{props.value}</p>
-    </div>
+    return <>
+        <tr className={props.classname}>
+            <td className="size-10">
+                <img className="size-7 me-2" src={props.icon}/>
+            </td>
+            <td>
+                <p className="text_genshin text-lg">{props.stats}</p>
+            </td>
+            <td>
+                <p className="justify-self-end ms-4 text_genshin">{props.value}</p>
+            </td>
+        </tr>
+    </>
 }
 
 export const CharacterStats = ({detail}: {detail: CharacterDetail}) => {
     const characterStats = detail?.properties ?? new Map()
-    return <div className="flex flex-col gap-2">
+    return <table className="table-auto">
             <CharacterStat
                 classname="bg-gradient-to-r from-transparent via-black/15 to-transparent py-1"
                 icon="/assets/icon/ic_max_hp.png"
@@ -42,5 +50,5 @@ export const CharacterStats = ({detail}: {detail: CharacterDetail}) => {
                 stats="Elemental Mastery"
                 value={characterStats?.get(StatsCode.EM)?.final ?? ""}
             />
-    </div>
+    </table>
 }

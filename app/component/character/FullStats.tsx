@@ -1,46 +1,52 @@
 import { CharacterDetailData } from "@/app/hooks/CharacterData"
-import { CharacterStat } from "./Stats"
 import { useContext, useMemo } from "react"
 import { CharacterDetail } from "@/app/_domain/response_model/CharacterDetail"
 import { StatsCode } from "@/app/global/ConstEnum"
+import { ExitIcon } from "@/app/common/BackIcon"
+import { useDynamicContext } from "@/app/hooks/utils"
+import { OverlayAction, OverlayActions } from "@/app/hooks/ActionContext"
+import { CharacterStat } from "./Stats"
 
-export const FullStats = () => {
+export const FullStats = ({isVisible}: {isVisible: Boolean}) => {
     const detail = useContext(CharacterDetailData) 
+    const action = useDynamicContext<OverlayActions>(OverlayAction)
 
     const transition = useMemo(
-        () => detail.type === "loaded" ? "opacity-100 scale-100": "opacity-0 scale-0", [detail.type]
+        () => isVisible && detail.type === "loaded" ? "opacity-100 scale-100": "opacity-0 scale-0", 
+        [isVisible, detail.type]
     )
     return <>
-        <section className={`w-screen h-screen flex flex-col bg-black bg-gradient-to-b from-black to to-transparent ${transition}`}>
-            {detail.type === "loaded" && <>
-                    <StatsHeader label="Base Stats"/>
-                    <StatsGroup detail={detail.data}/>
-                    <StatsHeader label="Advanced Stats"/>
-                    <StatsGroup detail={detail.data}/>
-                    <StatsHeader label="Elemental Type"/>
-                </>
-            }
+        <section className={`absolute w-full h-full p-10 rounded-xl flex flex-row gap-5 bg-gradient-to-b from-black to-transparent transition-opacity duration-100 ${transition}`}>
+            <div className="flex flex-col gap-3 w-full">
+                {detail.type === "loaded" && <>
+                        <StatsHeader label="Base Stats"/>
+                        <StatsGroup detail={detail.data}/>
+                        <StatsHeader label="Advanced Stats"/>
+                        <StatsGroup detail={detail.data}/>
+                        <StatsHeader label="Elemental Type"/>
+                    </>
+                }
+            </div>
+            <ExitIcon className="justify-self-end" onClick={() => { action.onStatDetailClicked(false) }}/>
         </section>
     </>
 }
 
 const StatsHeader = ({label}: {label: string}) => {
-    return <h3>{label}</h3>
+    return <h1 className="font-[genshin] text-gray-500">{label}</h1>
 }
 
 const StatsGroup = ({detail}: {detail : CharacterDetail}) => {
-    return <div className="grid - grid-cols-[0.5fr_10fr_1fr_1fr_1fr">
+    return <table>
         <CharacterStat
-            classname="bg-gradient-to-r from-transparent via-black/15 to-transparent py-1"
             icon="/assets/icon/ic_max_hp.png"
             stats="Max HP"
             value={detail.properties?.get(StatsCode.MAX_HP)?.final ?? ""}
         />
         <CharacterStat
-            classname="bg-gradient-to-r from-transparent via-black/15 to-transparent py-1"
             icon="/assets/icon/ic_max_hp.png"
             stats="Max HP"
             value={detail.properties?.get(StatsCode.MAX_HP)?.final ?? ""}
         />
-    </div>
+    </table>
 } 

@@ -28,15 +28,17 @@ export const OverlayContent = ({...props}: OverlayProps) => {
         (window as any).MobileGateBox.setAlarm(true)
     }
 
-    const actions = {
-      onChatClicked: (newState: Boolean) => {
-        setChatVisibility(newState)
-      },
-
-      onStatDetailClicked: (newState: Boolean) => {
-        setStatVisible(newState)
+    const actions = useMemo(() => {
+      return {
+        onChatClicked: (newState: Boolean) => {
+          setChatVisibility(newState)
+        },
+  
+        onStatDetailClicked: (newState: Boolean) => {
+          setStatVisible(!isStatVisible)
+        }
       }
-    }
+    }, [setChatVisibility, setStatVisible])
 
     return <>
       <OverlayAction.Provider value={actions}>
@@ -78,10 +80,9 @@ export const OverlayContent = ({...props}: OverlayProps) => {
               />
             </section>
 
-            {/* <section>
-              <FullStats />
-            </section>
-     */}
+            
+            <FullStats isVisible={isStatVisible}/>
+    
         </section>
       </OverlayAction.Provider>
     </>
