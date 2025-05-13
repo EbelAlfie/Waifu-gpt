@@ -1,6 +1,5 @@
 import { CharacterDetail } from "@/app/_domain/response_model/CharacterDetail"
-import { StatsCode } from "@/app/global/ConstEnum"
-import { useCharacterContext } from "@/app/hooks/CharacterData"
+import { BaseStats } from "@/app/global/ConstEnum"
 
 type StatsProps = { 
     classname?: string,
@@ -11,44 +10,46 @@ type StatsProps = {
 
 export const CharacterStat = ({...props}: StatsProps) => {
     return <>
-        <tr className={props.classname}>
-            <td className="size-10">
-                <img className="size-7 me-2" src={props.icon}/>
-            </td>
-            <td>
-                <p className="text_genshin text-lg">{props.stats}</p>
-            </td>
-            <td>
-                <p className="justify-self-end ms-4 text_genshin">{props.value}</p>
-            </td>
-        </tr>
+        <div className={`flex flex-row ${props.classname}`}>
+            <img className="size-7 me-2" src={props.icon}/>
+            <p className="text_genshin text-lg flex-grow">{props.stats}</p>
+            <p className="justify-self-end w-14 text-end ms-4 text_genshin">{props.value}</p>
+        </div>
     </>
 }
 
 export const CharacterStats = ({detail}: {detail: CharacterDetail}) => {
-    const characterStats = detail?.properties ?? new Map()
-    return <table className="table-auto">
+    const baseProperties = detail?.baseProperties ?? new Map()
+    return <div className="flex flex-col">
             <CharacterStat
-                classname="bg-gradient-to-r from-transparent via-black/15 to-transparent py-1"
+                classname="py-2 bg-gradient-to-r from-transparent via-black/15 to-transparent"
                 icon="/assets/icon/ic_max_hp.png"
                 stats="Max HP"
-                value={characterStats?.get(StatsCode.MAX_HP)?.final ?? ""}
+                value={baseProperties?.get(BaseStats.MAX_HP)?.final ?? ""}
             />
             <CharacterStat
+                classname="py-2"
                 icon="/assets/icon/ic_atk.png"
                 stats="ATK"
-                value={characterStats?.get(StatsCode.ATK)?.final ?? ""}
+                value={baseProperties?.get(BaseStats.ATK)?.final ?? ""}
             />
             <CharacterStat
-                classname="bg-gradient-to-r from-transparent via-black/15 to-transparent py-1"
+                classname="py-2 bg-gradient-to-r from-transparent via-black/15 to-transparent"
                 icon="/assets/icon/ic_def.png"
                 stats="DEF"
-                value={characterStats?.get(StatsCode.DEF)?.final ?? ""}
+                value={baseProperties?.get(BaseStats.DEF)?.final ?? ""}
             />
             <CharacterStat
+                classname="py-2"
                 icon="/assets/icon/ic_def.png"
                 stats="Elemental Mastery"
-                value={characterStats?.get(StatsCode.EM)?.final ?? ""}
+                value={baseProperties?.get(BaseStats.EM)?.final ?? ""}
             />
-    </table>
+            <CharacterStat
+                classname="py-2 bg-gradient-to-r from-transparent via-black/15 to-transparent"
+                icon="/assets/icon/ic_stamina.png"
+                stats="Max Stamina"
+                value={baseProperties?.get(BaseStats.STAMINA)?.final ?? ""}
+            />
+    </div>
 }

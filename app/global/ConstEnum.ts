@@ -27,9 +27,10 @@ export enum CommandType {
     UPDATE = "update_turn"
 }
 
-export enum StatsCode {
+export enum BaseStats {
     MAX_HP = 2000,
     ATK = 2001,
     DEF = 2002,
-    EM = 28
+    EM = 28,
+    STAMINA = 999999
 }

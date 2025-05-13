@@ -35,7 +35,7 @@ export const OverlayContent = ({...props}: OverlayProps) => {
         },
   
         onStatDetailClicked: (newState: Boolean) => {
-          setStatVisible(!isStatVisible)
+          setStatVisible(newState)
         }
       }
     }, [setChatVisibility, setStatVisible])
