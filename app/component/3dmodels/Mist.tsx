@@ -44,8 +44,8 @@ const CharacterMist = ({radius = 20, ...props} : MistProp)=> {
               concentrate = "inside"
               volume={30}
               scale={5.0}
-              speed={0.2}
-              growth={30}
+              speed={0.7}
+              growth={10}
               segments={100}
           />
         </Clouds>

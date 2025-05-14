@@ -92,6 +92,5 @@ const StatsGroup = ({detail}: {detail : CharacterDetail}) => {
             stats={AdvancedStat.ER}
             value={extraProperties?.get(AdvancedStat.ER.code)}
         />
-        <StatsHeader label="Elemental Type"/>
     </div>
 } 

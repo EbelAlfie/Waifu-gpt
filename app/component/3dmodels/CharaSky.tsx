@@ -5,7 +5,7 @@ type SkyProps = {
     radius: number
 }
 
-const CharaSky = ({radius = 1.5, color = 0xffffff, ...props}: SkyProps) => {
+const CharaSky = ({radius = 1.5, color = 0xffffff}: SkyProps) => {
     return (
         <>
             <mesh

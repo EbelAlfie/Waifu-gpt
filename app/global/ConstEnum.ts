@@ -5,6 +5,7 @@ export enum Elements {
     Hydro = "Hydro",
     Geo = "Geo",
     Dendro = "Dendro",
+    Electro = "Electro"
 }
 
 export enum Nation {

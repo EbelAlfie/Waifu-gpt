@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import MainCanvas from "./component/MainCanvas"
 import { OverlayContent } from "./component/character/OverlayContent"
 import { CharacterDetailData, GlobalCharacterData } from "./hooks/CharacterData"
@@ -7,6 +7,7 @@ import { useCharacterDetail, useCharacterList } from "./hooks/useCharacter"
 import { Character } from "@/api/domain/model/Character"
 import { Elements, Nation } from "./global/ConstEnum"
 import { CharacterAction } from "./hooks/ActionContext"
+import { getTheme, Theme } from "./hooks/useTheme"
 
 const Home = () => {
   const charaList = useCharacterList()
@@ -47,6 +48,8 @@ const MainContent = ({data}: MainContentProps) => {
       charInfo: data[selectedChar],
     }
   
+  const theme = getTheme(realData.charInfo.element)
+  
   const actions = {
     onCharacterSelected :(id: number) => { 
       const index = data.findIndex(char => char.id == id ) 
@@ -58,8 +61,13 @@ const MainContent = ({data}: MainContentProps) => {
     <GlobalCharacterData.Provider value={realData}>
       <CharacterDetailData.Provider value={character}>
         <CharacterAction.Provider value = {actions}>
-          <MainCanvas/>
+          
+          <Theme.Provider value={theme}>
+            <MainCanvas/>
+          </Theme.Provider>
+          
           <OverlayContent characterList={data}/>
+        
         </CharacterAction.Provider>
       </CharacterDetailData.Provider> 
     </GlobalCharacterData.Provider>

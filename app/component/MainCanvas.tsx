@@ -1,19 +1,20 @@
 "use client";
 
 import { Canvas, } from "@react-three/fiber";
-import { Color, Fog, Scene, Vector3 } from "three";
+import { Color, Scene, Vector3 } from "three";
 import InfoBackground from "./InfoBackground";
 import { CameraControls } from "@react-three/drei";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useMemo, useRef, useState } from "react";
 import CoordHelper, { CoordProps } from "./3dmodels/CoordHelper";
-import { NewFog } from "./3dmodels/Fog";
+import { Theme } from "../hooks/useTheme";
 
 const MainCanvas = () => {
+    const theme = useContext(Theme)
     const [coord, setCoord] = useState<CoordProps>()
     const camRef = useRef<CameraControls>(null)
 
     let scene = new Scene();
-	scene.background = new Color(0x169fc5)
+	scene.background = new Color(theme.skyColor)
 
     const updateCurrentCoord = () => {
         const position = new Vector3()

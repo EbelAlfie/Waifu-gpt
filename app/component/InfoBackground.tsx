@@ -4,13 +4,16 @@ import { GenshinStars } from "./3dmodels/Stars"
 import CharacterMist from "./3dmodels/Mist"
 import CharaSky from "./3dmodels/CharaSky"
 import Character from "./3dmodels/Character"
+import { Theme, ThemeType } from "../hooks/useTheme"
+import { useContext } from "react"
 
 const InfoBackground = () => {
+    const theme: ThemeType = useContext(Theme)
     return (
         <>
             <ambientLight color={0xffffff} intensity={0.8} />
-            <pointLight intensity={1} position={[0, 6, 0]} />
-            <hemisphereLight color={0xffffff} intensity={1} position={[0, 6, 0]} />
+            <pointLight intensity={1} />
+            <hemisphereLight color={0xffffff} intensity={2} />
             <GenshinStars
                 fade
                 factor={4} 
@@ -23,8 +26,8 @@ const InfoBackground = () => {
                 color = "#169fc5"
             /> */}
             <CharacterMist
-                color="#169fc5"
-                radius={25}
+                color={theme.mistColor}
+                radius={15}
             />
 
             {/* <SineColorPlane /> */}
@@ -32,7 +35,7 @@ const InfoBackground = () => {
             {/* <DebugMesh /> */}
 
             <CharaSky 
-                color={0x19566d}
+                color={theme.skyColor}
                 radius={1.5}
             />
             
@@ -52,7 +55,7 @@ const InfoBackground = () => {
                     mixBlur = {10}
                     mixStrength = {2}
                     resolution = {1080}
-                    color="#a0a0a0"
+                    color={theme.floorColor}
                 />
             </mesh>
            
