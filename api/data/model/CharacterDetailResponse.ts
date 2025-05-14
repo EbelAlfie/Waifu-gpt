@@ -1,7 +1,8 @@
 export type CharacterDetailResponse = {
     list: Array<{
         base: CharacterDetail,
-        base_properties: Array<CharacterProperties>
+        base_properties: Array<CharacterProperties>,
+        extra_properties: Array<CharacterProperties>,
     }>
 }
 

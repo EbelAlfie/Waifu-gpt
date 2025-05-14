@@ -23,11 +23,15 @@ export function mapCharacterModel(res: CharacterResponse): Character {
 
 export function mapCharacterDetail(res: CharacterDetailResponse): CharacterDetail {
     const data = res.list[0] ?? {}
-    const charStats = new Map(
+    const base = new Map(
         data.base_properties.map(item => [item.property_type, mapCharacterStats(item)])
     ) 
+    const extra = new Map(
+        data.extra_properties.map(item => [item.property_type, mapCharacterStats(item)])
+    )  
     return {
-        baseProperties: charStats
+        baseProperties: base,
+        extraProperties: extra
     }
 }
 
