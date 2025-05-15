@@ -1,9 +1,9 @@
 "use client";
 
 import { Canvas, } from "@react-three/fiber";
-import { Color, PerspectiveCamera, Scene, Vector3 } from "three";
+import { Color, Scene, Vector3 } from "three";
 import InfoBackground from "./InfoBackground";
-import { CameraControls, OrbitControls } from "@react-three/drei";
+import { CameraControls } from "@react-three/drei";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import CoordHelper, { CoordProps } from "./3dmodels/CoordHelper";
 import { Theme } from "../hooks/useTheme";
@@ -13,13 +13,6 @@ const MainCanvas = () => {
     const [coord, setCoord] = useState<CoordProps>()
     const controllRef = useRef<CameraControls>(null)
 
-    const camera = useMemo(() => {
-        const cam = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-        cam.position.set(0, 4, 11)
-        cam.zoom = 1.5
-        return cam
-    }, []) 
-
     const scene = useMemo(() => {
         const scene = new Scene()
 	    scene.background = new Color(theme.skyColor)
@@ -27,9 +20,7 @@ const MainCanvas = () => {
     }, []) 
 
     useEffect(() => {
-        if (controllRef.current) {
-            controllRef.current.setTarget(0, 4, 0)
-        }
+        controllRef.current && controllRef.current.setTarget(0, 4, 0)
     }, [controllRef.current])
 
     const updateCurrentCoord = () => {
@@ -46,12 +37,19 @@ const MainCanvas = () => {
         <Canvas
             shadows = {true}
             scene = {scene}
-            camera = {camera}
+            camera = {
+                {fov: 75, near: 0.1, far: 1000, position: [0, 4, 11], zoom: 1.5}
+            }
         > 
             <CameraControls 
                 ref={controllRef}
-                camera={camera}
                 onChange={updateCurrentCoord}
+                maxDistance={11}
+                minDistance={2}
+                maxPolarAngle={Math.PI - 0.5}
+                minPolarAngle={1}
+                maxAzimuthAngle={Math.PI / 2}
+                minAzimuthAngle={-Math.PI / 2}
             />  
 
             <axesHelper scale={10}/>
