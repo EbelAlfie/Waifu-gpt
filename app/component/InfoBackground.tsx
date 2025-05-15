@@ -4,22 +4,23 @@ import { GenshinStars } from "./3dmodels/Stars"
 import CharacterMist from "./3dmodels/Mist"
 import CharaSky from "./3dmodels/CharaSky"
 import Character from "./3dmodels/Character"
-import { Theme, ThemeType } from "../hooks/useTheme"
+import { Theme } from "../hooks/useTheme"
 import { useContext } from "react"
+import { useThree } from "@react-three/fiber"
 
 const InfoBackground = () => {
-    const theme: ThemeType = useContext(Theme)
+    const theme = useContext(Theme)
     return (
         <>
-            <ambientLight color={0xffffff} intensity={0.8} />
+            <ambientLight color={0xffffff} intensity={1} />
             <pointLight intensity={1} />
-            <hemisphereLight color={0xffffff} intensity={2} />
+            <hemisphereLight color={0xffffff} intensity={1} />
             <GenshinStars
                 fade
                 factor={4} 
                 radius={1}
-                count={1000}
-                speed={3}
+                count={500}
+                speed={4}
             />
 
             {/* <GenshinCloud 
@@ -51,9 +52,9 @@ const InfoBackground = () => {
                     attach="geometry"
                 />
                 <MeshReflectorMaterial 
-                    mirror = {0.8}
-                    mixBlur = {10}
-                    mixStrength = {2}
+                    mirror = {3}
+                    mixBlur = {1}
+                    mixStrength = {20}
                     resolution = {1080}
                     color={theme.floorColor}
                 />

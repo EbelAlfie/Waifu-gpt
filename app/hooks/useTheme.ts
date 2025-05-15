@@ -1,7 +1,7 @@
 import { createContext } from "react"
 import { Elements } from "../global/ConstEnum"
 
-export type ThemeType = {
+type ThemeType = {
     mistColor: number,
     skyColor: number,
     floorColor: number

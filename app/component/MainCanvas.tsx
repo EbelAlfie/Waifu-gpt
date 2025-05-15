@@ -1,24 +1,34 @@
 "use client";
 
 import { Canvas, } from "@react-three/fiber";
-import { Color, Scene, Vector3 } from "three";
+import { Color, PerspectiveCamera, Scene, Vector3 } from "three";
 import InfoBackground from "./InfoBackground";
-import { CameraControls } from "@react-three/drei";
-import { useContext, useMemo, useRef, useState } from "react";
+import { CameraControls, OrbitControls } from "@react-three/drei";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import CoordHelper, { CoordProps } from "./3dmodels/CoordHelper";
 import { Theme } from "../hooks/useTheme";
 
 const MainCanvas = () => {
     const theme = useContext(Theme)
     const [coord, setCoord] = useState<CoordProps>()
-    const camRef = useRef<CameraControls>(null)
+    const controllRef = useRef<CameraControls>(null)
 
-    let scene = new Scene();
-	scene.background = new Color(theme.skyColor)
+    const camera = useMemo(() => {
+        const cam = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+        cam.position.set(0, 4, 11)
+        cam.zoom = 1.5
+        return cam
+    }, []) 
+
+    const scene = useMemo(() => {
+        const scene = new Scene()
+	    scene.background = new Color(theme.skyColor)
+        return scene
+    }, []) 
 
     const updateCurrentCoord = () => {
         const position = new Vector3()
-        camRef.current && camRef.current.getPosition(position)
+        controllRef.current && controllRef.current.getPosition(position)
         setCoord({
             x: position.x,
             y: position.y,
@@ -30,15 +40,14 @@ const MainCanvas = () => {
         <Canvas
             shadows = {true}
             scene = {scene}
-            camera = {
-                { fov: 75, near: 0.1, far: 1000, position: [0, 6, 10] } 
-            }
+            camera = {camera}
         > 
             <CameraControls 
-                ref={camRef}
+                ref={controllRef}
+                camera={camera}
                 onChange={updateCurrentCoord}
-                makeDefault 
             />  
+            
             <axesHelper scale={10}/>
             <InfoBackground />
             {/* <NewFog 

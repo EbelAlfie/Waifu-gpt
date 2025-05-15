@@ -12,7 +12,7 @@ import { getTheme, Theme } from "./hooks/useTheme"
 const Home = () => {
   const charaList = useCharacterList()
 
-  const loadingContent = <p>Loading</p>
+  const loadingContent = <LoadingScreen/>
   const errorContent = <p>Error</p>
   
   const mainContent = charaList.type === "loaded" &&
@@ -71,6 +71,14 @@ const MainContent = ({data}: MainContentProps) => {
         </CharacterAction.Provider>
       </CharacterDetailData.Provider> 
     </GlobalCharacterData.Provider>
+  )
+}
+
+const LoadingScreen = () => {
+  return (
+      <div className="w-screen h-screen flex justify-center items-end p-10">
+          <p className="font-[genshin] text-lg">Loading</p>
+      </div>
   )
 }
 
