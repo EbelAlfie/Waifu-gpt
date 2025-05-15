@@ -7,7 +7,7 @@ export const metaData = {
 const MainLayout = ({ children }: { children: React.ReactNode}) => {
   return (
     <html lang="en">
-        <body className="w-full h-screen cursor-[url(/assets/icon/cursor.png)]">
+        <body className="w-full h-screen cursor-[url(/assets/icon/cursor.png),_pointer]">
             {children}
         </body>
     </html>

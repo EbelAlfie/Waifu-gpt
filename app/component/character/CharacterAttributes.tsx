@@ -26,22 +26,19 @@ export const CharacterAttribute = ({ classname }: { classname?: string }) => {
       <section
         className={`flex flex-col w-fit mt-8 me-8 ${classname} ${transition} delay-75 duration-200 transition-all`}
       >  
-        <>
-          <RarityStar />
-          <p className="text_genshin text-3xl mb-5">{characterInfo.name}</p>
-          <div className="flex flex-row w-fit">{rarity}</div>
-          <p className="text_genshin text-2xl mb-3">
-            Level {characterInfo.level} / 90
-          </p>
-          {characterDetail.type === "loaded" && 
-            <CharacterStats detail={characterDetail?.data}/> 
-          }
-          <LongButton
-            classname="flex-grow mt-5"
-            label="Details"
-            onClick={() => { action.onStatDetailClicked(true) }}
-          />
-        </>
+        <p className="text_genshin text-3xl mb-5">{characterInfo.name}</p>
+        <div className="flex flex-row w-fit">{rarity}</div>
+        <p className="text_genshin text-2xl mb-3">
+          Level {characterInfo.level} / 90
+        </p>
+        {characterDetail.type === "loaded" && 
+          <CharacterStats detail={characterDetail?.data}/> 
+        }
+        <LongButton
+          classname="flex-grow mt-5"
+          label="Details"
+          onClick={() => { action.onStatDetailClicked(true) }}
+        />
       </section>     
     </>
 };

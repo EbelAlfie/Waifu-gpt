@@ -26,11 +26,7 @@ export const FullStats = ({isVisible}: {isVisible: Boolean}) => {
 }
 
 const StatsHeader = ({label, className}: {label: string, className?: string}) => {
-    return <tr>
-        <td className={className} colSpan={4}>
-            <h1 className="font-[genshin] text-gray-500">{label}</h1>
-        </td>
-    </tr>
+    return <h1 className={`font-[genshin] text-gray-500 ${className}`}>{label}</h1>
 }
 
 const StatsGroup = ({detail}: {detail : CharacterDetail}) => {

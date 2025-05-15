@@ -82,4 +82,16 @@ const LoadingScreen = () => {
   )
 }
 
+const ErrorScreen = () => {
+  return (
+    <div className="h-screen w-screen bg-slate-800 justify-center items-end p-10">
+      <img 
+        className="m-10"
+        src="/assets/layla.webp"
+      />
+      <p className="font-[genshin] text-lg text-white">An error ocurred</p>
+    </div>
+  )
+}
+
 export default Home
