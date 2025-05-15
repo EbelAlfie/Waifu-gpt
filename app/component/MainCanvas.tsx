@@ -26,6 +26,12 @@ const MainCanvas = () => {
         return scene
     }, []) 
 
+    useEffect(() => {
+        if (controllRef.current) {
+            controllRef.current.setTarget(0, 4, 0)
+        }
+    }, [controllRef.current])
+
     const updateCurrentCoord = () => {
         const position = new Vector3()
         controllRef.current && controllRef.current.getPosition(position)
@@ -47,7 +53,7 @@ const MainCanvas = () => {
                 camera={camera}
                 onChange={updateCurrentCoord}
             />  
-            
+
             <axesHelper scale={10}/>
             <InfoBackground />
             {/* <NewFog 
