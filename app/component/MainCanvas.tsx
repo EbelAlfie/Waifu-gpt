@@ -8,6 +8,8 @@ import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import CoordHelper, { CoordProps } from "./3dmodels/CoordHelper";
 import { Theme } from "../hooks/useTheme";
 
+const debug = false
+
 const MainCanvas = () => {
     const theme = useContext(Theme)
     const [coord, setCoord] = useState<CoordProps>()
@@ -24,6 +26,7 @@ const MainCanvas = () => {
     }, [controllRef.current])
 
     const updateCurrentCoord = () => {
+        if (!debug) return 
         const position = new Vector3()
         controllRef.current && controllRef.current.getPosition(position)
         setCoord({
@@ -52,20 +55,15 @@ const MainCanvas = () => {
                 minAzimuthAngle={-Math.PI / 2}
             />  
 
-            <axesHelper scale={10}/>
+            { debug && <axesHelper scale={10}/> }
             <InfoBackground />
-            {/* <NewFog 
-                color={0xffffff}
-                near={1}
-                far={10}
-            /> */}
         </Canvas>
     , [])
 
     return (
         <>
-            {CanvasContent}     
-            <CoordHelper props={coord}/>
+            {CanvasContent}
+            { debug && <CoordHelper props={coord}/> }
         </>
     )
 }
