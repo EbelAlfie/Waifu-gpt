@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import { ChatRoom } from "./ChatRoomPage"
 import { Failed, Loaded, Loading } from "@/app/global/UiState"
 import { ChatListState } from "./ChatList"
-import { ChatUseCase } from "@/app/_domain/ChatUseCase"
+import { ChatUseCase } from "@/app/_characterai/_domain/ChatUseCase"
 import { useChat } from "../../hooks/useChat"
 
 export type ChatRoomUiState = Loading | Loaded<ChatListState> | Failed
@@ -18,8 +18,8 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
     const chatRoomUiState = useChat(useCase, props.isChatOpened)
 
     return <>
-        <div className="w-screen h-screen" onClick={() => {props.onBackPressed(!props.isChatOpened)}}>
-            <section className="flex flex-col w-lvw max-w-screen-lg h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80">
+        <div className="flex h-screen w-screen">
+            <section className="flex flex-col w-lvw max-w-screen-lg h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80 z-" onClick={() => {}}>
                 {chatRoomUiState.type === "loading" && <LoadingLottie/>}
                 {chatRoomUiState.type === "loaded" && 
                     <ChatRoom
@@ -30,6 +30,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
                 }
                 {chatRoomUiState.type === "error" && <ErrorLayout errorMessage={chatRoomUiState.error.message}/>}
             </section>
+            <div className="flex-grow h-screen" onClick={() => {props.onBackPressed(!props.isChatOpened)}}></div>
         </div>
     </>
 }

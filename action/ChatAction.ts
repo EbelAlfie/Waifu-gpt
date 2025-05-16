@@ -1,6 +1,6 @@
 "use server";
-import { RecentChatResponse } from "@/app/_data/model/RecentChatResponse";
-import { TurnResponse } from "@/app/_data/model/TurnResponse";
+import { RecentChatResponse } from "@/app/_characterai/_data/model/RecentChatResponse";
+import { TurnResponse } from "@/app/_characterai/_data/model/TurnResponse";
 import axios, { AxiosResponse } from "axios";
 
 export async function resurrectCharacter(chatId: string, token: string|undefined) {
