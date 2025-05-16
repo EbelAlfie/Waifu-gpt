@@ -35,11 +35,6 @@ export const useChat = (
             }
 
             chatData = recentChat
-            const resurrect = await useCase.resurectCharacter(recentChat.chatId)
-            if (resurrect instanceof Error) {
-                setChatRoomUiState(setError(resurrect))
-                return 
-            }
 
             useCase.registerOpenListener(() => fetchInitialData())
 
@@ -91,7 +86,7 @@ export const useChat = (
         }
 
         const fetchInitialData = async () => {
-            const chatHistory = await useCase.loadChatHistory(chatData.chatId)
+            const chatHistory = (chatData.chatId !== "") ? await useCase.loadChatHistory(chatData.chatId) : []
             if (chatHistory instanceof Error) {
                 setChatRoomUiState(setError(chatHistory))
                 return 
@@ -107,6 +102,10 @@ export const useChat = (
                     createTime: chat.createTime
                 }
             })
+
+            if (chatList.length <= 0) 
+                useCase.createChatRoom(character.characterAiData.characterId)
+
             setChatRoomUiState(setLoaded(
                 {
                     metadata: chatData,
