@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from "axios";
 export async function resurrectCharacter(chatId: string, token: string|undefined) {
     const config = {
         method: "GET",
-        url: `https://neo.character.ai/chat/${chatId}/resurrect`,
+        url: `https://character.ai/_next/data/HGcv53b-dcxEBHfVVp7IK/chat/${chatId}.json?character=${chatId}`,
         headers: {
             'authorization': `Token ${token}`
         }

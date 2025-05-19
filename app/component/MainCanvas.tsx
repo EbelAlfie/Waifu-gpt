@@ -7,11 +7,13 @@ import { CameraControls } from "@react-three/drei";
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import CoordHelper, { CoordProps } from "./3dmodels/CoordHelper";
 import { Theme } from "../hooks/useTheme";
+import { useCharacterContext } from "../hooks/CharacterData";
 
 const debug = false
 
 const MainCanvas = () => {
     const theme = useContext(Theme)
+    const character = useCharacterContext()
     const [coord, setCoord] = useState<CoordProps>()
     const controllRef = useRef<CameraControls>(null)
 
@@ -24,6 +26,10 @@ const MainCanvas = () => {
     useEffect(() => {
         controllRef.current && controllRef.current.setTarget(0, 4, 0)
     }, [controllRef.current])
+
+    useEffect(() => {
+        controllRef.current && controllRef.current.setLookAt(0, 4, 11, 0, 4, 0, true)
+    }, [character])
 
     const updateCurrentCoord = () => {
         if (!debug) return 
