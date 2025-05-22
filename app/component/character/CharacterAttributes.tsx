@@ -20,7 +20,7 @@ export const CharacterAttribute = ({ classname }: { classname?: string }) => {
   const transition = useMemo(
     () => (state ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"), 
     [characterDetail.type]
-  );
+  )
 
   return <>
       <section
