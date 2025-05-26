@@ -19,7 +19,7 @@ export const ChatRoomLayout = ({...props} : ChatRoomProps) => {
 
     return <>
         <div className="flex h-screen w-screen">
-            <section className="flex flex-col w-lvw max-w-screen-lg h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80 z-" onClick={() => {}}>
+            <section className="flex flex-col w-lvw max-w-screen-md h-screen rounded-tr-lg rounded-br-lg bg-slate-950 bg-opacity-80 z-" onClick={() => {}}>
                 {chatRoomUiState.type === "loading" && <LoadingLottie/>}
                 {chatRoomUiState.type === "loaded" && 
                     <ChatRoom
