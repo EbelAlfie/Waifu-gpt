@@ -1,5 +1,4 @@
-import { useContext } from "react"
-import { GlobalCharacterData, useCharacterContext } from "../../hooks/CharacterData"
+import { useCharacterContext } from "../../hooks/CharacterData"
 import { Avatar } from "./Avatar"
 import { AuthorModel } from "@/app/_characterai/_domain/response_model/ChatTurnHistory"
 

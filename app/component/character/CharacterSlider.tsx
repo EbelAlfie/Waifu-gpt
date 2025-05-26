@@ -3,12 +3,14 @@ import { CharacterIcon } from "./CharaAvatar"
 import { useCharacterContext } from "@/app/hooks/CharacterData"
 import { useDynamicContext } from "@/app/hooks/utils"
 import { CharacterAction, CharacterActions } from "@/app/hooks/ActionContext"
+import { useTransition } from "react"
 
 type CharacterSliderProps = {
     list: Character[],
 }
 
 export const CharacterSlider = ({list}: CharacterSliderProps) => {
+    const [_, startTransition] = useTransition()
     const selectCharacterAction = useDynamicContext<CharacterActions>(CharacterAction)
     const selectedCharacter = useCharacterContext()
     const characters = list.map((chara) => {
@@ -16,7 +18,7 @@ export const CharacterSlider = ({list}: CharacterSliderProps) => {
             key={chara.id} 
             model={chara} 
             selected={chara.id === selectedCharacter.charInfo.id}
-            onClick={selectCharacterAction?.onCharacterSelected}
+            onClick={() => startTransition(() => { selectCharacterAction?.onCharacterSelected })}
         />
     })
 
