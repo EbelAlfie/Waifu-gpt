@@ -54,7 +54,7 @@ const InfoBackground = () => {
                 <MeshReflectorMaterial 
                     mirror = {3}
                     mixBlur = {1}
-                    mixStrength = {20}
+                    mixStrength = {10}
                     resolution = {1080}
                     color={theme.floorColor}
                 />
