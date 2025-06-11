@@ -18,7 +18,7 @@ export const CharacterSlider = ({list}: CharacterSliderProps) => {
             key={chara.id} 
             model={chara} 
             selected={chara.id === selectedCharacter.charInfo.id}
-            onClick={() => startTransition(() => { selectCharacterAction?.onCharacterSelected })}
+            onClick={() => startTransition(() => { selectCharacterAction?.onCharacterSelected(chara.id) })}
         />
     })
 

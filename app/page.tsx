@@ -52,7 +52,7 @@ const MainContent = ({data}: MainContentProps) => {
   
   const actions = {
     onCharacterSelected :(id: number) => { 
-      const index = data.findIndex(char => char.id == id ) 
+      const index = data.findIndex(char => char.id === id ) 
       setSelected(index) 
     }
   }
